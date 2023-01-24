@@ -47,3 +47,43 @@ paths:
               type:
         '404':
           description : "DB 접속에러"
+
+  /monitor/newtrade:
+    post:
+      summary : "monitor 서버에서 거래발생 요청시 작동"
+      description : "리더 거래기록을 업데이트, 구독 정보를 조회하여 해당 리더의 구독자 정보를 트레이드서버로 시장, 거래량과 함께 전송"
+      tags:
+        - Monitor api
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "발생 거래기록 전체"
+          required: true
+          schema:
+            type: object
+            properties:
+              LEADER_SEQ:
+                type: number
+              HISTORY_NUM:
+                type: string
+              TRADE_TYPE:
+                type: string
+              TRADE_SYMBOL:
+                type: string
+              TRADE_MARKET:
+                type: string
+              TRADE_PRICE:
+                type: string
+              TRADE_VOLUME:
+                type: number
+              REG_DT:
+                type: string
+
+      responses:
+        '200':
+          description : "거래기록 정상 업데이트, 거래 수신 완료"
+        '201':
+          description : "거래기록 정상 업데이트, 해당 리더에게 구독자가 없음"
+        '404':
+          description : "해당 리더 혹은 유저를 찾을 수 없음"
+          
