@@ -1,5 +1,5 @@
 module.exports = {
-    DBhost : '127.0.0.1',
+    DBhost : '124.50.247.56',
     DBport : '3306',
     DBuser : 'root',
     DBpass : 'gjaqjq21@!',

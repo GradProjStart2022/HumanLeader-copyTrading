@@ -1,0 +1,141 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: CT REST API Server
+  description: CT Mornitoring Server API DOCs
+
+servers:
+  - url: http://localhost:3010/v1
+  - url: http://localhost:3010
+
+paths:
+  /mornitoring:
+    post:
+      responses:
+        200:
+          description: Ok
+      requestBody:
+        description: Kakao OAuth 2.0 ID
+        content:
+          application/json:
+            schema:
+              type: object
+              description: 사용자 ID
+              properties:
+                publicId:
+                  type: string
+        required: true
+  # /auth/login:
+  #   post:
+  #     tags:
+  #       - Auth
+  #     summary: 로그인
+  #     description: "로그인 (Test ID : Reabit)"
+  #     produces:
+  #       - application/json
+  #     requestBody:
+  #       description: Kakao OAuth 2.0 ID
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             description: 사용자 ID
+  #             properties:
+  #               publicId:
+  #                 type: string
+  #       required: true
+  #     responses:
+  #       200:
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               description: JWT Token
+  #               properties:
+  #                 token:
+  #                   type: string
+  # /publics:
+  #   post:
+  #     tags:
+  #       - Public
+  #     summary: 회원 정보 등록
+  #     description: 회원 정보 등록
+  #     produces:
+  #       - application/json
+  #     requestBody:
+  #       description: 회원 정보
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: "#/components/schemas/Public"
+  #       required: true
+  #     responses:
+  #       200:
+  #         description: OK
+  #       409:
+  #         description: 중복된 유저입니다.
+  #         content: {}
+  #   get:
+  #     tags:
+  #       - Public
+  #     summary: 회원 정보 조회
+  #     description: 회원 정보 조회
+  #     security:
+  #       - bearerAuth: []
+  #     produces:
+  #       - application/json
+  #     responses:
+  #       200:
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/Public"
+  #   patch:
+  #     tags:
+  #       - Public
+  #     summary: 회원 정보 삭제 상태로 업데이트
+  #     description: 회원 정보 삭제 상태로 업데이트
+  #     security:
+  #       - bearerAuth: []
+  #     produces:
+  #       - application/json
+  #     responses:
+  #       200:
+  #         description: OK
+
+components:
+  schemas:
+    Public:
+      type: object
+      properties:
+        PUBLIC_SEQ:
+          type: integer
+        PUBLIC_ID:
+          type: string
+        PUBLIC_TOKEN:
+          type: string
+        PUBLIC_NAME:
+          type: string
+          nullable: true
+        PUBLIC_IMAGE:
+          type: string
+          nullable: true
+        PHONE_NUM:
+          type: string
+          nullable: true
+        EMAIL:
+          type: string
+          nullable: true
+        PUBLIC_CI:
+          type: string
+        PUBLIC_ST:
+          type: string
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      in: header
+      bearerFormat: JWT
