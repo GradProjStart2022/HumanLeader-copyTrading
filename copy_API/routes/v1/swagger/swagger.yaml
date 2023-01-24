@@ -10,7 +10,7 @@ servers:
   - description : "프로젝트 원격 test server"
     url : http://124.50.247.56:3000/api
   
-paths:
+paths: 
   /test/LT_info:
     get:
       summary : "leader trader 정보 테이블 조회 테스트"
