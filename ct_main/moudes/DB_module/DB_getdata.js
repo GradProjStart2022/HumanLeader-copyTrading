@@ -1,0 +1,34 @@
+const mariadb = require('mariadb');
+const vals = require('./db_info.js');
+
+// DB접속을 위한 connection pool을 설정
+const pool = mariadb.createPool({
+    host: vals.DBhost, port:vals.DBport,
+    user: vals.DBuser, password: vals.DBpass,
+    connectionLimit: 5
+});
+
+// LEADER_SEQ 를 받아 해당 리더를 구독하는 사용자의 PUBLIC_SEQ, COPY_TRADE_TYPE를 받아옴
+async function Get_Sub_User(LEADER_SEQ){
+    let conn, rows;
+    try{
+        
+        conn = await pool.getConnection();
+        conn.query('USE copytrade_proto;');
+        rows = await conn.query(`select PUBLIC_SEQ, COPY_TRADE_TYPE from ct_following where LEADER_SEQ = ${LEADER_SEQ};`);
+        //console.log(rows)
+    }
+    catch(err){
+        throw err;
+    }
+    finally{
+        if (conn) conn.end();
+        //console.log(rows)
+        return rows;
+    }
+}
+
+module.exports = {
+
+    Get_Sub_User: Get_Sub_User
+}

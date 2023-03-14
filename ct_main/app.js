@@ -4,17 +4,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 // swaggrt Router
-var v1swaggerRouter = require('./routes/v1/index')
+var v1swaggerRouter = require('./moudes/EV_module/router/v1/index')
 
 // index Router
-var indexRouter = require('./routes/index');
+var indexRouter = require('./moudes/EV_module/router/index');
 
 // Test Router
-var LT_historyRouter = require('./routes/Test/LT_history');
-var LT_infoRouter = require('./routes/Test/LT_info')
+var TEST_Router = require('./moudes/EV_module/router/DB_test')
 
 // Monitor server Router
-var M_newtrade = require('./routes/Monitor/M_newtrade')
+var M_newtrade = require('./moudes/EV_module/router/newtrade')
 
 
 var app = express();
@@ -32,12 +31,11 @@ app.use('/', indexRouter);
 // swagger 
 app.use("/v1",v1swaggerRouter);
 
-// test apis
-app.use('/api/test/LT_history', LT_historyRouter);
-app.use('/api/test/LT_info', LT_infoRouter);
 
 // Monitor server apis
 app.use('/api/monitor/newtrade',M_newtrade);
+
+app.use('/dbtest',TEST_Router);
 
 
 
