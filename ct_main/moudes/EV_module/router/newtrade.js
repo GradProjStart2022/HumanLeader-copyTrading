@@ -1,7 +1,7 @@
 const { json } = require('express');
 var express = require('express');
 var db_getdata = require('../../DB_module/DB_getdata');
-var db_putdata = require('../../DB_module/DB_putdata');
+var db_postdata = require('../../DB_module/DB_postdata');
 var router = express.Router();
 
 // Leader trader의 새로운 거래기록 발생
@@ -13,7 +13,7 @@ router.post('/', async function(req, res, next) {
     res.end('ok');
 
     
-    db_putdata.PUT_LT_history(body);
+    db_postdata.POST_LT_history(body);
     console.log('리더 거래기록 갱신 완료')
     LEADER_SEQ = body.LEADER_SEQ
     console.log('거래발생 리더순번 : ',body.LEADER_SEQ)
