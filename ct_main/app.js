@@ -12,6 +12,13 @@ var indexRouter = require('./moudes/EV_module/router/index');
 // Test Router
 var TEST_Router = require('./moudes/EV_module/router/DB_test')
 
+/**  신규 이벤트   */
+
+// 회원가입
+
+var user_Router = require('./moudes/EV_module/Router/user_router');
+
+
 // Monitor server Router
 var M_newtrade = require('./moudes/EV_module/router/newtrade')
 
@@ -37,7 +44,8 @@ app.use('/api/monitor/newtrade',M_newtrade);
 
 app.use('/dbtest',TEST_Router);
 
-
+// USER event
+app.use('/user',user_Router);
 
 
 module.exports = app;

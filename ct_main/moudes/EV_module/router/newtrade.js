@@ -10,8 +10,7 @@ router.post('/', async function(req, res, next) {
     body = req.body;
     console.log(body)
     res.statusCode = 200
-    res.end('ok');
-
+    
     
     db_postdata.POST_LT_history(body);
     console.log('리더 거래기록 갱신 완료')
@@ -31,6 +30,8 @@ router.post('/', async function(req, res, next) {
             리더 거래시장 : ${body.TRADE_MARKET}
         `)
     }
+
+    res.end('ok');
     
 
 });
