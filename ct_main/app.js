@@ -16,7 +16,7 @@ var TEST_Router = require('./moudes/EV_module/router/DB_test')
 
 // 회원가입
 
-var user_Router = require('./moudes/EV_module/Router/user_router');
+var user_Router = require('./moudes/EV_module/router/user_router');
 
 
 // Monitor server Router

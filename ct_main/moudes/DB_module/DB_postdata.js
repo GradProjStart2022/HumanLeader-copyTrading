@@ -1,5 +1,5 @@
 const mariadb = require('mariadb');
-const vals = require('./db_info.js');
+const vals = require('./DB_info.js');
 
 // DB접속을 위한 connection pool을 설정
 const pool = mariadb.createPool({
