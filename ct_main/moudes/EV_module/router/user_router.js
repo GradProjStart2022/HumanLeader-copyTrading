@@ -1,6 +1,4 @@
 var express = require('express');
-var db_getdata = require('../../DB_module/DB_getdata');
-var db_postdata = require('../../DB_module/DB_postdata');
 var ur_userpost = require('../../UR_moudle/UR_userpost')
 var router = express.Router();
 

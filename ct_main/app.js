@@ -15,8 +15,10 @@ var TEST_Router = require('./moudes/EV_module/router/DB_test')
 /**  신규 이벤트   */
 
 // 회원가입
-
 var user_Router = require('./moudes/EV_module/router/user_router');
+
+// APP 라우터
+var app_Router = require('./moudes/EV_module/Router/app_router')
 
 
 // Monitor server Router
@@ -47,5 +49,7 @@ app.use('/dbtest',TEST_Router);
 // USER event
 app.use('/user',user_Router);
 
+// APP event 
+app.use('/app',app_Router);
 
 module.exports = app;

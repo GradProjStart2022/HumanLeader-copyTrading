@@ -28,7 +28,27 @@ async function Get_Sub_User(LEADER_SEQ){
     }
 }
 
+async function Get_all_leader(){
+    let conn, rows;
+    try{
+        
+        conn = await pool.getConnection();
+        conn.query('USE copytrade_proto;');
+        rows = await conn.query(`select LEADER_SEQ,LEADER_UID,LEADER_NAME,LEADER_IMAGE,LEADER_CAPACITY,LEADER_PRICE,LEADER_AMOUNT,EXCHANGE_TYPE,TRADER_ST from ct_leader;`);
+        //console.log(rows)
+    }
+    catch(err){
+        throw err;
+    }
+    finally{
+        if (conn) conn.end();
+        //console.log(rows)
+        return rows;
+    }
+}
+
 module.exports = {
 
-    Get_Sub_User: Get_Sub_User
+    Get_Sub_User: Get_Sub_User,
+    Get_all_leader : Get_all_leader,
 }
