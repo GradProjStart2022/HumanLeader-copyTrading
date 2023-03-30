@@ -11,6 +11,7 @@
     "express": "~4.16.1",
     "mariadb": "^3.0.1",
     "morgan": "~1.9.1",
+    "node-telegram-bot-api": "^0.61.0",
     "swagger-ui-express": "^4.6.0",
     "yamljs": "^0.3.0"
   },
@@ -18,4 +19,3 @@
     "nodemon": "^2.0.20"
   }
 }
-  

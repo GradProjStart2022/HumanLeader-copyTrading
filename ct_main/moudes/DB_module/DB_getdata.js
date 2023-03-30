@@ -15,7 +15,7 @@ async function Get_Sub_User(LEADER_SEQ){
         
         conn = await pool.getConnection();
         conn.query('USE copytrade_proto;');
-        rows = await conn.query(`select PUBLIC_SEQ, COPY_TRADE_TYPE from ct_following where LEADER_SEQ = ${LEADER_SEQ};`);
+        rows = await conn.query(`select * from ct_following where LEADER_SEQ = ${LEADER_SEQ};`);
         //console.log(rows)
     }
     catch(err){
