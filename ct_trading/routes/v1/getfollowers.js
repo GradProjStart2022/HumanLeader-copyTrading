@@ -1,9 +1,9 @@
-import { pool } from "../../model/pool";
+import { createPool, releaseConnection } from "../../model/pool";
 
 async function getFollowers() {
   const sql = `
     SELECT 
-      LEADER_SEQ, p.PUBLIC_SEQ, ACCESS_KEY, SECRET_KEY, COPY_TRADE_TYPE 
+      LEADER_SEQ, p.PUBLIC_SEQ, ACCESS_KEY, SECRET_KEY, COPY_TRADE_TYPE, FIXED_AMOUNT, FIXED_RATIO, IS_AUTO_TRADING_YN
     FROM 
       ct_public p INNER JOIN ct_following f
     ON
@@ -14,6 +14,8 @@ async function getFollowers() {
       LEADER_SEQ;
     `;
 
+  const pool = createPool();
+
   const conn = await pool.getConnection(async (conn) => conn);
   let followers;
   try {
@@ -23,8 +25,9 @@ async function getFollowers() {
   } finally {
     conn.release();
     delete followers.meta;
-    console.log(followers);
+    console.log("DB에서 구독정보 불러오기 완료");
   }
+  return followers;
 }
 
 module.exports = getFollowers;

@@ -1,4 +1,4 @@
-import { pool } from "../model/pool";
+import { createPool, releaseConnection } from "../model/pool";
 require("dotenv").config();
 
 async function getLeaders() {
@@ -13,6 +13,8 @@ async function getLeaders() {
     WHERE
         TRADER_ST = "RS01";
     `;
+
+  const pool = createPool();
 
   const conn = await pool.getConnection(async (conn) => conn);
   let leaders;
