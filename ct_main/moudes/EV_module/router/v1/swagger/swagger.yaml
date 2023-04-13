@@ -6,17 +6,17 @@ info:
 
 servers:
   - description: "프로젝트 local dev server"
-    url : http://127.0.0.1:3000/api
+    url : http://127.0.0.1:3000/
   - description : "프로젝트 원격 test server"
-    url : http://124.50.247.56:3000/api
+    url : http://124.50.247.56:3000/
   
 paths: 
-  /test/LT_info:
+  /test/show_tables:
     get:
       summary : "leader trader 정보 테이블 조회 테스트"
       description : "leader trader 정보 테이블 조회 테스트용 api, 테이블 전체 json 데이터를 불러옴"
       tags:
-        - Test api 
+        - Test 
       responses:
         '200':
           description : "정상 응답, DB 정상 작동중"
@@ -28,6 +28,168 @@ paths:
               type:
         '404':
           description : "DB 접속에러"
-              
+    
+
+  /test/show_cmmcode:
+      get:
+        summary : "leader trader 정보 테이블 조회 테스트"
+        description : "leader trader 정보 테이블 조회 테스트용 api, 테이블 전체 json 데이터를 불러옴"
+        tags:
+          - Test 
+        responses:
+          '200':
+            description : "정상 응답, DB 정상 작동중"
+            content:
+              application/json:
+                schema:
+                type:
+                itmes:
+                type:
+          '404':
+            description : "DB 접속에러"
+
+
+
+  /trade/newtrade:
+      post:
+        summary : "leader trader 정보 테이블 조회 테스트"
+        description : "leader trader 정보 테이블 조회 테스트용 api, 테이블 전체 json 데이터를 불러옴"
+        tags:
+          - Trade
+        requestBody:
+          content:
+            application/json:
+              schema:      # Request body contents
+                type: object
+                properties:
+                  LEADER_SEQ : 
+                    type: integer
+                  HISTORY_NUM :
+                    type: string
+                  TRADE_TYPE : 
+                    type: string
+                  TRADE_SYMBOL :
+                    type: string
+                  TRADE_MARKET :
+                    type: string
+                  TRADE_PRICE : 
+                    type: string
+                  TRADE_VOLUME : 
+                    type: integer
+                  REG_DT :
+                    type : datetime
+                example: 
+                  LEADER_SEQ : 1
+                  HISTORY_NUM : "00"
+                  TRADE_TYPE :  "TT01"
+                  TRADE_SYMBOL : "test_sym"
+                  TRADE_MARKET : "test_mk"
+                  TRADE_PRICE :  123123
+                  TRADE_VOLUME : 12
+                  REG_DT : "2022-01-19T12:16:59"
+        responses:
+          '200':
+            description : "신규 거래 등록 정상 작동중"
+            content:
+              application/json:
+                schema:
+                type:
+                itmes:
+                type:
+          '404':
+            description : "에러"
+
+  /user/new:
+      post:
+        summary : "신규 사용자 등록"
+        description : "신규 사용자 등록, 사용자 정보를 받아 DB에 등록"
+        tags:
+          - User
+        requestBody:
+          content:
+            application/json:
+              schema:      # Request body contents
+                type: object
+                properties:
+                  PUBLIC_ID :
+                    type: string
+                  PUBLIC_ST : 
+                    type: string
+                  REG_DT :
+                    type: datetime
+                  MOD_DT :
+                    type: datetime
+                  ACCESS_KEY : 
+                    type: string
+                  SECRET_KEY : 
+                    type: string
+                example: 
+                  PUBLIC_ID : "1111111122"
+                  PUBLIC_ST : "0S01"
+                  REG_DT : "2023-03-16 19:08:14"
+                  MOD_DT : "2023-03-16 19:42:04"
+                  ACCESS_KEY : "test_AK"
+                  SECRET_KEY : "test_SK"
+        responses:
+          '200':
+            description : "신규 거래 등록 정상 작동중"
+            content:
+              application/json:
+                schema:
+                type:
+                itmes:
+                type:
+          '404':
+            description : "에러"
+
+
+  /leader/all:
+      get:
+        summary : "모든 리더 조회"
+        description : "모든 리더의 목록을 json의 형태로 불러온다."
+        tags:
+          - Leader 
+        responses:
+          '200':
+            description : "정상 응답,"
+            content:
+              application/json:
+                schema:
+                type:
+                itmes:
+                type:
+          '404':
+            description : "접속에러"
+
+  
+  /leader/history:
+      post:
+        summary : "특정 리더 거래 조회"
+        description : "특정 리더 seq를 받아 리더의 모든 거래를 조회"
+        tags:
+          - Leader
+        requestBody:
+          content:
+            application/json:
+              schema:      # Request body contents
+                type: object
+                properties:
+                  seq :
+                    type: string
+                  
+                example: 
+                  seq : "1"
+                  
+        responses:
+          '200':
+            description : "정상 작동중"
+            content:
+              application/json:
+                schema:
+                type:
+                itmes:
+                type:
+          '404':
+            description : "에러"
 
   
