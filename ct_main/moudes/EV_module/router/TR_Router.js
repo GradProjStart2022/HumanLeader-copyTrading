@@ -7,7 +7,7 @@ var router = express.Router();
 var telegramBot = require('../Trigger/TR_testbot');
 
 // Leader trader의 새로운 거래기록 발생
-router.post('/', async function(req, res, next) {
+router.post('/newtrade', async function(req, res, next) {
     
     // body 데이터 오브젝트화
     body = req.body;

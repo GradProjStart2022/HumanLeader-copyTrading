@@ -13,6 +13,20 @@ async function get_leader_all(){
 
 }
 
+async function get_leaderhis_byID(seq){
+    console.log('LR req get');
+
+    // DB 모듈을 이용해 전체 리더데이터 불러오기
+
+    var leader_his = await db_getdata.Get_leader_history_byID(seq);
+
+
+
+    return leader_his;
+
+}
+
 module.exports = {
     get_leader_all : get_leader_all,
+    get_leaderhis_byID : get_leaderhis_byID,
 }

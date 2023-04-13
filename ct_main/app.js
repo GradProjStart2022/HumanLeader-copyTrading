@@ -10,19 +10,19 @@ var v1swaggerRouter = require('./moudes/EV_module/router/v1/index')
 var indexRouter = require('./moudes/EV_module/router/index');
 
 // Test Router
-var TEST_Router = require('./moudes/EV_module/router/DB_test')
+var TEST_Router = require('./moudes/EV_module/Router/TEST_Router')
 
 /**  신규 이벤트   */
 
 // 회원가입
-var user_Router = require('./moudes/EV_module/router/user_router');
+var UR_Router = require('./moudes/EV_module/Router/UR_Router');
 
 // APP 라우터
-var app_Router = require('./moudes/EV_module/Router/app_router')
+var LR_Router = require('./moudes/EV_module/Router/LR_Router')
 
 
 // Monitor server Router
-var M_newtrade = require('./moudes/EV_module/router/newtrade')
+var trade_Router = require('./moudes/EV_module/router/TR_Router')
 
 
 var app = express();
@@ -42,14 +42,15 @@ app.use("/v1",v1swaggerRouter);
 
 
 // Monitor server apis
-app.use('/api/monitor/newtrade',M_newtrade);
+app.use('/trade',trade_Router);
 
-app.use('/dbtest',TEST_Router);
+// test 
+app.use('/test',TEST_Router);
 
 // USER event
-app.use('/user',user_Router);
+app.use('/user',UR_Router);
 
 // APP event 
-app.use('/app',app_Router);
+app.use('/leader',LR_Router);
 
 module.exports = app;

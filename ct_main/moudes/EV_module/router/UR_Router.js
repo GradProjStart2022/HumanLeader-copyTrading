@@ -5,7 +5,7 @@ var router = express.Router();
 // 회원가입 이벤트 라우터
 // xxx:3000/user에서 post로 회원가입시 작동
 // 
-router.post('/', async function(req, res, next) {
+router.post('/new', async function(req, res, next) {
     
     data = req.body;
     console.log(req.body)
