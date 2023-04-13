@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "297237989646",
+    "project_id": "hlcopybot",
+    "storage_bucket": "hlcopybot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297237989646:android:465f896daa059831f9af5f",
+        "android_client_info": {
+          "package_name": "com.hlcopybotapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297237989646-5tcaf0sc5ulm3tbs0tieklal9q75ei9d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hlcopybotapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "297237989646-lkuvq1orqjiebss81mfdk86nm85eesal.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUGpYDlpSYESDQKNXDVFTlOOrR8Do0MIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297237989646-lkuvq1orqjiebss81mfdk86nm85eesal.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

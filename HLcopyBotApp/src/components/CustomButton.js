@@ -1,63 +1,37 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Platform, Pressable, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {RFValue} from 'react-native-responsive-fontsize';
 
-const CustomButton = ({onPress, title, hasMarginBottom, theme}) => {
-    const isPrimary = theme === 'primary';
-
+const CustomButton = ({text, color, textColor, width, onPress, disabled}) => {
     return (
-        <View style={[styles.block, hasMarginBottom && styles.margin]}>
-            <Pressable
-                onPress={onPress}
-                style={({pressed}) => [
-                    styles.wrapper,
-                    isPrimary && styles.primaryWrapper,
-                    Platform.OS === 'ios' && pressed && {opacity: 0.5},
-                ]}
-                android_ripple={{color: isPrimary ? '#ffffff' : '#6200ee'}}>
-                <Text
-                    style={[
-                        styles.text,
-                        isPrimary ? styles.primaryText : styles.secondaryText,
-                    ]}>
-                    {title}
-                </Text>
-            </Pressable>
-        </View>
+        <TouchableOpacity
+            style={[
+                styles.button,
+                {
+                    width: width ? width : '100%',
+                    backgroundColor: color ? color : '#1F3FDB',
+                    paddingVertical: width ? RFValue(11) : RFValue(15),
+                },
+            ]}
+            onPress={onPress}
+            disabled={disabled ? disabled : false}>
+            <Text style={[styles.buttonText, {color: textColor ? textColor : '#FFFFFF'}]}>{text}</Text>
+        </TouchableOpacity>
     );
 };
 
-CustomButton.defaultProps = {
-    theme: 'primary',
-};
-
 const styles = StyleSheet.create({
-    overflow: {
-        borderRadius: 4,
-        overflow: 'hidden',
-    },
-    wrapper: {
-        borderRadius: 4,
-        height: 48,
-        width: 300,
-        alignItems: 'center',
+    button: {
+        paddingVertical: RFValue(15),
         justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: RFValue(12),
+        marginVertical: RFValue(5),
+        alignSelf: 'center',
     },
-    primaryWrapper: {
-        backgroundColor: '#6200ee',
-    },
-    text: {
-        fontWeight: 'bold',
-        fontSize: 14,
-        color: 'white',
-    },
-    margin: {
-        marginBottom: 8,
-    },
-    primaryText: {
-        color: 'white',
-    },
-    secondaryText: {
-        color: '#6200ee',
+    buttonText: {
+        fontSize: RFValue(13),
     },
 });
 

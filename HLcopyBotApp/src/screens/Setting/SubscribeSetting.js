@@ -1,12 +1,12 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
-import TraderList from '../components/trader/TraderList';
+import SubscribeList from '../../components/subscribe/SubscribeList';
 
-const TraderListScreen = () => {
+const SubscribeSetting = () => {
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>Trader</Text>
-            <TraderList />
+            <Text style={styles.title}>구독 목록</Text>
+            <SubscribeList />
         </ScrollView>
     );
 };
@@ -14,7 +14,7 @@ const TraderListScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#ffffff',
         padding: 20,
     },
     title: {
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TraderListScreen;
+export default SubscribeSetting;

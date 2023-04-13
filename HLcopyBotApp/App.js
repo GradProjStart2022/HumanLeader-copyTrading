@@ -1,29 +1,23 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
-import MainTab from './src/MainTab';
-import SignInScreen from './src/screens/SignInScreen';
-
-const Stack = createStackNavigator();
+import messaging from '@react-native-firebase/messaging';
+import {Alert} from 'react-native';
+import RootStackScreen from './src/screens/RootStackNavigater';
+import LoginScreen from './src/screens/LoginScreen';
 
 const App = () => {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="SignIn">
-                <Stack.Screen
-                    name="SignIn"
-                    component={SignInScreen}
-                    options={{headerShown: false}}
-                />
-                <Stack.Screen
-                    name="MainTab"
-                    component={MainTab}
-                    options={{headerShown: false}}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+    const [isLogin, setIsLogin] = useState(false);
+
+    useEffect(() => {
+        const unsubscribe = messaging().onMessage(async remoteMessage => {
+            Alert.alert(remoteMessage.notification.title, remoteMessage.notification.body);
+            console.log('Received a new FCM message:', remoteMessage);
+        });
+
+        return unsubscribe;
+    }, []);
+
+    return <>{isLogin ? <RootStackScreen setIsLogin={setIsLogin} /> : <LoginScreen setIsLogin={setIsLogin} />}</>;
 };
 
 const styles = StyleSheet.create({});

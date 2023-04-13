@@ -1,0 +1,48 @@
+{
+    "ct_leader": [
+        {
+            "LEADER_SEQ": 1,
+            "LEADER_UID": "1",
+            "LEADER_NAME": "test_leader1",
+            "LEADER_IMAGE": "https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__340.png",
+            "LEADER_CAPACITY": 999,
+            "LEADER_PRICE": "11",
+            "LEADER_AMOUNT": "100000",
+            "EXCHANGE_TYPE": "ET01",
+            "TRADER_ST": "RS01"
+        },
+        {
+            "LEADER_SEQ": 2,
+            "LEADER_UID": "2",
+            "LEADER_NAME": "test_leader2",
+            "LEADER_IMAGE": "https://cdn.pixabay.com/photo/2015/11/16/14/43/cat-1045782__340.jpg",
+            "LEADER_CAPACITY": 999,
+            "LEADER_PRICE": "22",
+            "LEADER_AMOUNT": "200000",
+            "EXCHANGE_TYPE": "ET01",
+            "TRADER_ST": "RS01"
+        },
+        {
+            "LEADER_SEQ": 3,
+            "LEADER_UID": "3",
+            "LEADER_NAME": "test_leader3",
+            "LEADER_IMAGE": "https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554__340.jpg",
+            "LEADER_CAPACITY": 999,
+            "LEADER_PRICE": "33",
+            "LEADER_AMOUNT": "300000",
+            "EXCHANGE_TYPE": "ET01",
+            "TRADER_ST": "RS01"
+        },
+        {
+            "LEADER_SEQ": 4,
+            "LEADER_UID": "4",
+            "LEADER_NAME": "test_leader4",
+            "LEADER_IMAGE": "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262__340.jpg",
+            "LEADER_CAPACITY": 999,
+            "LEADER_PRICE": "44",
+            "LEADER_AMOUNT": "400000",
+            "EXCHANGE_TYPE": "ET01",
+            "TRADER_ST": "RS01"
+        }
+    ]
+}
