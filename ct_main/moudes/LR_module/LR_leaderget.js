@@ -1,5 +1,5 @@
 var db_getdata = require('../DB_module/DB_getdata');
-
+var tr_getleadrhis = require('../TR_module/TR_gettrade');
 
 async function get_leader_all(){
     console.log('LR req get');
@@ -18,7 +18,7 @@ async function get_leaderhis_byID(seq){
 
     // DB 모듈을 이용해 전체 리더데이터 불러오기
 
-    var leader_his = await db_getdata.Get_leader_history_byID(seq);
+    var leader_his = await tr_getleadrhis.TR_getleaderhis_byID(seq);
 
 
 

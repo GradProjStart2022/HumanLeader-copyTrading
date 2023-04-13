@@ -1,6 +1,6 @@
 const { json } = require('express');
 var express = require('express');
-var db_talbe_view = require('../../DB_module/DB_tableview');
+var db_talbe_view = require('../../DB_module/DB_test');
 var router = express.Router();
 
 
