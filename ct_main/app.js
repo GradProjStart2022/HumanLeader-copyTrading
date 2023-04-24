@@ -6,9 +6,9 @@ var logger = require('morgan');
 // swaggrt Router
 var v1swaggerRouter = require('./moudes/EV_module/router/v1/index');
 var indexRouter = require('./moudes/EV_module/router/index');
-var TEST_Router = require('./moudes/EV_module/Router/TEST_Router');
-var UR_Router = require('./moudes/EV_module/Router/UR_Router');
-var LR_Router = require('./moudes/EV_module/Router/LR_Router');
+var TEST_Router = require('./moudes/EV_module/router/TEST_Router');
+var UR_Router = require('./moudes/EV_module/router/UR_Router');
+var LR_Router = require('./moudes/EV_module/router/LR_Router');
 var TR_Router = require('./moudes/EV_module/router/TR_Router');
 var SU_Router = require('./moudes/EV_module/router/SU_Router');
 
