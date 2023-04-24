@@ -9,7 +9,9 @@ var indexRouter = require('./moudes/EV_module/router/index');
 var TEST_Router = require('./moudes/EV_module/Router/TEST_Router');
 var UR_Router = require('./moudes/EV_module/Router/UR_Router');
 var LR_Router = require('./moudes/EV_module/Router/LR_Router');
-var trade_Router = require('./moudes/EV_module/router/TR_Router');
+var TR_Router = require('./moudes/EV_module/router/TR_Router');
+var SU_Router = require('./moudes/EV_module/router/SU_Router');
+
 
 
 var app = express();
@@ -28,7 +30,7 @@ app.use('/', indexRouter);
 app.use("/v1",v1swaggerRouter);
 
 // trade
-app.use('/trade',trade_Router);
+app.use('/trade',TR_Router);
 
 // test 
 app.use('/test',TEST_Router);
@@ -38,6 +40,9 @@ app.use('/user',UR_Router);
 
 // leader 
 app.use('/leader',LR_Router);
+
+//subscribe
+app.use('/sub',SU_Router);
 
 
 module.exports = app;

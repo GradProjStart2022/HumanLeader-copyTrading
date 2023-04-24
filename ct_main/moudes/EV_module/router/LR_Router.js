@@ -16,7 +16,7 @@ router.get('/all',async function(req, res, next){
     console.log("app - get all leader request");
     // LR 모듈에게 모든 리더 목록 요청
     var LR_data = await LR_leaderget.get_leader_all();
-    console.log(`LR data : ${JSON.stringify(LR_data)}`);
+    //console.log(`LR data : ${JSON.stringify(LR_data)}`);
 
     res.json(LR_data);
 

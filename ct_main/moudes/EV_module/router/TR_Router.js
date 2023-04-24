@@ -6,6 +6,21 @@ var router = express.Router();
 
 var telegramBot = require('../Trigger/TR_testbot');
 
+var TR_gettrade = require('../../TR_module/TR_gettrade');
+
+
+// 모든 거래 기록 조회
+router.get('/all',async function(req, res, next){
+    console.log("app - get all user trade recode request");
+    var TR_data = await TR_gettrade.TR_allusertrade();
+    //console.log(`LR data : ${JSON.stringify(LR_data)}`);
+    res.json(TR_data);
+    
+
+});
+
+
+
 // Leader trader의 새로운 거래기록 발생
 router.post('/newtrade', async function(req, res, next) {
     
@@ -60,6 +75,9 @@ router.post('/newtrade', async function(req, res, next) {
     
 
 });
+
+
+
 
 
 module.exports = router;

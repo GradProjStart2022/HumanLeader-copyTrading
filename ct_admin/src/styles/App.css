@@ -1,0 +1,10 @@
+/** src/styles/common/App.css */
+
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+}
