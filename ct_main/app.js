@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 // swaggrt Router
+// 디렉토리 이름 대소문자 안맞으면 서버에서 실행 안됨...
 var v1swaggerRouter = require('./moudes/EV_module/router/v1/index');
 var indexRouter = require('./moudes/EV_module/router/index');
 var TEST_Router = require('./moudes/EV_module/router/TEST_Router');
