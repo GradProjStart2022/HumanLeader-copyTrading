@@ -1,11 +1,9 @@
 // src/pages/Tradeboard
 
 import React from "react";
-import TradeTable from '../components/TradeTable'
+import TradeTable from '../components/tables/TradeTable'
 
 import '../styles/pages/tradepage.css'
-import '../styles/PageCommon.css'
-import '../styles/pages/dashboardpage.css'
 import '../styles/PageCommon.css'
 
 

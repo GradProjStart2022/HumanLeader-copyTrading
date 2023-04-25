@@ -1,22 +1,12 @@
-// src/pages/Settingboard
+import React from 'react';
+import Popup from 'reactjs-popup';
 
-import React from "react";
-import Popup from 'reactjs-popup'
-
-import '../styles/pages/settingpage.css'
-import '../styles/PageCommon.css'
 import '../styles/modal.css'
 
-
-
-class Settingboard extends React.Component {
-  render () {
-    return (
-    <div className="contentsArea">
-      <div className="settingpage">
-        <h1>Setting</h1>
-        <Popup 
-          trigger={ <button> Trigger </button> } 
+const TempPopup = (props) => {
+  return (
+    <Popup 
+          trigger={ <button> Edit </button> } 
           modal
           nested
           style = {{ borderRadius : '5px'}}
@@ -30,7 +20,7 @@ class Settingboard extends React.Component {
                   <button className='close' onClick={()=>{close();}} >
                     &times;
                   </button>
-                  <div className="header"> Modal header </div>
+                  <div className="header"> USER INFO </div>
                   <div className="contents"> 
                     <div className="inputdata">
                       <label>NAME</label>
@@ -38,7 +28,7 @@ class Settingboard extends React.Component {
                     </div>
                     <div className="inputdata">
                       <label>PW</label>
-                      <input className="inputtext" value={"before password"}></input>
+                      <input className="inputtext" value={`${props.item.PUBLIC_ID}`}></input>
                     </div>
                     <span>
 
@@ -61,11 +51,7 @@ class Settingboard extends React.Component {
 
 
         </Popup>
-
-      </div>
-    </div>
-    )
-  }
+  )
 }
 
-export default Settingboard;
+export default TempPopup

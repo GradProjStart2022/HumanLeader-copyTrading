@@ -1,7 +1,7 @@
 // src/pages/Userboard
 
 import React from "react";
-import UserTable from '../components/UserTable'
+import UserTable from '../components/tables/UserTable'
 
 import '../styles/pages/userpage.css'
 import '../styles/PageCommon.css'

@@ -1,4 +1,5 @@
 import React from "react";
+import SubPopup from "../popups/Subpopup";
 
 class DisplayTable extends React.Component {
 
@@ -58,28 +59,19 @@ class DisplayTable extends React.Component {
                         <td>{item.FOLLOWING_SEQ}</td>
                         <td>{item.PUBLIC_SEQ}</td>
                         <td>{item.LEADER_SEQ}</td>
-                        <td>{item.PURCHASE_TOKEN}</td>
                         <td>{item.FOLLOWING_TYPE}</td>
                         <td>{item.COPY_TRADE_TYPE}</td>
                         <td>{item.FIXED_AMOUNT}</td>
                         <td>{item.FIXED_RATIO}</td>
-                        <td>{item.STOP_RATIO}</td>
-                        <td>{item.IS_AUTO_TRADING_YN}</td>
-                        <td>{item.SUB_START_DT}</td>
-                        <td>{item.SUB_END_DT}</td>
                         <td>{item.FOLLOWING_ST}</td>
-                        <td>{item.REG_DT}</td>
-                        <td>{item.MOD_DT}</td>
-
                         
-                        
-                        <td><button>delete</button></td>
+                        <td><SubPopup item={item} /></td>
                 </tr>
             )
         })
 
         return (
-            <div>
+            <div style={{ height: "450px", overflowY: "scroll" }}>
                 <table className="table table-striped">
                     <tbody>
                         <tr
@@ -91,18 +83,12 @@ class DisplayTable extends React.Component {
                             <td>FOLLOWING_SEQ</td>
                             <td>PUBLIC_SEQ</td>
                             <td>LEADER_SEQ</td>
-                            <td>PURCHASE_TOKEN</td>
                             <td>FOLLOWING_TYPE</td>
                             <td>COPY_TRADE_TYPE</td>
                             <td>FIXED_AMOUNT</td>
                             <td>FIXED_RATIO</td>
-                            <td>STOP_RATIO</td>
-                            <td>IS_AUTO_TRADING_YN</td>
-                            <td>SUB_START_DT</td>
-                            <td>SUB_END_DT</td>
                             <td>FOLLOWING_ST</td>
-                            <td>REG_DT</td>
-                            <td>MOD_DT</td>
+
                             
                             <td></td>
                             

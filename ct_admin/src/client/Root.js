@@ -2,7 +2,9 @@
 
 import React from "react";
 import App from '../App';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+
 
 const Root = () => (
   <BrowserRouter>

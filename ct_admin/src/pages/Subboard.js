@@ -1,7 +1,7 @@
 // src/pages/Subboard
 
 import React from "react";
-import SubTable from '../components/Subtable'
+import SubTable from '../components/tables/Subtable'
 
 import '../styles/pages/subpage.css'
 import '../styles/PageCommon.css'

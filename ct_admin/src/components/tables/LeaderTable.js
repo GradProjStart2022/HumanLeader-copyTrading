@@ -1,4 +1,5 @@
 import React from "react";
+import LeaderPopup from "../popups/Leaderpopup";
 
 class DisplayTable extends React.Component {
 
@@ -54,20 +55,19 @@ class DisplayTable extends React.Component {
                         <td>{item.LEADER_SEQ}</td>
                         <td>{item.LEADER_UID}</td>
                         <td>{item.LEADER_NAME}</td>
-                        <td>{item.LEADER_IMAGE}</td>
                         <td>{item.LEADER_CAPACITY}</td>
                         <td>{item.LEADER_PRICE}</td>
                         <td>{item.LEADER_AMOUNT}</td>
                         <td>{item.EXCHANGE_TYPE}</td>
                         <td>{item.TRADER_ST}</td>
                         
-                        <td><button>delete</button></td>
+                        <td><LeaderPopup item={item} /></td>
                 </tr>
             )
         })
 
         return (
-            <div>
+            <div style={{ height: "450px", overflowY: "scroll" }}>
                 <table className="table table-striped">
                     <tbody>
                         <tr
@@ -79,7 +79,6 @@ class DisplayTable extends React.Component {
                             <td>LEADER_SEQ</td>
                             <td>LEADER_UID</td>
                             <td>LEADER_NAME</td>
-                            <td>LEADER_IMAGE</td>
                             <td>LEADER_CAPACITY</td>
                             <td>LEADER_PRICE</td>
                             <td>LEADER_AMOUNT</td>

@@ -1,4 +1,5 @@
 import React from "react";
+import TradePopup from "../popups/Tradepopup";
 
 class DisplayTable extends React.Component {
 
@@ -58,15 +59,14 @@ class DisplayTable extends React.Component {
                         <td>{item.TRADE_MARKET}</td>
                         <td>{item.TRADE_PRICE}</td>
                         <td>{item.TRADE_VOLUME}</td>
-                        <td>{item.REG_DT}</td>
                         
-                        <td><button>delete</button></td>
+                        <td><TradePopup item={item}  /></td>
                 </tr>
             )
         })
 
         return (
-            <div>
+            <div style={{ height: "450px", overflowY: "scroll" }}>
                 <table className="table table-striped">
                     <tbody>
                         <tr
@@ -84,7 +84,6 @@ class DisplayTable extends React.Component {
                             <td>TRADE_MARKET</td>
                             <td>TRADE_PRICE</td>
                             <td>TRADE_VOLUME</td>
-                            <td>REG_DT</td>
                             
                             <td></td>
                             

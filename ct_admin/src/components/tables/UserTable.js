@@ -1,4 +1,6 @@
 import React from "react";
+import UserPopup from "../popups/Userpopup";
+
 
 class DisplayTable extends React.Component {
 
@@ -51,16 +53,14 @@ class DisplayTable extends React.Component {
                         <td>{item.PUBLIC_ST}</td>
                         <td>{item.REG_DT}</td>
                         <td>{item.MOD_DT}</td>
-                        <td>{item.ACCESS_KEY}</td>
-                        <td>{item.SECRET_KEY}</td>
                         
-                        <td><button>delete</button></td>
+                        <td><UserPopup item={item} /></td>
                 </tr>
             )
         })
 
         return (
-            <div>
+            <div style={{ height: "450px", overflowY: "scroll" }}>
                 <table className="table table-striped">
                     <tbody>
                         <tr
@@ -74,8 +74,7 @@ class DisplayTable extends React.Component {
                             <td>PUBLIC_ST</td>
                             <td>REG_DT</td>
                             <td>MOD_DT</td>
-                            <td>ACCESS_KEY</td>
-                            <td>SECRET_KEY</td>
+                            
                             
                             <td></td>
                             
