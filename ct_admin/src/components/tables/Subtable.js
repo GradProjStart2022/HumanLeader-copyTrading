@@ -1,3 +1,6 @@
+// src/components/tables/SubTable.js
+
+
 import React from "react";
 import SubPopup from "../popups/Subpopup";
 

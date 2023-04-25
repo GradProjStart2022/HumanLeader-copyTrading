@@ -1,3 +1,6 @@
+// src/components/tables/LeaderTable.js
+
+
 import React from "react";
 import LeaderPopup from "../popups/Leaderpopup";
 

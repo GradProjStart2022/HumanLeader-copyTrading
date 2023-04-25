@@ -12,7 +12,10 @@ class Tradeboard extends React.Component {
     return (
       <div className="contentsArea">
       <div className="tradepage">
-        <h1>Trade</h1>
+      <div className="header">
+          <h1>Trade</h1>
+                   
+        </div>
           <TradeTable/>
       </div>
       </div>

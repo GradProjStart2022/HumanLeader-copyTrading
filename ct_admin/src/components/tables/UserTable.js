@@ -1,3 +1,5 @@
+// src/components/tables/UserTable.js
+
 import React from "react";
 import UserPopup from "../popups/Userpopup";
 

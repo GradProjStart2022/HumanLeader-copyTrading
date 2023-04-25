@@ -2,6 +2,7 @@
 
 import React from "react";
 import UserTable from '../components/tables/UserTable'
+import Useradd from "../components/addpopups/Useradd";
 
 import '../styles/pages/userpage.css'
 import '../styles/PageCommon.css'
@@ -12,7 +13,10 @@ class Userboard extends React.Component {
     return (
       <div className="contentsArea">
       <div className="userpage">
-        <h1>User</h1>
+        <div className="header">
+          <h1>User</h1>
+          <Useradd/>        
+        </div>
         <UserTable/>
       </div>
       </div>

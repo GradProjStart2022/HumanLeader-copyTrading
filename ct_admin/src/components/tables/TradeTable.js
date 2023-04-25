@@ -1,3 +1,6 @@
+// src/components/tables/TradeTable.js
+
+
 import React from "react";
 import TradePopup from "../popups/Tradepopup";
 

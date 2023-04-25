@@ -8,7 +8,6 @@ import SubTable from '../components/tables/Subtable'
 import TreadeTable from '../components/tables/TradeTable'
 
 
-
 import '../styles/pages/dashboardpage.css'
 import '../styles/PageCommon.css'
 import '../styles/modal.css'
@@ -33,7 +32,7 @@ class Dashboard extends React.Component {
             "display": "grid", 
             "grid-template-columns" : "1fr 1fr",
             "column-gap": "20px",
-            "padding-right" : "20px"}}>
+            }}>
           <h3>User</h3>
           <h3>Leader</h3>
             <div style={{ height: "130px", overflowY: "scroll" }}>

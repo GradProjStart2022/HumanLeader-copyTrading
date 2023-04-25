@@ -2,6 +2,7 @@
 
 import React from "react";
 import LeaderTable from "../components/tables/LeaderTable"
+import Leaderadd from "../components/addpopups/Leaderadd"
 
 import '../styles/pages/leaderpage.css'
 import '../styles/PageCommon.css'
@@ -13,7 +14,10 @@ class Leaderboard extends React.Component {
     return (
       <div className="contentsArea">
         <div className="leaderpage">
-          <h1>Leader</h1>
+            <div className="header">
+              <h1>Leader</h1>
+              <Leaderadd/>
+            </div>
             <LeaderTable/>
         </div>
       </div>
