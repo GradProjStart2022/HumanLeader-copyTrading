@@ -5,6 +5,7 @@ var sub_get = require('../../SU_module/SU_getsub');
 var router = express.Router();
 
 var telegramBot = require('../Trigger/TR_testbot');
+var TR_app_autotrade = require('../Trigger/TR_app_autotrade')
 
 var TR_gettrade = require('../../TR_module/TR_gettrade');
 
@@ -70,6 +71,9 @@ router.post('/newtrade', async function(req, res, next) {
             리더 거래시장 : ${body.TRADE_MARKET}
             ----------------------------------------`);
     }
+
+    // TR 모듈을 통해 FCM 메세지 전송
+    TR_app_autotrade("test title", "test body");
 
     res.end('ok');
     
