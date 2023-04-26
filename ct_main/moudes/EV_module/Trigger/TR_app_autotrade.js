@@ -1,7 +1,10 @@
 const { response } = require("express")
 
 function autoTrade_message(title, body){
-    const FCM_TOKEN = "ya29.a0Ael9sCOGdloPWmmg8Ez7kv8ld8CjHFi-3P0nBRH3P7mO8tn66Jh7ZrDjzK3MaWEksIe2R4FUDJvC5DY0WkCut-BOqfqwzvtDqAfkgLo1v-MOy0dKbARmimwcpRwhgAeiUynVjKkEV8AI_OTRxXWPYMKNGGr1aCgYKATESARESFQF4udJhDQqNTGXPns_blbp0e4Jvbw0163" // 현장에서 발급
+
+    // FCM토큰 : 유효기간 1시간, POST header에 입력
+    // DIVICE 토큰 : 유효기간 없음, POST body > message > token 에 입력
+    const FCM_TOKEN = "ya29.a0Ael9sCOGdloPWmmg8Ez7kv8ld8CjHFi-3P0nBRH3P7mO8tn66Jh7ZrDjzK3MaWEksIe2R4FUDJvC5DY0WkCut-BOqfqwzvtDqAfkgLo1v-MOy0dKbARmimwcpRwhgAeiUynVjKkEV8AI_OTRxXWPYMKNGGr1aCgYKATESARESFQF4udJhDQqNTGXPns_blbp0e4Jvbw0163" 
     const DIVICE_TOKEN = "eYJkPvGFR42BLyoklQHUhQ:APA91bGFlVQkFixLjrH-RpqKBxRlvqUFzFxtxVnLJNVlUCmK0GztLBCPy2gR2iQn_tE4tbFz47FBFG4qt6LeXMAL7B2Ft5YMqrFKc29XGsYvrlOPWcKUkds-LE-Qt_QQcqSmJ21M9Xjk"
     const URL = "https://fcm.googleapis.com/v1/projects/hlcopybot/messages:send"
     
