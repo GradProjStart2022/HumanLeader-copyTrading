@@ -73,7 +73,7 @@ router.post('/newtrade', async function(req, res, next) {
     }
 
     // TR 모듈을 통해 FCM 메세지 전송
-    TR_app_autotrade("test title", "test body");
+    TR_app_autotrade.autoTrade_message("test_title22",`${JSON.stringify(body)}`);
 
     res.end('ok');
     

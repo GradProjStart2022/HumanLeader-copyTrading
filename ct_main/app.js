@@ -2,13 +2,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const cors = require('cors')
+const cors = require('cors');
 
 let corsOptions = {
   origin: '*',      // 출처 허용 옵션
   credential: true, // 사용자 인증이 필요한 리소스(쿠키 등) 접근
 }
-app.use(cors(corsOptions));
+
 
 
 
@@ -31,7 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors(corsOptions));
 
 // index
 app.use('/', indexRouter);

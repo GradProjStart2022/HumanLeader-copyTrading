@@ -1,13 +1,13 @@
 const { response } = require("express")
 
-const autoTrade_message = (title, body) => {
-    const FCM_TOKEN = "fEFL7n-CQ8yvE6hA2pjxoK:APA91bHs5xig6T3RJyn0FPOTxpWsFw2XHpeBARQk5m7CXbPOfpZFV1Ch_O1kuMggGpE9iIImoXDLhQjIdXA4o7nU4N0kBd8Qy8Sa8COld6Dy8r-fhL2SFICPe87nhTZZidbGYcp_j9jV" // 현장에서 발급
-    const DIVICE_TOKEN = "ya29.a0Ael9sCN5OD1Teva2SpRhn-fXOB1mI3-XndaTXOq8_VAdprxHXQ58hbeKjUSDzALpguHCnbTkFaNsnvg6ymSludT36_KnGbnpwgJeq3vpXQ85H15hj2iyoPkLTza-H8Vd7ssZVFLjtHaUsLpUNtLxP8E9rUb4aCgYKAR8SARMSFQF4udJhxL9Oz_WNEGvjVcVmgB1lGA0163"
-    const URL = "fcm.googleapis.com/v1/projects/hlcopybot/messages:send"
+function autoTrade_message(title, body){
+    const FCM_TOKEN = "ya29.a0Ael9sCOGdloPWmmg8Ez7kv8ld8CjHFi-3P0nBRH3P7mO8tn66Jh7ZrDjzK3MaWEksIe2R4FUDJvC5DY0WkCut-BOqfqwzvtDqAfkgLo1v-MOy0dKbARmimwcpRwhgAeiUynVjKkEV8AI_OTRxXWPYMKNGGr1aCgYKATESARESFQF4udJhDQqNTGXPns_blbp0e4Jvbw0163" // 현장에서 발급
+    const DIVICE_TOKEN = "eYJkPvGFR42BLyoklQHUhQ:APA91bGFlVQkFixLjrH-RpqKBxRlvqUFzFxtxVnLJNVlUCmK0GztLBCPy2gR2iQn_tE4tbFz47FBFG4qt6LeXMAL7B2Ft5YMqrFKc29XGsYvrlOPWcKUkds-LE-Qt_QQcqSmJ21M9Xjk"
+    const URL = "https://fcm.googleapis.com/v1/projects/hlcopybot/messages:send"
     
     let postdata = {
         "message": {
-            "token": `${FCM_TOKEN}`,
+            "token": `${DIVICE_TOKEN}`,
             "notification": {
               "body": `${body}`,
               "title": `${title}`
@@ -15,10 +15,12 @@ const autoTrade_message = (title, body) => {
         }
     }
 
+    console.log(`${JSON.stringify(postdata)}`);
+
     fetch(`${URL}`, {
         method: 'POST', 
         headers: {
-            'Authorization' : `Bearer ${DIVICE_TOKEN}`,
+            'Authorization' : `Bearer ${FCM_TOKEN}`,
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(postdata),
@@ -34,4 +36,6 @@ const autoTrade_message = (title, body) => {
 
 }
 
-export default autoTrade_message
+module.exports = {
+    autoTrade_message : autoTrade_message,
+}
