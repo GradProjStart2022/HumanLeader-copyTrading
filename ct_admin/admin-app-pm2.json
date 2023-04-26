@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "ct_admin",
+            "script": "npm",
+            "args" : "start"
+        }
+    ]
+}
