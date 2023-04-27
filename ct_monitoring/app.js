@@ -11,10 +11,27 @@ import monitoring from "./routes/monitoring";
 
 var app = express();
 async function monitor() {
+  let timerIds = {};
   let leaders = await getLeaders();
   leaders.forEach((leader) => {
-    setInterval(() => monitoring(leader), 1000);
+    timerIds[leader.LEADER_SEQ] = setInterval(() => monitoring(leader), 1000);
   });
+  setInterval(() => {
+    let updatedLeaders = getLeaders();
+    for (const deletedLeader in leaders) {
+      if (leaders[deletedLeader] !== updatedLeaders[deletedLeader]) {
+        clearInterval(timerIds[deletedLeader.LEADER_SEQ]);
+      }
+    }
+    for (const newLeader in updatedLeaders) {
+      if (updatedLeaders[deletedLeader] !== leaders[deletedLeader]) {
+        timerIds[leader.LEADER_SEQ] = setInterval(
+          () => monitoring(newLeader),
+          1000
+        );
+      }
+    }
+  }, 60 * 60 * 1000);
 }
 
 monitor();

@@ -58,7 +58,7 @@ function monitoring(leader) {
     if (error) throw new Error(error);
     if (
       JSON.stringify(bodyT) !== JSON.stringify(body) &&
-      body[0].created_at.slice(0, 19) > currentDate.slice(0.19)
+      body[0].created_at.slice(0, 19) > currentDate.slice(0, 19)
     ) {
       // trading 서버에 거래 발생 POST
       bodyT = body;

@@ -16,17 +16,18 @@ async function getLeaders() {
 
   const pool = createPool();
 
-  const conn = await pool.getConnection(async (conn) => conn);
   let leaders;
   try {
+    const conn = await pool.getConnection();
     leaders = await conn.query(sql);
+    conn.release();
   } catch (err) {
     console.log(err);
   } finally {
-    conn.release();
+    console.log("DB에서 리더트레이더 정보 불러오기 완료");
+    delete leaders.meta;
   }
-  console.log("DB에서 리더트레이더 정보 불러오기 완료");
-  delete leaders.meta;
+
   return leaders;
 }
 

@@ -20,7 +20,7 @@ function createPool() {
 
 function releaseConnection(connction) {
   if (pool && connction) {
-    connection.relaes();
+    connection.release();
   }
 }
 
