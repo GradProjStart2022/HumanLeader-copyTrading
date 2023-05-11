@@ -157,35 +157,35 @@
 
 1. url 요청 → 라우터  :  app.js에서 1차 분기 및 요청을 라우터 로 전달
 
-   ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled.png)
+   ![Untitled](readmeImg/Untitled.png)
 2. 라우터 → 기능 모듈 :  라우터에서 기능 모듈을 호출하여 기능 처리
 
-   ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%201.png)
+   ![Untitled](readmeImg/Untitled%201.png)
 3. 기능 모듈 → DB 모듈 : DB모듈에 데이터 처리 요청
 
-   ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%202.png)
+   ![Untitled](readmeImg/Untitled%202.png)
 4. DB 모듈 : 쿼리를 통해 처리 및 데이터 수신 (post는 여기서 종료)
 
-   ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%203.png)
+   ![Untitled](readmeImg/Untitled%203.png)
 5. DB → 기능 모듈  : 수신 데이터 전달
 
    - return rows : 여기서 rows가 DB 수신 데이터
 
      - 이 데이터를 전달
 
-     ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%204.png)
+     ![Untitled](readmeImg/Untitled%204.png)
 
      - DB_data 에 rows 전달
 6. 기능 모듈 → 라우터 : 수신 데이터 전달
 
    - UR_data 에 DB_data 전달
 
-   ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%205.png)
+   ![Untitled](readmeImg/Untitled%205.png)
 7. 라우터 : 처리 완료
 
    - 받은 데이터를 이용해 전달 및  처리
 
-   ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%206.png)
+   ![Untitled](readmeImg/Untitled%206.png)
 
 # 개발 순서
 
@@ -243,7 +243,7 @@ ex) 리더기능 - 신규 리더 생성
   - 대부분 이미 있음, 신규 카테고리를 만들 경우 연결
 - postman 등을 사용하여 라우팅이 잘 되었는지 테스트
 
-  ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%207.png)
+  ![Untitled](readmeImg/Untitled%207.png)
 
 ## 5. **기능 모듈 메서드 생성**
 
@@ -289,9 +289,9 @@ ex) 리더기능 - 신규 리더 생성
     ```
   - postman 테스트
 
-    ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%207.png)
+    ![Untitled](readmeImg/Untitled%207.png)
 
-    ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%208.png)
+    ![Untitled](readmeImg/Untitled%208.png)
 
 ## 6. DB 모듈 메서드 생성
 
@@ -383,10 +383,10 @@ ex) 리더기능 - 신규 리더 생성
   ```
 - postman을 통한 테스트
 
-  ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%209.png)
+  ![Untitled](readmeImg/Untitled%209.png)
 - DB 확인
 
-  ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%2010.png)
+  ![Untitled](readmeImg/Untitled%2010.png)
 
 ## 7. 사용
 
@@ -419,11 +419,12 @@ ex) 리더기능 - 신규 리더 생성
           .catch(error => console.error(error));
       }
   ```
+
   - component가 호출되면 this.state.list에 모든 리더 목록이 자동으로 입력된다.
   - 이후 this.state.list를 이용하여 api를 통해 불러온 데이터에 접근할 수 있다.
 - DB 상태
 
-  ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%2011.png)
+  ![Untitled](readmeImg/Untitled%2011.png)
 - 구성화면
 
   ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%2012.png)
