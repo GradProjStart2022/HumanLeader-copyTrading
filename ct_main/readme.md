@@ -425,6 +425,6 @@ ex) 리더기능 - 신규 리더 생성
 - DB 상태
 
   ![Untitled](readmeImg/Untitled%2011.png)
-- 구성화면
+- 구성화면  
 
-  ![Untitled](CT%20main%20API%20%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%20%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%83%E1%85%B3%20%E1%84%86%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%20179519b0f41441afbb1bc7604767bd9d/Untitled%2012.png)
+  ![Untitled](readmeImg/Untitled%2012.png)
