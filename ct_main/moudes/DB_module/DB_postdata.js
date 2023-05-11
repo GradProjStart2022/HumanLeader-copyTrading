@@ -5,7 +5,6 @@ const vals = require('./DB_info.js');
 const pool = mariadb.createPool({
     host: vals.DBhost, port:vals.DBport,
     user: vals.DBuser, password: vals.DBpass,
-    connectionLimit: 5
 });
 
 // ct_leader_history에 거래기록 추가
@@ -57,8 +56,49 @@ async function POST_user(data){
     try{
         conn = await pool.getConnection();
         conn.query('USE copytrade_proto');
-        console.log(`INSERT INTO ct_public (PUBLIC_ID, PUBLIC_ST, REG_DT, MOD_DT, ACCESS_KEY, SECRET_KEY) VALUES (${PUBLIC_ID}, '${PUBLIC_ST}', '${REG_DT}', '${MOD_DT}', '${ACCESS_KEY}', '${SECRET_KEY}')`)
-        output = await conn.query(`INSERT INTO ct_public (PUBLIC_ID, PUBLIC_ST, REG_DT, MOD_DT, ACCESS_KEY, SECRET_KEY) VALUES (${PUBLIC_ID}, '${PUBLIC_ST}', '${REG_DT}', '${MOD_DT}', '${ACCESS_KEY}', '${SECRET_KEY}');`)
+        console.log(`INSERT INTO ct_public (PUBLIC_ID, PUBLIC_ST, REG_DT, MOD_DT, ACCESS_KEY, SECRET_KEY) VALUES ('${PUBLIC_ID}', '${PUBLIC_ST}', '${REG_DT}', '${MOD_DT}', '${ACCESS_KEY}', '${SECRET_KEY}')`)
+        output = await conn.query(`INSERT INTO ct_public (PUBLIC_ID, PUBLIC_ST, REG_DT, MOD_DT, ACCESS_KEY, SECRET_KEY) VALUES ('${PUBLIC_ID}', '${PUBLIC_ST}', '${REG_DT}', '${MOD_DT}', '${ACCESS_KEY}', '${SECRET_KEY}');`)
+    }
+    catch(err){
+        throw err;
+    }
+    finally{
+        if(conn) conn.end()
+        console.log(output)
+        return;
+    }
+    
+}
+
+// 신규 리더 정보 DB 등록
+async function POST_leader(data){
+
+    console.log(`DB data : ${JSON.stringify(data)}`)
+
+    LEADER_UID = data.LEADER_UID
+    LEADER_NAME = data.LEADER_NAME
+    LEADER_IMAGE = data.LEADER_IMAGE
+    LEADER_CAPACITY = data.LEADER_CAPACITY
+    LEADER_PRICE = data.LEADER_PRICE
+    LEADER_AMOUNT = data.LEADER_AMOUNT
+    EXCHANGE_TYPE = data.EXCHANGE_TYPE
+    ACCESS_KEY = data.ACCESS_KEY
+    SECRET_KEY = data.SECRET_KEY
+    TRADER_ST = data.TRADER_ST
+    REG_DT = data.REG_DT
+    MOD_DT = data.MOD_DT
+
+    const SQLquery = await `INSERT INTO ct_leader (LEADER_UID, LEADER_NAME, LEADER_IMAGE, LEADER_CAPACITY, LEADER_PRICE, LEADER_AMOUNT, EXCHANGE_TYPE, ACCESS_KEY, SECRET_KEY, TRADER_ST, REG_DT, MOD_DT) VALUES (${LEADER_UID}, '${LEADER_NAME}', '${LEADER_IMAGE}', '${LEADER_CAPACITY}', '${LEADER_PRICE}', '${LEADER_AMOUNT}','${EXCHANGE_TYPE}', '${ACCESS_KEY}', '${SECRET_KEY}','${TRADER_ST}','${REG_DT}','${MOD_DT}');`
+    console.log(SQLquery);
+
+    let conn, output;
+    try{  
+        
+        conn = await pool.getConnection();
+        conn.query('USE copytrade_proto');
+        console.log("con success");
+        console.log(`DB query :  INSERT INTO ct_leader (LEADER_UID, LEADER_NAME, LEADER_IMAGE, LEADER_CAPACITY, LEADER_PRICE, LEADER_AMOUNT, EXCHANGE_TYPE, ACCESS_KEY, SECRET_KEY, TRADER_ST, REG_DT, MOD_DT) VALUES ('${LEADER_UID}', '${LEADER_NAME}', '${LEADER_IMAGE}', '${LEADER_CAPACITY}', '${LEADER_PRICE}', '${LEADER_AMOUNT}', '${EXCHANGE_TYPE}', '${ACCESS_KEY}', '${SECRET_KEY}','${TRADER_ST}','${REG_DT}','${MOD_DT}');`)
+        output = await conn.query(`INSERT INTO ct_leader (LEADER_UID, LEADER_NAME, LEADER_IMAGE, LEADER_CAPACITY, LEADER_PRICE, LEADER_AMOUNT, EXCHANGE_TYPE, ACCESS_KEY, SECRET_KEY, TRADER_ST, REG_DT, MOD_DT) VALUES ('${LEADER_UID}', '${LEADER_NAME}', '${LEADER_IMAGE}', '${LEADER_CAPACITY}', '${LEADER_PRICE}', '${LEADER_AMOUNT}','${EXCHANGE_TYPE}', '${ACCESS_KEY}', '${SECRET_KEY}','${TRADER_ST}','${REG_DT}','${MOD_DT}');`)
     }
     catch(err){
         throw err;
@@ -74,6 +114,7 @@ async function POST_user(data){
 module.exports = {
 
     POST_LT_history: POST_LT_history,
-    POST_user : POST_user
+    POST_user : POST_user,
+    POST_leader : POST_leader
 
 }
