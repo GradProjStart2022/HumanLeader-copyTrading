@@ -27,8 +27,6 @@ class DisplayTable extends React.Component {
             this.setState({
                 list: data
             });
-            console.log('aa');
-            
         })
         .catch(error => console.error(error));
     }
