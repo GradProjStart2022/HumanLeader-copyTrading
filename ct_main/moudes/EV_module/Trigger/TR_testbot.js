@@ -1,4 +1,4 @@
-/*const TelegramBot = require('node-telegram-bot-api');
+const TelegramBot = require('node-telegram-bot-api');
 
 // 발급받은 봇 토큰 입력
 const token = '6072145282:AAFtxxk2XdQ124whODgCOOMwrIXb1985lss';
@@ -41,4 +41,3 @@ module.exports = {
     sendmessage : sendmessage,
 }
 
-*/
