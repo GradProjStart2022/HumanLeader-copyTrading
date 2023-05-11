@@ -187,7 +187,7 @@
 
    ![Untitled](readmeImg/Untitled%206.png)
 
-# 개발 순서
+# 개발 순서 - 신규 리더 등록 API 만들기
 
 ## 1. **API 분류 선택**
 
