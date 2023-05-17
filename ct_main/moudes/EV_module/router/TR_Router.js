@@ -5,6 +5,22 @@ var sub_get = require('../../SU_module/SU_getsub');
 var router = express.Router();
 
 var telegramBot = require('../Trigger/TR_testbot');
+var TR_app_autotrade = require('../Trigger/TR_app_autotrade')
+
+var TR_gettrade = require('../../TR_module/TR_gettrade');
+
+
+// 모든 거래 기록 조회
+router.get('/all',async function(req, res, next){
+    console.log("app - get all user trade recode request");
+    var TR_data = await TR_gettrade.TR_allusertrade();
+    //console.log(`LR data : ${JSON.stringify(LR_data)}`);
+    res.json(TR_data);
+    
+
+});
+
+
 
 // Leader trader의 새로운 거래기록 발생
 router.post('/newtrade', async function(req, res, next) {
@@ -56,10 +72,16 @@ router.post('/newtrade', async function(req, res, next) {
             ----------------------------------------`);
     }
 
+    // TR 모듈을 통해 FCM 메세지 전송
+    TR_app_autotrade("test title", "test body");
+
     res.end('ok');
     
 
 });
+
+
+
 
 
 module.exports = router;

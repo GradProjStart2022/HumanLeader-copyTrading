@@ -1,0 +1,85 @@
+.Modal {
+  font-size: 12px;
+  border: solid 1px;
+  width: 400px;
+  height: auto;
+  border-radius: 5px;
+  
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.Modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+
+.button {
+  bottom: 10px;
+}
+
+.Modal > .contents {
+  width: 100%;
+  padding: 10px 5px;
+  display:inline-block;
+  
+}
+
+.Modal > .sub-contents {
+  display: grid;
+  grid-template-columns: 400px 400px
+}
+
+.Modal > .Actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+
+.Modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 1px;
+  border: 1px solid #cfcece;
+}
+
+.inputdata {
+  padding-right: 40px;
+  display: flex;
+  justify-content: right;
+  margin: 10px;
+}
+
+.labeltext {
+  justify-self:right;
+}
+
+.inputtext {
+  justify-self:left;
+  margin-left: 5px;
+  width: 200px;
+}

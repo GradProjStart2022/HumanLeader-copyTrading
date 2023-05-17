@@ -1,0 +1,31 @@
+/* src/styles/common/Nav.css */
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  
+  display: flex;
+  border: solid 2px;
+  background-color: #eee;
+
+}
+
+nav > div {
+  border: solid 1px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbutton {
+}
+
+nav > div > a {
+  text-decoration-line: none;
+  text-decoration: none; 
+  color: black; 
+  
+}

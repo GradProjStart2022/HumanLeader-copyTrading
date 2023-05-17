@@ -28,12 +28,14 @@ async function Get_Sub_User(LEADER_SEQ){
     }
 }
 
+// 모든 리더목록을 DB에서 불러오기
 async function Get_all_leader(){
     let conn, rows;
     try{
         
         conn = await pool.getConnection();
         conn.query('USE copytrade_proto;');
+        //rows = await conn.query(`select * from ct_leader;`);
         rows = await conn.query(`select LEADER_SEQ,LEADER_UID,LEADER_NAME,LEADER_IMAGE,LEADER_CAPACITY,LEADER_PRICE,LEADER_AMOUNT,EXCHANGE_TYPE,TRADER_ST from ct_leader;`);
         //console.log(rows)
     }
@@ -47,6 +49,70 @@ async function Get_all_leader(){
     }
 }
 
+//모든 유저 트레이드 내역을 불러오기
+async function Get_all_trade(){
+    let conn, rows;
+    try{
+        
+        conn = await pool.getConnection();
+        conn.query('USE copytrade_proto;');
+        rows = await conn.query(`select * from ct_trading_history;`);
+        //console.log(rows)
+    }
+    catch(err){
+        throw err;
+    }
+    finally{
+        if (conn) conn.end();
+        //console.log(rows)
+        return rows;
+    }
+}
+
+
+//모든 구독 목록을 불러오기
+async function Get_all_sub(){
+    let conn, rows;
+    try{
+        
+        conn = await pool.getConnection();
+        conn.query('USE copytrade_proto;');
+        rows = await conn.query(`select * from ct_following;`);
+        //console.log(rows)
+    }
+    catch(err){
+        throw err;
+    }
+    finally{
+        if (conn) conn.end();
+        //console.log(rows)
+        return rows;
+    }
+}
+
+//모든 유저 목록을 불러오기
+async function Get_all_user(){
+    let conn, rows;
+    try{
+        
+        conn = await pool.getConnection();
+        conn.query('USE copytrade_proto;');
+        rows = await conn.query(`select * from ct_public;`);
+        //console.log(rows)
+    }
+    catch(err){
+        throw err;
+    }
+    finally{
+        if (conn) conn.end();
+        //console.log(rows)
+        return rows;
+    }
+}
+
+
+
+// 리더 SEQ를 통해 리더 거래목록 조회
 async function Get_leader_history_byID(seq){
     let conn, rows;
     try{
@@ -71,4 +137,7 @@ module.exports = {
     Get_Sub_User: Get_Sub_User,
     Get_all_leader : Get_all_leader,
     Get_leader_history_byID : Get_leader_history_byID,
+    Get_all_trade : Get_all_trade,
+    Get_all_sub : Get_all_sub,
+    Get_all_user : Get_all_user,
 }

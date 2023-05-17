@@ -1,6 +1,8 @@
 var db_getdata = require('../DB_module/DB_getdata');
 var tr_getleadrhis = require('../TR_module/TR_gettrade');
 
+
+// 모든 리더 목록 조회
 async function get_leader_all(){
     console.log('LR req get');
 
@@ -13,6 +15,8 @@ async function get_leader_all(){
 
 }
 
+
+// ID를 통해 해당 리더 검색
 async function get_leaderhis_byID(seq){
     console.log('LR req get');
 
