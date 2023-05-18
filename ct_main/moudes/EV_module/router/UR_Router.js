@@ -1,6 +1,8 @@
 var express = require("express");
 var ur_userpost = require("../../UR_moudle/UR_postuser");
 var UR_userget = require("../../UR_moudle/UR_getuser");
+var ur_tokenPost = require("../../UR_moudle/UR_tokenpost");
+const UR_tokenpost = require("../../UR_moudle/UR_tokenpost");
 var router = express.Router();
 
 // id로 유저 조회
@@ -35,6 +37,19 @@ router.post("/new", async function (req, res, next) {
 
   // 받은 데이터를 UR모듈의 함수에 전달
   ur_userpost.user_signup(data);
+});
+
+router.post("/token", async function (req, res, next) {
+  data = req.body;
+  data.console.log(req.body);
+  res.statusCode = 200;
+  res.end("ok");
+
+  // 받은 데이터 확인
+  console.log(`EV data: ${JSON.stringify(data)}`);
+
+  // 받은 데이터를 UR모듈의 함수에 전달
+  UR_tokenpost.fcmPost(data);
 });
 
 module.exports = router;

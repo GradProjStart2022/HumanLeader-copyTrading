@@ -112,11 +112,10 @@ async function POST_leader(data) {
 async function PostFcmToken(data) {
   console.log(`DB data : ${JSON.stringify(data)}`);
 
-  PUBLIC_SEQ = data.id;
+  PUBLIC_ID = data.id;
   TOKEN = data.token;
 
-  const query =
-    await "INSERT INTO ct_public_token (PUBLIC_SEQ, TOKEN) VALUES (?,?)";
+  const query = await "UPDATE ct_public SET TOKEN=? WHERE PUBLIC_ID = ?";
   console.log(query);
 
   let conn, output;
@@ -125,9 +124,9 @@ async function PostFcmToken(data) {
     conn.query("USE copytrade_proto");
     console.log("con success");
     console.log(
-      `DB query :  "INSERT INTO ct_public_token (PUBLIC_SEQ, TOKEN) VALUES (?,?)`
+      `DB query :  "UPDATE ct_public SET (TOKEN=${TOKEN}) where id = (${PUBLIC_ID})`
     );
-    output = await conn.query(query, [PUBLIC_SEQ, TOKEN]);
+    output = await conn.query(query, [PUBLIC_ID, TOKEN]);
   } catch (err) {
     throw err;
   } finally {
