@@ -126,7 +126,7 @@ async function PostFcmToken(data) {
     console.log(
       `DB query :  "UPDATE ct_public SET (TOKEN=${TOKEN}) where id = (${PUBLIC_ID})`
     );
-    output = await conn.query(query, [PUBLIC_ID, TOKEN]);
+    output = await conn.query(query, [TOKEN, PUBLIC_ID]);
   } catch (err) {
     throw err;
   } finally {

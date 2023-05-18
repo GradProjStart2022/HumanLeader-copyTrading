@@ -6,7 +6,7 @@ const UR_tokenpost = require("../../UR_moudle/UR_tokenpost");
 var router = express.Router();
 
 // id로 유저 조회
-router.get("/", async function (req, res, next) {
+router.post("/", async function (req, res, next) {
   console.log("app - get user by id request");
   // UR 모듈을 통해 데이터 조회 요청
   var UR_data = await UR_userget.get_user_by_id(req.body.id);
