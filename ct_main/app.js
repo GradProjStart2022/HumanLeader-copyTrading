@@ -13,7 +13,6 @@ var UR_Router = require("./moudes/EV_module/router/UR_Router");
 var LR_Router = require("./moudes/EV_module/router/LR_Router");
 var TR_Router = require("./moudes/EV_module/router/TR_Router");
 var SU_Router = require("./moudes/EV_module/router/SU_Router");
-var TK_Router = require("./moudes/EV_module/router/TK_Router");
 
 var app = express();
 
@@ -50,8 +49,5 @@ app.use("/leader", LR_Router);
 
 //subscribe
 app.use("/sub", SU_Router);
-
-//FCMTOKEN
-app.use("/token", TK_Router);
 
 module.exports = app;
