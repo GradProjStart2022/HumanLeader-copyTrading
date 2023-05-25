@@ -106,7 +106,8 @@ async function Get_user_by_id(id) {
   try {
     conn = await pool.getConnection();
     conn.query("USE copytrade_proto;");
-    rows = await conn.query(`select PUBLIC_ID from ct_public where id=?;`);
+    rows = await conn.query("select PUBLIC_ID from ct_public where id=?", [id]);
+
     //console.log(rows)
   } catch (err) {
     throw err;
