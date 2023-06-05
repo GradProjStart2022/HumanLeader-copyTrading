@@ -27,7 +27,16 @@ function fcmPost(data) {
   db_postdata.PostFcmToken(data);
 }
 
+function keyRegist(data) {
+  // 받은 데이터 확인
+  console.log(`UR data: ${JSON.stringify(data)}`);
+
+  // DB 모듈로 데이터 전달
+  db_postdata.PostKey(data);
+}
+
 module.exports = {
   user_signup: user_signup,
   fcmPost: fcmPost,
+  keyRegist: keyRegist,
 };

@@ -157,10 +157,38 @@ async function PostFcmToken(data) {
   }
 }
 
+// 신규 access key, secret key 등록
+async function PostKey(data) {
+  console.log(`DB data : ${JSON.stringify(data)}`);
+
+  const PUBLIC_ID = data.id;
+  const ACCESS_KEY = data.accessKey;
+  const SECRET_KEY = data.secretKey;
+
+  const query =
+    await "UPDATE ct_public SET ACCESS_KEY=?, SECRET_KEY=? WHERE PUBLIC_ID = ?";
+
+  let conn, output;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto");
+    console.log("con success");
+
+    output = await conn.query(query, [ACCESS_KEY, SECRET_KEY, PUBLIC_ID]);
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    console.log(output);
+    return;
+  }
+}
+
 module.exports = {
   POST_LT_history: POST_LT_history,
   POST_user: POST_user,
   POST_leader: POST_leader,
   POST_public: POST_public,
   PostFcmToken: PostFcmToken,
+  PostKey: PostKey,
 };

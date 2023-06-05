@@ -39,7 +39,7 @@ router.post("/new", async function (req, res, next) {
   // 받은 데이터를 UR모듈의 함수에 전달
   ur_userpost.user_signup(data);
 });
-
+// token 등록 라우터
 router.post("/token", async function (req, res, next) {
   data = req.body;
   console.log(req.body);
@@ -51,6 +51,19 @@ router.post("/token", async function (req, res, next) {
 
   // 받은 데이터를 UR모듈의 함수에 전달
   ur_userpost.fcmPost(data);
+});
+
+router.post("/key", async function (req, res, next) {
+  data = req.body;
+  console.log(req.body);
+  res.statusCode = 200;
+  res.json(1);
+
+  // 받은 데이터 확인
+  console.log(`EV data: ${JSON.stringify(data)}`);
+
+  // 받은 데이터를 UR모듈의 함수에 전달
+  ur_userpost.keyRegist(data);
 });
 
 module.exports = router;
