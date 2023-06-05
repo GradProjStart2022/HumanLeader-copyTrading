@@ -67,6 +67,27 @@ async function POST_user(data) {
   }
 }
 
+// app 유저 회원가입
+async function POST_public(data) {
+  console.log(`DB data : ${JSON.stringify(data)}`);
+
+  PUBLIC_ID = data.id;
+  let conn, output;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto");
+    console.log(`INSERT INTO ct_public (PUBLIC_ID) VALUES ('${PUBLIC_ID}')`);
+    var query = "INSERT INTO ct_public (PUBLIC_ID) VALUES (?)";
+    output = await conn.query(query, [PUBLIC_ID]);
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    console.log(output);
+    return;
+  }
+}
+
 // 신규 리더 정보 DB 등록
 async function POST_leader(data) {
   console.log(`DB data : ${JSON.stringify(data)}`);
@@ -136,9 +157,38 @@ async function PostFcmToken(data) {
   }
 }
 
+// 신규 access key, secret key 등록
+async function PostKey(data) {
+  console.log(`DB data : ${JSON.stringify(data)}`);
+
+  const PUBLIC_ID = data.id;
+  const ACCESS_KEY = data.accessKey;
+  const SECRET_KEY = data.secretKey;
+
+  const query =
+    await "UPDATE ct_public SET ACCESS_KEY=?, SECRET_KEY=? WHERE PUBLIC_ID = ?";
+
+  let conn, output;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto");
+    console.log("con success");
+
+    output = await conn.query(query, [ACCESS_KEY, SECRET_KEY, PUBLIC_ID]);
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    console.log(output);
+    return;
+  }
+}
+
 module.exports = {
   POST_LT_history: POST_LT_history,
   POST_user: POST_user,
+  POST_public: POST_public,
   POST_leader: POST_leader,
   PostFcmToken: PostFcmToken,
+  PostKey: PostKey,
 };
