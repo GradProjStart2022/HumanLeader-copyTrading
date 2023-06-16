@@ -49,6 +49,27 @@ async function Get_all_leader() {
   }
 }
 
+//특정 유저 id로 불러오기
+async function Get_leader_by_id(id) {
+  let conn, rows;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto;");
+    rows = await conn.query(
+      "select LEADER_SEQ,LEADER_UID,LEADER_NAME,LEADER_IMAGE,LEADER_CAPACITY,LEADER_PRICE,LEADER_AMOUNT,EXCHANGE_TYPE,TRADER_ST,REG_DT from ct_leader; where LEADER_UID=?",
+      [id]
+    );
+
+    //console.log(rows)
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    //console.log(rows)
+    return rows;
+  }
+}
+
 //모든 유저 트레이드 내역을 불러오기
 async function Get_all_trade() {
   let conn, rows;
@@ -105,7 +126,10 @@ async function Get_user_by_id(id) {
   try {
     conn = await pool.getConnection();
     conn.query("USE copytrade_proto;");
-    rows = await conn.query("select PUBLIC_ID from ct_public where id=?", [id]);
+    rows = await conn.query(
+      "select PUBLIC_ID from ct_public where PUBLIC_ID=?",
+      [id]
+    );
 
     //console.log(rows)
   } catch (err) {

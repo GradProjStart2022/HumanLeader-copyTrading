@@ -10,8 +10,8 @@ const queryEncode = require("querystring").encode;
 let bodyT = {};
 
 function monitoring(leader) {
-  const access_key = leader["ACCESS_KEY"];
-  const secret_key = leader["SECRET_KEY"];
+  const access_key = leader["ACCESS_KEY"]; // 리더 ACCESS KEY
+  const secret_key = leader["SECRET_KEY"]; // 리더 SECRET KEY
   const server_url = process.env.UPBIT_OPEN_API_SERVER_URL;
 
   const state = "done";
@@ -58,7 +58,7 @@ function monitoring(leader) {
     if (error) throw new Error(error);
     if (
       JSON.stringify(bodyT) !== JSON.stringify(body) &&
-      body[0].created_at.slice(0, 19) > currentDate.slice(0.19)
+      body[0].created_at.slice(0, 19) > currentDate.slice(0, 19)
     ) {
       // trading 서버에 거래 발생 POST
       bodyT = body;

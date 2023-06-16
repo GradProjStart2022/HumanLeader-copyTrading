@@ -183,7 +183,36 @@ async function PostKey(data) {
     return;
   }
 }
+async function PostFollowing(data) {
+  console.log(`DB data : ${JSON.stringify(data)}`);
 
+  const query =
+    await "INSERT INTO ct_following (PUBLIC_SEQ, LEADER_SEQ, FOLLOWING_TYPE, COPY_TRADE_TYPE, FIXED_AMOUNT, FIXED_RATIO, STOP_RATIO, TAKE_RATIO, IS_AUTO_TRADING_YN, FOLLOWING_ST) VALUES (?,?,FT01,?,?,?,?,?,?,FS01)";
+
+  let conn, output;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto");
+    console.log("con success");
+
+    output = await conn.query(query, [
+      data.publicSeq,
+      data.leaderSeq,
+      data.tradeType,
+      data.fixAmount,
+      data.fixRatio,
+      data.stopRatio,
+      data.takeRatio,
+      data.isAutoTrading,
+    ]);
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    console.log(output);
+    return;
+  }
+}
 module.exports = {
   POST_LT_history: POST_LT_history,
   POST_user: POST_user,
@@ -191,4 +220,5 @@ module.exports = {
   POST_public: POST_public,
   PostFcmToken: PostFcmToken,
   PostKey: PostKey,
+  PostFollowing: PostFollowing,
 };
