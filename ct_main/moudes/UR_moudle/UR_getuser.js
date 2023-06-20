@@ -14,8 +14,14 @@ async function get_user_by_id(id) {
 
   return DB_data;
 }
+async function get_userinfo_by_id(id) {
+  // DB 모듈을 이용해 전체 유저데이터 불러오기
+  var DB_data = await db_getdata.Get_userinfo_by_id(id);
 
+  return DB_data;
+}
 module.exports = {
   get_user_all: get_user_all,
   get_user_by_id: get_user_by_id,
+  get_userinfo_by_id: get_userinfo_by_id,
 };

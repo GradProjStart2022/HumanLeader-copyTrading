@@ -186,8 +186,21 @@ async function PostKey(data) {
 async function PostFollowing(data) {
   console.log(`DB data : ${JSON.stringify(data)}`);
 
-  const query =
-    await "INSERT INTO ct_following (PUBLIC_SEQ, LEADER_SEQ, FOLLOWING_TYPE, COPY_TRADE_TYPE, FIXED_AMOUNT, FIXED_RATIO, STOP_RATIO, TAKE_RATIO, IS_AUTO_TRADING_YN, FOLLOWING_ST) VALUES (?,?,FT01,?,?,?,?,?,?,FS01)";
+  const query = `
+    INSERT INTO ct_following (
+      PUBLIC_SEQ, LEADER_SEQ, FOLLOWING_TYPE, COPY_TRADE_TYPE, FIXED_AMOUNT, FIXED_RATIO, STOP_RATIO, TAKE_RATIO, IS_AUTO_TRADING_YN, FOLLOWING_ST
+    )
+    VALUES (?,?,'FT01',?,?,?,?,?,?,'FS01')
+    ON DUPLICATE KEY UPDATE
+      FOLLOWING_TYPE = ?,
+      COPY_TRADE_TYPE = ?,
+      FIXED_AMOUNT = ?,
+      FIXED_RATIO = ?,
+      STOP_RATIO = ?,
+      TAKE_RATIO = ?,
+      IS_AUTO_TRADING_YN = ?,
+      FOLLOWING_ST = ?
+  `;
 
   let conn, output;
   try {
@@ -204,6 +217,14 @@ async function PostFollowing(data) {
       data.stopRatio,
       data.takeRatio,
       data.isAutoTrading,
+      "FS01",
+      data.tradeType,
+      data.fixAmount,
+      data.fixRatio,
+      data.stopRatio,
+      data.takeRatio,
+      data.isAutoTrading,
+      "FS01",
     ]);
   } catch (err) {
     throw err;
@@ -213,7 +234,33 @@ async function PostFollowing(data) {
     return;
   }
 }
-module.exports = {
+
+async function DisableFollowing(data) {
+  console.log(`DB data : ${JSON.stringify(data)}`);
+
+  const query = await `
+    UPDATE ct_following
+    SET FOLLOWING_ST = 'FS02'
+    WHERE PUBLIC_SEQ = ? AND LEADER_SEQ = ?;
+  `;
+
+  let conn, output;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto");
+    console.log("con success");
+
+    output = await conn.query(query, [data.publicSeq, data.leaderSeq]);
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    console.log(output);
+    return;
+  }
+}
+
+const sql = (module.exports = {
   POST_LT_history: POST_LT_history,
   POST_user: POST_user,
   POST_leader: POST_leader,
@@ -221,4 +268,5 @@ module.exports = {
   PostFcmToken: PostFcmToken,
   PostKey: PostKey,
   PostFollowing: PostFollowing,
-};
+  DisableFollowing: DisableFollowing,
+});
