@@ -1,60 +1,52 @@
-var express = require('express');
-var tr_post = require('../../TR_module/TR_posttrade');
-var sub_get = require('../../SU_module/SU_getsub');
+var express = require("express");
+var tr_post = require("../../TR_module/TR_posttrade");
+var sub_get = require("../../SU_module/SU_getsub");
 
 var router = express.Router();
 
-var telegramBot = require('../Trigger/TR_testbot');
-var TR_app_autotrade = require('../Trigger/TR_app_autotrade')
+var telegramBot = require("../Trigger/TR_testbot");
+var TR_app_autotrade = require("../Trigger/TR_app_autotrade");
 
-var TR_gettrade = require('../../TR_module/TR_gettrade');
-
+var TR_gettrade = require("../../TR_module/TR_gettrade");
 
 // 모든 거래 기록 조회
-router.get('/all',async function(req, res, next){
-    console.log("app - get all user trade recode request");
-    var TR_data = await TR_gettrade.TR_allusertrade();
-    //console.log(`LR data : ${JSON.stringify(LR_data)}`);
-    res.json(TR_data);
-    
-
+router.get("/all", async function (req, res, next) {
+  console.log("app - get all user trade recode request");
+  var TR_data = await TR_gettrade.TR_allusertrade();
+  //console.log(`LR data : ${JSON.stringify(LR_data)}`);
+  res.json(TR_data);
 });
 
-
-
 // Leader trader의 새로운 거래기록 발생
-router.post('/newtrade', async function(req, res, next) {
-    
-    // body 데이터 오브젝트화
-    body = req.body;
-    console.log(body);
-    res.statusCode = 200;
-    
-    // TR모듈을 이용하여 거래 갱신
-    tr_post.trade_postLtrade(body);
-    LEADER_SEQ = body.LEADER_SEQ;
-    console.log('거래발생 리더SEQ : ',body.LEADER_SEQ);
+router.post("/newtrade", async function (req, res, next) {
+  // body 데이터 오브젝트화
+  body = req.body;
+  console.log(body);
+  res.statusCode = 200;
 
+  // TR모듈을 이용하여 거래 갱신
+  tr_post.trade_postLtrade(body);
+  LEADER_SEQ = body.LEADER_SEQ;
+  console.log("거래발생 리더SEQ : ", body.LEADER_SEQ);
 
+  // SUB 모듈을 통해 구독정보조회
+  console.log("해당 리더의 구독자정보를 조회합니다.");
 
-    // SUB 모듈을 통해 구독정보조회
-    console.log('해당 리더의 구독자정보를 조회합니다.');
+  sub_data = await sub_get.get_subscribe(LEADER_SEQ);
 
-    sub_data = await sub_get.get_subscribe(LEADER_SEQ);
+  console.log(`router_get data :${JSON.stringify(sub_data, null, 2)}`);
 
-    console.log(`router_get data :${JSON.stringify(sub_data, null, 2)}`);
-
-    // TR 모듈을 이용하여 알람요청 이벤트를 발생시킵니다.  
-    telegramBot.sendmessage(
-        `
+  // TR 모듈을 이용하여 알람요청 이벤트를 발생시킵니다.
+  telegramBot.sendmessage(
+    `
         ----------------------------------------
         수신 데이터 : ${JSON.stringify(sub_data, null, 2)}
         ----------------------------------------
         `
-        )
+  );
 
-    for (var i =0; i < sub_data.length; i++ ) {
-        telegramBot.sendmessage(`
+  for (var i = 0; i < sub_data.length; i++) {
+    telegramBot.sendmessage(`
             ----------------------------------------
             유저아이디 ${sub_data[i].PUBLIC_SEQ}의 계좌로 거래요청
 
@@ -62,7 +54,7 @@ router.post('/newtrade', async function(req, res, next) {
             리더 거래금액 : ${body.TRADE_PRICE}
             리더 거래시장 : ${body.TRADE_MARKET}
             ----------------------------------------`);
-        console.log(`
+    console.log(`
             ----------------------------------------
             유저아이디 ${sub_data[i].PUBLIC_SEQ}의 계좌로 거래요청
 
@@ -70,18 +62,12 @@ router.post('/newtrade', async function(req, res, next) {
             리더 거래금액 : ${body.TRADE_PRICE}
             리더 거래시장 : ${body.TRADE_MARKET}
             ----------------------------------------`);
-    }
+  }
 
-    // TR 모듈을 통해 FCM 메세지 전송
-    TR_app_autotrade("test title", "test body");
+  // TR 모듈을 통해 FCM 메세지 전송
+  TR_app_autotrade("test title", "test body");
 
-    res.end('ok');
-    
-
+  res.end("ok");
 });
-
-
-
-
 
 module.exports = router;

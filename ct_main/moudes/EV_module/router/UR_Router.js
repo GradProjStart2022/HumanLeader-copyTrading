@@ -25,6 +25,15 @@ router.get("/all", async function (req, res, next) {
   res.json(UR_data);
 });
 
+// 모든 유저 목록 조회
+router.get("/info/:id", async function (req, res, next) {
+  // UR 모듈을 통해 데이터 조회 요청
+  const id = req.params.id;
+  var UR_data = await UR_userget.get_userinfo_by_id(id);
+  console.log(`UR_data : ${JSON.stringify(UR_data)}`);
+  res.json(UR_data);
+});
+
 // 회원가입 이벤트 라우터
 // xxx:3000/user에서 post로 회원가입시 작동
 router.post("/new", async function (req, res, next) {

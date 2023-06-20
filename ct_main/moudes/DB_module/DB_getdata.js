@@ -56,7 +56,14 @@ async function Get_leader_by_id(id) {
     conn = await pool.getConnection();
     conn.query("USE copytrade_proto;");
     rows = await conn.query(
-      "select LEADER_SEQ,LEADER_UID,LEADER_NAME,LEADER_IMAGE,LEADER_CAPACITY,LEADER_PRICE,LEADER_AMOUNT,EXCHANGE_TYPE,TRADER_ST,REG_DT from ct_leader; where LEADER_UID=?",
+      `SELECT 
+      ct_leader.LEADER_SEQ,LEADER_UID,LEADER_NAME,LEADER_IMAGE,LEADER_CAPACITY,LEADER_PRICE,LEADER_AMOUNT,EXCHANGE_TYPE,TRADER_ST,ct_leader.REG_DT,
+      IF(ct_following.LEADER_SEQ IS NULL, 'N', 'Y') AS SUBSCRIBED
+    FROM
+      ct_leader
+      LEFT JOIN ct_following ON ct_leader.LEADER_UID = ct_following.LEADER_SEQ
+    WHERE
+      ct_leader.LEADER_SEQ = ?`,
       [id]
     );
 
@@ -181,6 +188,77 @@ async function Get_user_by_id(id) {
   }
 }
 
+async function Get_userinfo_by_id(id) {
+  let conn, rows;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto;");
+    rows = await conn.query(
+      "select PUBLIC_SEQ, PUBLIC_ID, TOKEN from ct_public where PUBLIC_ID=?",
+      [id]
+    );
+
+    //console.log(rows)
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    //console.log(rows)
+    return rows;
+  }
+}
+
+async function IsSubed(leaderSeq, publicSeq) {
+  let conn, rows;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto;");
+    rows = await conn.query(
+      `SELECT EXISTS (
+        SELECT 1
+        FROM ct_following
+        WHERE LEADER_SEQ = ?
+          AND PUBLIC_SEQ = ?
+          AND FOLLOWING_ST = 'FS01'
+      ) AS result;`,
+      [leaderSeq, publicSeq]
+    );
+
+    //console.log(rows)
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    //console.log(rows)
+    return rows;
+  }
+}
+
+async function Get_leader_by_publicseq(publicSeq) {
+  let conn, rows;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto;");
+    rows = await conn.query(
+      `SELECT 
+      cl.LEADER_SEQ, cl.LEADER_UID, cl.LEADER_NAME, cl.LEADER_IMAGE, cl.LEADER_CAPACITY, cl.LEADER_PRICE, cl.LEADER_AMOUNT, cl.EXCHANGE_TYPE, cl.TRADER_ST
+      FROM ct_leader cl
+      WHERE
+      cl.LEADER_SEQ IN (SELECT LEADER_SEQ from ct_following cf  where PUBLIC_SEQ = ? and FOLLOWING_ST = "FS01")
+      `,
+      [publicSeq]
+    );
+
+    //console.log(rows)
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    //console.log(rows)
+    return rows;
+  }
+}
+
 module.exports = {
   Get_Sub_User: Get_Sub_User,
   Get_all_leader: Get_all_leader,
@@ -189,4 +267,8 @@ module.exports = {
   Get_all_sub: Get_all_sub,
   Get_all_user: Get_all_user,
   Get_user_by_id: Get_user_by_id,
+  Get_leader_by_id: Get_leader_by_id,
+  Get_userinfo_by_id: Get_userinfo_by_id,
+  IsSubed: IsSubed,
+  Get_leader_by_publicseq: Get_leader_by_publicseq,
 };
