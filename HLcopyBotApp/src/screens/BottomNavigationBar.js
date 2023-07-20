@@ -1,7 +1,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import MainScreen from './HomeScreen';
+import HomeScreen from './HomeScreen';
 import TraderListScreen from './TraderListScreen';
 import AlarmScreen from './AlarmScreen';
 import SettingScreen from './SettingScreen';
@@ -13,7 +13,7 @@ const BottomNavigationBar = ({setIsLogin}) => {
         <Tab.Navigator initialRouteName="Home" screenOptions={{showLable: false, activeTintColor: '#e7d6ff'}}>
             <Tab.Screen
                 name="Home"
-                component={MainScreen}
+                component={HomeScreen}
                 options={{
                     tabBarIcon: ({color, size}) => <Icon name="home" size={size} color={color} />,
                     headerShown: false,

@@ -1,0 +1,37 @@
+[
+    {
+        "LEADER_SEQ": 2,
+        "LEADER_UID": "testleader2",
+        "LEADER_NAME": "testleader2",
+        "LEADER_IMAGE": "L2_image",
+        "LEADER_CAPACITY": 300,
+        "LEADER_PRICE": "0",
+        "LEADER_AMOUNT": "0",
+        "EXCHANGE_TYPE": "ET01",
+        "TRADER_ST": "RS02",
+        "REG_DT": "2022-11-09T01:54:11.000Z",
+        "SUBSCRIBED": "N"
+    },
+    {
+        "LEADER_SEQ": 1,
+        "LEADER_UID": "testleader1",
+        "LEADER_NAME": "testleader1",
+        "LEADER_IMAGE": "L1_image",
+        "LEADER_CAPACITY": 200,
+        "LEADER_PRICE": "0",
+        "LEADER_AMOUNT": "0",
+        "EXCHANGE_TYPE": "ET01",
+        "TRADER_ST": "RS01"
+    },
+    {
+        "LEADER_SEQ": 2,
+        "LEADER_UID": "testleader2",
+        "LEADER_NAME": "testleader2",
+        "LEADER_IMAGE": "L2_image",
+        "LEADER_CAPACITY": 300,
+        "LEADER_PRICE": "0",
+        "LEADER_AMOUNT": "0",
+        "EXCHANGE_TYPE": "ET01",
+        "TRADER_ST": "RS02"
+    }
+]

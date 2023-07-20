@@ -1,10 +1,10 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Button, Linking, View} from 'react-native';
 
 const AlarmSetting = () => {
     return (
-        <View>
-            <Text>알람 설정</Text>
+        <View style={{flex: 1}}>
+            <Button title="test" onPress={() => Linking.openSettings()} />
         </View>
     );
 };

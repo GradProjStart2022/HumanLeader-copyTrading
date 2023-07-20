@@ -5,7 +5,7 @@ import TraderList from '../components/trader/TraderList';
 const TraderListScreen = () => {
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>Trader</Text>
+            <Text style={styles.title}>Leader</Text>
             <TraderList />
         </ScrollView>
     );

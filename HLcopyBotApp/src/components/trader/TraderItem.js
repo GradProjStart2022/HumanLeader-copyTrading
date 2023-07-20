@@ -12,10 +12,17 @@ const TraderItem = ({item}) => {
             style={styles.container}
             onPress={() =>
                 navigation.navigate('TraderDetail', {
-                    uid: item.LEADER_UID,
+                    LEADER_SEQ: item.LEADER_SEQ,
+                    LEADER_UID: item.LEADER_UID,
+                    LEADER_NAME: item.LEADER_NAME,
+                    LEADER_IMAGE: item.LEADER_IMAGE,
+                    LEADER_CAPACITY: item.LEADER_CAPACITY,
+                    LEADER_PRICE: item.LEADER_PRICE,
+                    LEADER_AMOUNT: item.LEADER_AMOUNT,
                 })
             }>
-            <RoundImage source={item.LEADER_IMAGE ? {uri: item.LEADER_IMAGE} : require('../../img/symbol/ticker/BTC.png')} />
+            {/* <RoundImage source={item.LEADER_IMAGE ? {uri: item.LEADER_IMAGE} : require('../../img/symbol/ticker/BTC.png')} /> */}
+            <RoundImage source={require('../../img/symbol/ticker/BTC.png')} />
             <View>
                 <View style={styles.textbox}>
                     <Text>{item.LEADER_NAME}</Text>
