@@ -12,17 +12,17 @@
 
 # 기술 스택
 ## monitoring 서버, trading 서버
-|Node.js|MariaDB|Upbit API|express|
+|Node.js|MariaDB|express|Upbit API|
 |---|---|---|---|
-
+|![poster](./readme_img/node_js.jpg)|![poster](./readme_img/mariadb.png)|||
 ## main 서버
 |nodejs|express|pm2|mariaDB|swagger|
 |---|---|---|---|---|
-
+|![poster](./readme_img/node_js.jpg)|||![poster](./readme_img/mariadb.png)||
 ## admin 서버
 |nodejs|reactjs|react-Router| 
 |---|---|---|
-
+|![poster](./readme_img/node_js.jpg)|![poster](./readme_img/react.jpg)|![poster](./readme_img/react_router.jpg)|
 ## 앱 프론트엔드
 |JavaScript|React Native|CSS|
 |---|---|---|
