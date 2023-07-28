@@ -23,7 +23,7 @@
 ## 앱 프론트엔드
 |JavaScript|React Native|CSS|
 |---|---|---|
-<img src="https://raw.githubusercontent.com/queryholic/captures/master/lombok-install-eclipse/_1.png" width="100" height="100" />
+|<img src="https://raw.githubusercontent.com/queryholic/captures/master/lombok-install-eclipse/_1.png" width="100" height="100" />|||
 # 아키텍처 구성도
 ![poster](./readme_img/sys_arch.jpg)
 
