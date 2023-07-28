@@ -23,7 +23,7 @@
 ## 앱 프론트엔드
 |JavaScript|React Native|CSS|
 |---|---|---|
-<img src="[https://raw.githubusercontent.com/queryholic/captures/master/lombok-install-eclipse/_1.png](https://i.namu.wiki/i/yPim-9KS42DqusQ4h_1DqMJV_QYSFFvlVOM-Glf0U3IXOeSVL7WEQB3By3KI_1GRx52q6A2ApVZWWd7iXGQdynp4KlFwAp8FU8Pz9znaZ034KmT48HXCbxG0QQV4WmqWcw2ttcCTXzDZ_A6hD6OpoQ.svg)https://i.namu.wiki/i/yPim-9KS42DqusQ4h_1DqMJV_QYSFFvlVOM-Glf0U3IXOeSVL7WEQB3By3KI_1GRx52q6A2ApVZWWd7iXGQdynp4KlFwAp8FU8Pz9znaZ034KmT48HXCbxG0QQV4WmqWcw2ttcCTXzDZ_A6hD6OpoQ.svg" width="650" height="400" />
+<img src="https://raw.githubusercontent.com/queryholic/captures/master/lombok-install-eclipse/_1.png](https://i.namu.wiki/i/yPim-9KS42DqusQ4h_1DqMJV_QYSFFvlVOM-Glf0U3IXOeSVL7WEQB3By3KI_1GRx52q6A2ApVZWWd7iXGQdynp4KlFwAp8FU8Pz9znaZ034KmT48HXCbxG0QQV4WmqWcw2ttcCTXzDZ_A6hD6OpoQ.svg)https://i.namu.wiki/i/yPim-9KS42DqusQ4h_1DqMJV_QYSFFvlVOM-Glf0U3IXOeSVL7WEQB3By3KI_1GRx52q6A2ApVZWWd7iXGQdynp4KlFwAp8FU8Pz9znaZ034KmT48HXCbxG0QQV4WmqWcw2ttcCTXzDZ_A6hD6OpoQ.svg" width="650" height="400" />
 # 아키텍처 구성도
 ![poster](./readme_img/sys_arch.jpg)
 
