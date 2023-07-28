@@ -14,11 +14,11 @@
 ## monitoring 서버, trading 서버
 |Node.js|MariaDB|express|Upbit API|
 |---|---|---|---|
-|<img src="./readme_img/node_js.svg" width="100" height="100" />|<img src="./readme_img/mariadb.svg" width="100" height="100" />|<img src="./readme_img/express.png" width="100" height="100" />|<img src="./readme_img/upbit.png" width="100" height="100" />|
+|<img src="./readme_img/node_js.svg" width="100" height="100" />|<img src="./readme_img/mariadb.svg" width="100" height="100" />|<img src="./readme_img/express.png" width="150" height="100" />|<img src="./readme_img/upbit.png" width="100" height="100" />|
 ## main 서버
 |nodejs|express|pm2|mariaDB|swagger|
 |---|---|---|---|---|
-|<img src="./readme_img/node_js.svg" width="100" height="100" />|<img src="./readme_img/express.png" width="100" height="100" />|<img src="./readme_img/pm2.png" width="100" height="100" />|<img src="./readme_img/mariadb.svg" width="100" height="100" />|<img src="./readme_img/swagger.png" width="100" height="100" />|
+|<img src="./readme_img/node_js.svg" width="100" height="100" />|<img src="./readme_img/express.png" width="150" height="100" />|<img src="./readme_img/pm2.png" width="100" height="100" />|<img src="./readme_img/mariadb.svg" width="100" height="100" />|<img src="./readme_img/swagger.png" width="100" height="100" />|
 ## admin 서버
 |nodejs|reactjs|react-Router| 
 |---|---|---|
