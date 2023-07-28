@@ -10,6 +10,27 @@
 |:---:|:---:|:---:|
 |팀장<br>앱 프론트엔드|monitoring 서버<br>trading 서버|main 서버<br>admin 서버|
 
+# 기술 스택
+## monitoring 서버
+|Node.js|MariaDB|Upbit API|express|
+|---|---|---|---|
+
+## trading 서버
+|Node.js|MariaDB|Upbit API|express|
+|---|---|---|---|
+
+## main 서버
+|nodejs|express|pm2|mariaDB|swagger|
+|---|---|---|---|---|
+
+## admin 서버
+|nodejs|reactjs|react-Router| 
+|---|---|---|
+
+## 앱 프론트엔드
+|JavaScript|React Native|CSS|
+|---|---|---|
+|![poster](./readme_img/javascript.svg)|![poster](./readme_img/react.svg)|![poster](./readme_img/css.svg)
 
 # 아키텍처 구성도
 ![poster](./readme_img/sys_arch.jpg)
@@ -18,12 +39,4 @@
 # DB 구성도
 ![poster](./readme_img/db.png)
 
-# 기술 스택
-## monitoring 서버
-## trading 서버
-## main 서버
-## admin 서버
-## 앱 프론트엔드
-|JavaScript|React Native|CSS|
-|---|---|---|
-|![poster](./readme_img/javascript.svg)|![poster](./readme_img/react.svg)|![poster](./readme_img/css.svg)
+
