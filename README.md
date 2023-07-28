@@ -11,11 +11,7 @@
 |팀장<br>앱 프론트엔드|monitoring 서버<br>trading 서버|main 서버<br>admin 서버|
 
 # 기술 스택
-## monitoring 서버
-|Node.js|MariaDB|Upbit API|express|
-|---|---|---|---|
-
-## trading 서버
+## monitoring 서버, trading 서버
 |Node.js|MariaDB|Upbit API|express|
 |---|---|---|---|
 
