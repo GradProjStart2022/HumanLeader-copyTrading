@@ -10,6 +10,14 @@
 |:---:|:---:|:---:|
 |팀장<br>앱 프론트엔드|monitoring 서버<br>trading 서버|main 서버<br>admin 서버|
 
+
+# 아키텍처 구성도
+![poster](./readme_img/sys_arch.jpg)
+
+
+# DB 구성도
+![poster](./readme_img/db.png)
+
 # 기술 스택
 ## monitoring 서버
 ## trading 서버
@@ -19,10 +27,3 @@
 |JavaScript|React Native|CSS|
 |---|---|---|
 |||
-
-# 아키텍처 구성도
-![poster](./readme_img/sys_arch.jpg)
-
-
-# DB 구성도
-![poster](./readme_img/db.png)
