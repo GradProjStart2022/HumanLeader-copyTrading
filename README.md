@@ -26,5 +26,4 @@
 ## 앱 프론트엔드
 |JavaScript|React Native|CSS|
 |---|---|---|
-|
-![poster](./readme_img/javascript.svg)||
+|![poster](./readme_img/javascript.svg)|![poster](./readme_img/react.svg)|![poster](./readme_img/css.svg)
