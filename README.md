@@ -21,6 +21,8 @@
 |||
 
 # 아키텍처 구성도
+![poster](./readme_img/sys_arch.jpg)
+
 
 # DB 구성도
-![poster](./db.png)
+![poster](./readme_img/db.png)
