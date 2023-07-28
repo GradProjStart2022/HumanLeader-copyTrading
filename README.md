@@ -18,7 +18,7 @@
 ## main 서버
 |nodejs|express|pm2|mariaDB|swagger|
 |---|---|---|---|---|
-|![poster](./readme_img/node_js.svg)|||![poster](./readme_img/mariadb.svg){: width="100" height="100"}||
+|![poster](./readme_img/node_js.svg)|||![poster](./readme_img/mariadb.svg){: width="100" height="100"}|<img src="./readme_img/mariadb.svg", width="100">|
 ## admin 서버
 |nodejs|reactjs|react-Router| 
 |---|---|---|
