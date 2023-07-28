@@ -14,23 +14,19 @@
 ## monitoring 서버, trading 서버
 |Node.js|MariaDB|express|Upbit API|
 |---|---|---|---|
-|![poster](./readme_img/node_js.svg)|![poster](./readme_img/mariadb.svg)|||
 ## main 서버
 |nodejs|express|pm2|mariaDB|swagger|
 |---|---|---|---|---|
-|![poster](./readme_img/node_js.svg)|||![poster](./readme_img/mariadb.svg){: width="100" height="100"}|<img src="./readme_img/mariadb.svg", width="100">|
 ## admin 서버
 |nodejs|reactjs|react-Router| 
 |---|---|---|
-|![poster](./readme_img/node_js.svg)|![poster](./readme_img/react.svg)|![poster](./readme_img/react_router.svg)|
 ## 앱 프론트엔드
 |JavaScript|React Native|CSS|
 |---|---|---|
-|![poster](./readme_img/javascript.svg)|![poster](./readme_img/react.svg)|![poster](./readme_img/css.svg)
-
+./readme_img/mariadb.svg
 # 아키텍처 구성도
 ![poster](./readme_img/sys_arch.jpg)
-
+<img src="./readme_img/mariadb.svg", width="50">
 
 # DB 구성도
 ![poster](./readme_img/db.png)
