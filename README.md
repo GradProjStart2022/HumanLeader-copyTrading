@@ -20,10 +20,11 @@
 ## admin 서버
 |nodejs|reactjs|react-Router| 
 |---|---|---|
+|<img src="./readme_img/node_js.svg" width="100" height="100" />|<img src="./readme_img/react.svg" width="100" height="100" />|<img src="./readme_img/react_router.svg" width="100" height="100" />|
 ## 앱 프론트엔드
 |JavaScript|React Native|CSS|
 |---|---|---|
-|<img src="./readme_img/javascript.svg" width="100" height="100" />|||
+|<img src="./readme_img/javascript.svg" width="100" height="100" />|<img src="./readme_img/react.svg" width="100" height="100" />|<img src="./readme_img/css.svg" width="100" height="100" />|
 # 아키텍처 구성도
 ![poster](./readme_img/sys_arch.jpg)
 
