@@ -8,5 +8,18 @@
 # 팀원
 |김충오|김진유|서지원|
 |:---:|:---:|:---:|
-|팀장<br>앱 프론트엔드|모니터링서버<br>카피서버|메인서버<br>어드민서버|
+|팀장<br>앱 프론트엔드|monitoring 서버<br>trading 서버|main 서버<br>admin 서버|
 
+# 기술 스택
+## monitoring 서버
+## trading 서버
+## main 서버
+## admin 서버
+## 앱 프론트엔드
+|JavaScript|React Native|CSS|
+|---|---|---|
+|||
+
+# 아키텍처 구성도
+
+# DB 구성도
