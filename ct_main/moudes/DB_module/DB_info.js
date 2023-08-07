@@ -1,5 +1,5 @@
 const ct_aws = {
-  DBhost: "database-jy.ckjinzyrqfop.ap-northeast-2.rds.amazonaws.com",
+  DBhost: "ct.ccbitioqdtge.ap-northeast-2.rds.amazonaws.com",
   DBport: "3306",
   DBuser: "admin",
   DBpass: "wlsdb995!",
