@@ -35,8 +35,6 @@ class DisplayTable extends React.Component {
             this.setState({
                 list: data
             });
-            console.log('aa');
-            
         })
         .catch(error => console.error(error));
     }
@@ -47,22 +45,20 @@ class DisplayTable extends React.Component {
         }
 
         let tb_data = this.state.list.map((item)=>{
-            console.log("yeah");
             return (
                 <tr key={item.PUBLIC_SEQ}>
                         <td>{item.PUBLIC_SEQ}</td>
                         <td>{item.PUBLIC_ID}</td>
-                        <td>{item.PUBLIC_ST}</td>
+                        <td>{ (item.PUBLIC_ST == "OS01") ? "정상" : "삭제" }</td>
                         <td>{item.REG_DT}</td>
                         <td>{item.MOD_DT}</td>
-                        
                         <td><UserPopup item={item} /></td>
                 </tr>
             )
         })
 
         return (
-            <div style={{ height: "450px", overflowY: "scroll" }}>
+            <div style={{ height: '100%', overflowY: "scroll" }}>
                 <table className="table table-striped">
                     <tbody>
                         <tr

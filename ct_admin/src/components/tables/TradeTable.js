@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import TradePopup from "../popups/Tradepopup";
+import Tradepopup from "../popups/Tradepopup"
 
 class DisplayTable extends React.Component {
 
@@ -55,21 +55,26 @@ class DisplayTable extends React.Component {
                 <tr key={item.HISTORY_SEQ}>
                         <td>{item.HISTORY_SEQ}</td>
                         <td>{item.FOLLOWING_SEQ}</td>
-                        <td>{item.TRADE_TYPE}</td>
-                        <td>{item.TRADE_ST}</td>
+                        <td>{ (item.TRADE_TYPE == "TT01") ? "매수":
+                                (item.TRADE_TYPE == "TT02") ? "매도": 
+                                    (item.TRADE_TYPE == "TT99") ? "시세": null
+                        }</td>
+                        <td>{ (item.TRADE_ST == "TS01") ? "거래 성공" :
+                                (item.TRADE_ST == "TS02") ? "거래 실패" : null
+                        }</td>
                         <td>{item.TRADE_NUM}</td>
                         <td>{item.TRADE_SYMBOL}</td>
                         <td>{item.TRADE_MARKET}</td>
                         <td>{item.TRADE_PRICE}</td>
                         <td>{item.TRADE_VOLUME}</td>
                         
-                        <td><TradePopup item={item}  /></td>
+                        <td><Tradepopup item={item}  /></td>
                 </tr>
             )
         })
 
         return (
-            <div style={{ height: "450px", overflowY: "scroll" }}>
+            <div style={{ height: "100%", overflowY: "scroll" }}>
                 <table className="table table-striped">
                     <tbody>
                         <tr
@@ -88,6 +93,7 @@ class DisplayTable extends React.Component {
                             <td>TRADE_PRICE</td>
                             <td>TRADE_VOLUME</td>
                             
+                            <td></td>
                             <td></td>
                             
                         </tr>

@@ -4,6 +4,17 @@
   width: 400px;
   height: auto;
   border-radius: 5px;
+  overflow-y: scroll;
+  
+}
+
+.Modal_t {
+  font-size: 12px;
+  border: solid 1px;
+  width: 400px;
+  height: 600px;
+  border-radius: 5px;
+  overflow-y: scroll;
   
 }
 
@@ -30,6 +41,16 @@
   padding: 5px;
 }
 
+.Modal_t > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+
+
+
 .button {
   bottom: 10px;
 }
@@ -40,8 +61,18 @@
   display:inline-block;
   
 }
+.Modal_t > .contents {
+  width: 100%;
+  padding: 10px 5px;
+  display:inline-block;
+  
+}
 
 .Modal > .sub-contents {
+  display: grid;
+  grid-template-columns: 400px 400px
+}
+.Modal_t > .sub-contents {
   display: grid;
   grid-template-columns: 400px 400px
 }
@@ -53,7 +84,28 @@
   text-align: center;
 }
 
+.Modal_t > .Actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+
 .Modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 1px;
+  border: 1px solid #cfcece;
+}
+
+.Modal_t > .close {
   cursor: pointer;
   position: absolute;
   display: block;

@@ -27,7 +27,7 @@ const SubPopup = (props) => {
                   <button className='close' onClick={()=>{close();}} >
                     &times;
                   </button>
-                  <div className="header"> USER INFO </div>
+                  <div className="header"> SUBSCTIBE INFO </div>
                   <div className="sub-contents  contents" > 
 
                     <div className="inputdata">

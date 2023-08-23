@@ -3,6 +3,7 @@
 
 import React from "react";
 import LeaderPopup from "../popups/Leaderpopup";
+import TradePopup from "../popups/Leader-TradePopup"
 
 class DisplayTable extends React.Component {
 
@@ -41,7 +42,9 @@ class DisplayTable extends React.Component {
         "LEADER_PRICE": "0",
         "LEADER_AMOUNT": "0",
         "EXCHANGE_TYPE": "ET01",
-        "TRADER_ST": "RS01"
+        "TRADER_ST": "RS01",
+        "ACCESS_KEY",
+        "SECRET_KEY"
 
  */
     render(){
@@ -59,16 +62,20 @@ class DisplayTable extends React.Component {
                         <td>{item.LEADER_CAPACITY}</td>
                         <td>{item.LEADER_PRICE}</td>
                         <td>{item.LEADER_AMOUNT}</td>
-                        <td>{item.EXCHANGE_TYPE}</td>
-                        <td>{item.TRADER_ST}</td>
+                        <td>{(item.EXCHANGE_TYPE == "ET01") ? "업비트" : null}</td>
+                        <td>{ (item.TRADER_ST == "RS01") ? "거래중" : 
+                                (item.TRADER_ST == "RS02") ? "대기중" : "삭제"
+                            }</td>
                         
                         <td><LeaderPopup item={item} /></td>
+                        <td><TradePopup item={item} /></td>
+
                 </tr>
             )
         })
 
         return (
-            <div style={{ height: "450px", overflowY: "scroll" }}>
+            <div style={{ height: "100%", overflowY: "scroll" }}>
                 <table className="table table-striped">
                     <tbody>
                         <tr
@@ -87,6 +94,7 @@ class DisplayTable extends React.Component {
                             <td>TRADER_ST</td>
                             
                             
+                            <td></td>
                             <td></td>
                             
                         </tr>
