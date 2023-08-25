@@ -2,6 +2,7 @@
 
 import React from "react";
 import UserPopup from "../popups/Userpopup";
+import UserDelete from "../DelPopups/userdel";
 
 
 class DisplayTable extends React.Component {
@@ -53,6 +54,7 @@ class DisplayTable extends React.Component {
                         <td>{item.REG_DT}</td>
                         <td>{item.MOD_DT}</td>
                         <td><UserPopup item={item} /></td>
+                        <td><UserDelete item={item} /></td>
                 </tr>
             )
         })
@@ -74,7 +76,8 @@ class DisplayTable extends React.Component {
                             <td>MOD_DT</td>
                             
                             
-                            <td></td>
+                            <td>Edit</td>
+                            <td>Del</td>
                             
                         </tr>
                         {tb_data}
