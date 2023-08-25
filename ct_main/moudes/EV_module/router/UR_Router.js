@@ -1,7 +1,8 @@
 var express = require("express");
 var ur_userpost = require("../../UR_moudle/UR_postuser");
 var UR_userget = require("../../UR_moudle/UR_getuser");
-var UR_userput = require('../../UR_moudle/UR_putuser')
+var UR_userput = require('../../UR_moudle/UR_putuser');
+var UR_userdel = require('../../UR_moudle/UR_deluser')
 var router = express.Router();
 
 // id로 유저 조회
@@ -80,7 +81,6 @@ router.post("/key", async function (req, res, next) {
 // 유저 정보 수정
 router.put("/info", async function (req, res, next) {
   const data = req.body;
-  
 
   // 받은 데이터 확인
   console.log(`EV data: ${JSON.stringify(data)}`);
@@ -90,9 +90,14 @@ router.put("/info", async function (req, res, next) {
   res.end('ok');
 });
 
+
+// 유저 삭제
 router.delete('/info', async (req,res,next) => {
   res.statusCode = 200;
-  console.log(req.body)
+  console.log("EV data: ",req.body);
+
+  UR_userdel.del_user(req.body);
+
   res.end('ok')
 })
 
