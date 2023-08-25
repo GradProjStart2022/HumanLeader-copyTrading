@@ -1,6 +1,4 @@
-// src/components/popups/Userpopup.js
-
-import React, { useState } from 'react';
+import React from 'react';
 import '../../styles/modal.css'
 
 
