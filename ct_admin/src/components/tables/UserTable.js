@@ -49,7 +49,7 @@ class DisplayTable extends React.Component {
                 <tr key={item.PUBLIC_SEQ}>
                         <td>{item.PUBLIC_SEQ}</td>
                         <td>{item.PUBLIC_ID}</td>
-                        <td>{ (item.PUBLIC_ST == "OS01") ? "정상" : "삭제" }</td>
+                        <td>{ (item.PUBLIC_ST === "OS01") ? "정상" : "삭제" }</td>
                         <td>{item.REG_DT}</td>
                         <td>{item.MOD_DT}</td>
                         <td><UserPopup item={item} /></td>

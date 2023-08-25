@@ -62,9 +62,9 @@ class DisplayTable extends React.Component {
                         <td>{item.LEADER_CAPACITY}</td>
                         <td>{item.LEADER_PRICE}</td>
                         <td>{item.LEADER_AMOUNT}</td>
-                        <td>{(item.EXCHANGE_TYPE == "ET01") ? "업비트" : null}</td>
-                        <td>{ (item.TRADER_ST == "RS01") ? "거래중" : 
-                                (item.TRADER_ST == "RS02") ? "대기중" : "삭제"
+                        <td>{(item.EXCHANGE_TYPE === "ET01") ? "업비트" : null}</td>
+                        <td>{ (item.TRADER_ST === "RS01") ? "거래중" : 
+                                (item.TRADER_ST === "RS02") ? "대기중" : "삭제"
                             }</td>
                         
                         <td><LeaderPopup item={item} /></td>

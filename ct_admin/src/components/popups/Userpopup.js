@@ -32,6 +32,8 @@ const UserPopup = (props) => {
 
   const updatedata = () => {
     const data = userdata
+    
+    let PUBLIC_SEQ = props.item.PUBLIC_SEQ
     let PUBLIC_ID = data.PUBLIC_ID
     let PUBLIC_ST = data.PUBLIC_ST
     let REG_DT = data.REG_DT
@@ -39,8 +41,18 @@ const UserPopup = (props) => {
     let ACCESS_KEY = data.ACCESS_KEY
     let SECRET_KEY = data.SECRET_KEY
     let TOKEN = data.TOKEN
-
-    console.log(PUBLIC_ID,PUBLIC_ST,REG_DT,MOD_DT,ACCESS_KEY,SECRET_KEY,TOKEN);
+    
+    console.log("a")
+    console.log(`
+      PUBLIC_SEQ : ${PUBLIC_SEQ},
+      PUBLIC_ID : ${PUBLIC_ID}, 
+      PUBLIC_ST : ${PUBLIC_ST},
+      REG_DT : ${REG_DT},
+      MOD_DT : ${MOD_DT},
+      ACCESS_KEY : ${ACCESS_KEY},
+      SECRET_KEY : ${SECRET_KEY},
+      TOKEN : ${TOKEN}
+      `);
   }
 
   return (

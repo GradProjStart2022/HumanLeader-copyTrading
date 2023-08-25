@@ -55,12 +55,12 @@ class DisplayTable extends React.Component {
                 <tr key={item.HISTORY_SEQ}>
                         <td>{item.HISTORY_SEQ}</td>
                         <td>{item.FOLLOWING_SEQ}</td>
-                        <td>{ (item.TRADE_TYPE == "TT01") ? "매수":
-                                (item.TRADE_TYPE == "TT02") ? "매도": 
-                                    (item.TRADE_TYPE == "TT99") ? "시세": null
+                        <td>{ (item.TRADE_TYPE === "TT01") ? "매수":
+                                (item.TRADE_TYPE === "TT02") ? "매도": 
+                                    (item.TRADE_TYPE === "TT99") ? "시세": null
                         }</td>
-                        <td>{ (item.TRADE_ST == "TS01") ? "거래 성공" :
-                                (item.TRADE_ST == "TS02") ? "거래 실패" : null
+                        <td>{ (item.TRADE_ST === "TS01") ? "거래 성공" :
+                                (item.TRADE_ST === "TS02") ? "거래 실패" : null
                         }</td>
                         <td>{item.TRADE_NUM}</td>
                         <td>{item.TRADE_SYMBOL}</td>

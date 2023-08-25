@@ -52,9 +52,9 @@ const TradePopup = (props) => {
               <tbody>
                 {tradeHistory.map((trade, index) => (
                   <tr key={index}>
-                    <td>{ (trade.TRADE_TYPE == "TT01") ? "매수":
-                                (trade.TRADE_TYPE == "TT02") ? "매도": 
-                                    (trade.TRADE_TYPE == "TT99") ? "시세": null
+                    <td>{ (trade.TRADE_TYPE === "TT01") ? "매수":
+                                (trade.TRADE_TYPE === "TT02") ? "매도": 
+                                    (trade.TRADE_TYPE === "TT99") ? "시세": null
                         }</td>
                     <td>{trade.TRADE_PRICE}</td>
                     <td>{trade.TRADE_VOLUME}</td>
