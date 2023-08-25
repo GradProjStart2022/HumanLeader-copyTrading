@@ -90,5 +90,11 @@ router.put("/info", async function (req, res, next) {
   res.end('ok');
 });
 
+router.delete('/info', async (req,res,next) => {
+  res.statusCode = 200;
+  console.log(req.body)
+  res.end('ok')
+})
+
 
 module.exports = router;
