@@ -11,7 +11,7 @@ class Useradd extends React.Component {
     super(props);
     this.state = {
       PUBLIC_ID : '',
-      PUBLIC_ST : '',
+      PUBLIC_ST : 'OS01',
       REG_DT : '1999-12-31T23:59:59',
       MOD_DT : '2000-12-31T23:59:59',
       ACCESS_KEY : '',

@@ -9,7 +9,9 @@ const UserDelete = (props) => {
             console.log(JSON.stringify(props.item))
             
 
-            let isch = window.confirm(`정말로 SEQ : ${props.item.PUBLIC_SEQ} 아이디를 삭제하시겠습니까?`);
+            let isch = window.confirm(`정말로 SEQ : ${props.item.PUBLIC_SEQ} 아이디를 삭제하시겠습니까?
+            (팔로우 된 리더가 있으면 삭제가 되지 않습니다)
+            `);
 
             if (isch) {
                 console.log(props.item.PUBLIC_SEQ,'아이디 삭제 요청 보냄')
