@@ -24,6 +24,7 @@ class Useradd extends React.Component {
     const userdata = this.state
     console.log(JSON.stringify(userdata));
     alert(`${JSON.stringify(userdata)}`);
+    
     fetch('http://124.50.247.56:3000/user/new', {
       method : 'POST',
       headers : {

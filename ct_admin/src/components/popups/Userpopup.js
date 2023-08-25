@@ -5,6 +5,12 @@ import Popup from 'reactjs-popup';
 
 import '../../styles/modal.css'
 
+function edit_date(dateString) {
+  const parts = dateString.split('.'); // 문자열을 '.'을 기준으로 나눔
+  const datePart = parts[0]; // 날짜 부분 (2022-07-29T14:47:14)을 얻음
+  return datePart;
+}
+
 const UserPopup = (props) => {
   let [userdata, setUserdata] = useState({
     PUBLIC_SEQ : props.item.PUBLIC_SEQ,
@@ -30,29 +36,47 @@ const UserPopup = (props) => {
     })
   }
 
-  const updatedata = () => {
+  const updatedata = async () => {
     const data = userdata
     
+
     let PUBLIC_SEQ = props.item.PUBLIC_SEQ
     let PUBLIC_ID = data.PUBLIC_ID
     let PUBLIC_ST = data.PUBLIC_ST
-    let REG_DT = data.REG_DT
-    let MOD_DT = data.MOD_DT
+    let REG_DT = edit_date(`${data.REG_DT}`)
+    let MOD_DT = edit_date(`${data.MOD_DT}`)
     let ACCESS_KEY = data.ACCESS_KEY
     let SECRET_KEY = data.SECRET_KEY
     let TOKEN = data.TOKEN
-    
-    console.log("a")
-    console.log(`
-      PUBLIC_SEQ : ${PUBLIC_SEQ},
-      PUBLIC_ID : ${PUBLIC_ID}, 
-      PUBLIC_ST : ${PUBLIC_ST},
-      REG_DT : ${REG_DT},
-      MOD_DT : ${MOD_DT},
-      ACCESS_KEY : ${ACCESS_KEY},
-      SECRET_KEY : ${SECRET_KEY},
-      TOKEN : ${TOKEN}
-      `);
+
+    const put_data = {
+      PUBLIC_SEQ : PUBLIC_SEQ,
+      PUBLIC_ID : PUBLIC_ID,
+      PUBLIC_ST : PUBLIC_ST,
+      REG_DT : REG_DT,
+      MOD_DT : MOD_DT,
+      ACCESS_KEY : ACCESS_KEY,
+      SECRET_KEY : SECRET_KEY,
+      TOKEN : TOKEN
+    }
+
+    console.log('put data: ',JSON.stringify(put_data));
+
+      fetch('http://124.50.247.56:3000/user/info', {
+        method : 'PUT',
+        headers : {
+          'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(put_data)
+      })
+      .then((response) => response)
+      .then((data) => {
+        console.log('success to put user data', data);
+      })
+      .catch((err) => {
+        console.log('유저 수정 api오류');
+        console.error(err)
+      })
   }
 
   return (
@@ -146,17 +170,20 @@ const UserPopup = (props) => {
                   <div className="Actions">
                     <button 
                       className="button"
-                      onClick = {()=>{
+                      onClick = {async ()=>{
                         let isch = window.confirm('이대로 변경하시겠습니까?');
                         console.log(isch)
                         if (isch) {
-                          updatedata();
+                          await updatedata();
+                          resetstate();
                         }
                         else {
                           resetstate();
                         }
                         
-                        close();}}
+                        close();
+                        
+                      }}
                     >
                       ok
                     </button>
