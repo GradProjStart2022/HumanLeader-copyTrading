@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth';
 import RoundImage from '../components/RoundImage';
 
 const HomeScreen = () => {
-    const user = auth.currentUser;
+    const user = auth().currentUser;
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#ffffff'}}>

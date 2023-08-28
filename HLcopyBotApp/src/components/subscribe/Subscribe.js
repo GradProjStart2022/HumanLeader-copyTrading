@@ -25,7 +25,6 @@ const SubScribe = ({route}) => {
     }, [tradeType]);
     return (
         <View style={styles.container}>
-            <Text>{route.params.LeaderSEQ}</Text>
             <Picker selectedValue={isAutoTrade} onValueChange={item => setIsAutoTrade(item)}>
                 <Picker.Item label="수동 거래" value={'N'} />
                 <Picker.Item label="자동 거래" value={'Y'} />
@@ -47,10 +46,17 @@ const SubScribe = ({route}) => {
                     </View>
                 )}
 
-                <Text>스탑 리밋 비율</Text>
-                <TextInput style={styles.textbox} value={stopRatio} onChangeText={setStopRatio} keyboardType="number-pad" />
-                <Text>이익실현가 비율</Text>
-                <TextInput style={styles.textbox} value={takeRatio} onChangeText={setTakeRatio} keyboardType="number-pad" clearTextOnFocus="true" />
+                <Text>스탑 리밋 비율 (미구현)</Text>
+                <TextInput style={styles.textbox} editable={false} value={stopRatio} onChangeText={setStopRatio} keyboardType="number-pad" />
+                <Text>이익실현가 비율 (미구현)</Text>
+                <TextInput
+                    style={styles.textbox}
+                    editable={false}
+                    value={takeRatio}
+                    onChangeText={setTakeRatio}
+                    keyboardType="number-pad"
+                    clearTextOnFocus="true"
+                />
             </View>
             <View
                 style={{

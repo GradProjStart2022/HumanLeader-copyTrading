@@ -6,7 +6,7 @@ import RoundImage from '../RoundImage';
 import {RFValue} from 'react-native-responsive-fontsize';
 import CustomButton from '../CustomButton';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {getSubscribed, postUnsubscribe} from '../../utils/api';
+import {getSubscribed, postHistory, postUnsubscribe} from '../../utils/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoaderAnimation from '../LoaderAnimation';
 
@@ -15,11 +15,14 @@ const TraderDetailScreen = ({route}) => {
     const [isSubscribe, setIsSubscribe] = useState();
     const navigation = useNavigation();
     const [isLoading, setIsLoading] = useState(true);
+    const [history, setHistory] = useState();
 
     const Subscribed = async item => {
         try {
             const publicSeq = await AsyncStorage.getItem('publicSeq');
             const subScribe = await getSubscribed(item.LEADER_SEQ, publicSeq);
+            setHistory(await postHistory({seq: route.params.LEADER_SEQ}));
+            console.log(history);
             setIsSubscribe(subScribe.SUBSCRIBED);
         } catch (error) {
             console.error(error);
@@ -34,6 +37,8 @@ const TraderDetailScreen = ({route}) => {
         React.useCallback(() => {
             setIsLoading(true);
             Subscribed(route.params);
+
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [isSubscribe]),
     );
 
@@ -79,8 +84,8 @@ const TraderDetailScreen = ({route}) => {
                                         <Text style={styles.tableHeaderText}>체결금액</Text>
                                     </View>
                                 </View>
-                                {trader.ct_leader_history.map(trader => (
-                                    <View key={trader.HISTORY_NUM} style={{flexDirection: 'row'}}>
+                                {/* {history.map(trader => (
+                                    <View key={trader.REG_DT} style={{flexDirection: 'row'}}>
                                         <View style={[styles.tableBody, {width: RFValue(150)}]}>
                                             <Text style={styles.tableBodyText}>{trader.REG_DT}</Text>
                                         </View>
@@ -88,7 +93,7 @@ const TraderDetailScreen = ({route}) => {
                                             <Text style={styles.tableBodyText}>{trader.TRADE_TYPE === 'TT01' ? '매수' : '매도'}</Text>
                                         </View>
                                         <View style={[styles.tableBody, {width: RFValue(70)}]}>
-                                            <Text style={styles.tableBodyText}>{trader.TRADE_MARKET}</Text>
+                                            <Text style={styles.tableBodyText}>{trader.TRADE_TYPE}</Text>
                                         </View>
                                         <View style={[styles.tableBody, {width: RFValue(100)}]}>
                                             <Text style={styles.tableBodyText}>{trader.TRADE_VOLUME}</Text>
@@ -97,7 +102,7 @@ const TraderDetailScreen = ({route}) => {
                                             <Text style={styles.tableBodyText}>{trader.TRADE_PRICE}</Text>
                                         </View>
                                     </View>
-                                ))}
+                                ))} */}
                             </View>
                         </ScrollView>
                         <View style={{marginVertical: RFValue(20)}} />

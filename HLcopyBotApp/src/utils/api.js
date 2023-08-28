@@ -77,6 +77,19 @@ export const getLeaders = async () => {
     return data;
 };
 
+// Leader 거래 기록 조회
+export const postHistory = async params => {
+    const response = await fetch(`${API_URI}/leader/history`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+    });
+    const data = await response.json();
+    return data;
+};
+
 // 구독 여부 확인
 export const getSubscribed = async (LeaderSeq, PublicSeq) => {
     const response = await fetch(`${API_URI}/sub/${LeaderSeq}/${PublicSeq}`, {
@@ -99,7 +112,7 @@ export async function getSubLeaders() {
 
 // 구독
 export async function postSubscribe(params) {
-    const response = await fetch(`${API_URI}/sub/new`, {
+    const response = await fetch(`${API_URI}/leader/histroy`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -107,7 +120,7 @@ export async function postSubscribe(params) {
         body: JSON.stringify(params),
     });
     const data = await response.json();
-    console.log(data);
+    return data;
 }
 
 // 구독 취소
