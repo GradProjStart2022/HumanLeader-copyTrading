@@ -1,6 +1,8 @@
 var express = require("express");
 var tr_post = require("../../TR_module/TR_posttrade");
 var sub_get = require("../../SU_module/SU_getsub");
+var al_post = require("../../AL_module/AL_postdata");
+var DB_post = require('../../DB_module/DB_postdata')
 
 var router = express.Router();
 
@@ -31,12 +33,35 @@ router.post("/newtrade", async function (req, res, next) {
 
   // SUB 모듈을 통해 구독정보조회
   console.log("해당 리더의 구독자정보를 조회합니다.");
-
   sub_data = await sub_get.get_subscribe(LEADER_SEQ);
 
-  console.log(`router_get data :${JSON.stringify(sub_data, null, 2)}`);
+  // 구독정보에서 FOLLOWING_SEQ만 리스트의 형태로 추출
+  const following_data  = await sub_data.map(item => item.FOLLOWING_SEQ);
+  console.log('following: ',following_data);
+  // 구독번호에 해당하는 기기에 알람 전송
+  for (const F of following_data){
+    let temp = {
+      FOLLOWING_SEQ : F,
+      TRADE_TYPE : req.body.TRADE_TYPE,
+      TRADE_SYMBOL : req.body.TRADE_SYMBOL,
+      TRADE_MARKET : req.body.TRADE_MARKET,
+      TRADE_PRICE : req.body.TRADE_PRICE,
+      TRADE_VOLUME : req.body.TRADE_VOLUME,
+      IS_READ_YN : 'N',
+      TRADE_YN : 'Y',
+      IS_AUTOTRADE_YN : 'Y',
+      CONTENTS : 'NULL',
+      REG_DT : req.body.REG_DT
+    }
+    await console.log('temp: ',temp)
+    await DB_post.POST_alarm(temp);
+  }
+
+  //console.log(`router_get data :${JSON.stringify(sub_data, null, 2)}`);
+  
 
   // TR 모듈을 이용하여 알람요청 이벤트를 발생시킵니다.
+  /*
   telegramBot.sendmessage(
     `
         ----------------------------------------
@@ -63,9 +88,11 @@ router.post("/newtrade", async function (req, res, next) {
             리더 거래시장 : ${body.TRADE_MARKET}
             ----------------------------------------`);
   }
+  */
+
 
   // TR 모듈을 통해 FCM 메세지 전송
-  TR_app_autotrade("test title", "test body");
+  //TR_app_autotrade("test title", "test body");
 
   res.end("ok");
 });

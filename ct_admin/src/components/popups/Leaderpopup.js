@@ -22,7 +22,7 @@ const LeaderPopup = (props) => {
                   <button className='close' onClick={()=>{close();}} >
                     &times;
                   </button>
-                  <div className="header"> USER INFO </div>
+                  <div className="header"> LEADER INFO </div>
                   <div className="contents"> 
 
                     <div className="inputdata">
@@ -68,6 +68,16 @@ const LeaderPopup = (props) => {
                     <div className="inputdata">
                       <label>TRADER_ST</label>
                       <input className="inputtext" value={`${props.item.TRADER_ST}`}></input>
+                    </div>
+
+                    <div className="inputdata">
+                      <label>ACCESS_KEY</label>
+                      <input className="inputtext" value={`${props.item.ACCESS_KEY}`}></input>
+                    </div>
+
+                    <div className="inputdata">
+                      <label>SECRET_KEY</label>
+                      <input className="inputtext" value={`${props.item.SECRET_KEY}`}></input>
                     </div>
 
                     <span>

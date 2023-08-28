@@ -155,7 +155,7 @@ async function Get_leader_history_byID(seq) {
     conn = await pool.getConnection();
     conn.query("USE copytrade_proto;");
     rows = await conn.query(
-      `select TRADE_TYPE, TRADE_PRICE,TRADE_VOLUME,REG_DT from ct_leader_history where LEADER_SEQ = ${seq};`
+      `select  LEADER_HISTORY_SEQ,TRADE_TYPE, TRADE_PRICE,TRADE_VOLUME,REG_DT from ct_leader_history where LEADER_SEQ = ${seq};`
     );
     //console.log(rows)
   } catch (err) {
@@ -259,6 +259,25 @@ async function Get_leader_by_publicseq(publicSeq) {
   }
 }
 
+async function Get_apptext() {
+  let conn, rows;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto;");
+    rows = await conn.query(
+      `select * from ct_app_text`
+    );
+
+    //console.log(rows)
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    //console.log(rows)
+    return rows;
+  }
+}
+
 module.exports = {
   Get_Sub_User: Get_Sub_User,
   Get_all_leader: Get_all_leader,
@@ -271,4 +290,6 @@ module.exports = {
   Get_userinfo_by_id: Get_userinfo_by_id,
   IsSubed: IsSubed,
   Get_leader_by_publicseq: Get_leader_by_publicseq,
+  Get_apptext: Get_apptext,
+
 };

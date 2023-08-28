@@ -62,11 +62,16 @@ class DisplayTable extends React.Component {
                         <td>{item.FOLLOWING_SEQ}</td>
                         <td>{item.PUBLIC_SEQ}</td>
                         <td>{item.LEADER_SEQ}</td>
-                        <td>{item.FOLLOWING_TYPE}</td>
-                        <td>{item.COPY_TRADE_TYPE}</td>
+                        <td>{ (item.FOLLOWING_TYPE === "FT01" ? "리더트레이더" : null) }</td>
+                        <td>{ (item.COPY_TRADE_TYPE === "CT01") ? "고정거래": "고정비율"}</td>
                         <td>{item.FIXED_AMOUNT}</td>
                         <td>{item.FIXED_RATIO}</td>
-                        <td>{item.FOLLOWING_ST}</td>
+                        <td>{ (item.FOLLOWING_ST === "FS01") ? "구독 중" : 
+                                (item.FOLLOWING_ST === "FS02") ? "구독 취소" : 
+                                    (item.FOLLOWING_ST === "FS03") ? "구독 보류" : 
+                                        (item.FOLLOWING_ST === "FS04") ? "구독 일시정지" : 
+                                            (item.FOLLOWING_ST === "FS99") ? "구독 만료" : null
+                        }</td>
                         
                         <td><SubPopup item={item} /></td>
                 </tr>
@@ -74,7 +79,7 @@ class DisplayTable extends React.Component {
         })
 
         return (
-            <div style={{ height: "450px", overflowY: "scroll" }}>
+            <div style={{ height: "100%", overflowY: "scroll" }}>
                 <table className="table table-striped">
                     <tbody>
                         <tr
