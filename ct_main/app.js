@@ -15,7 +15,7 @@ var LR_Router = require('./moudes/EV_module/router/LR_Router');
 var TR_Router = require('./moudes/EV_module/router/TR_Router');
 var SU_Router = require('./moudes/EV_module/router/SU_Router');
 var AL_Router = require('./moudes/EV_module/router/AL_Router');
-
+var AP_Router = require('./moudes/EV_module/router/AP_Router');
 
 
 var app = express();
@@ -58,5 +58,7 @@ app.use('/sub',SU_Router);
 //alarm
 app.use('/alarm',AL_Router);
 
+//app
+app.use('/app',AP_Router);
 
 module.exports = app;
