@@ -111,7 +111,7 @@ export async function getSubLeaders() {
 
 // 구독
 export async function postSubscribe(params) {
-    const response = await fetch(`${API_URI}/leader/histroy`, {
+    const response = await fetch(`${API_URI}/sub/new`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -134,3 +134,14 @@ export async function postUnsubscribe(params) {
     const data = await response.json();
     return data;
 }
+
+// 고정금액, 고정비율 설명 조회
+export const getContent = async () => {
+    const response = await fetch(`${API_URI}/app/contents`, {
+        method: 'GET',
+    });
+    const data = await response.json();
+    await AsyncStorage.setItem('fixedRatio', data.find(item => item.text_id === 'AT01')?.text_contents);
+    await AsyncStorage.setItem('fixedAmount', data.find(item => item.text_id === 'AT02')?.text_contents);
+    return data;
+};

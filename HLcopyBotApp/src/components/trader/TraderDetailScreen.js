@@ -25,16 +25,6 @@ const formatDate = dateObj => {
     return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
 };
 
-// const formattedDate = originalDate.toLocaleString('en-US', {
-//     year: 'numeric',
-//     month: '2-digit',
-//     day: '2-digit',
-//     hour: '2-digit',
-//     minute: '2-digit',
-//     second: '2-digit',
-//     timeZone: 'UTC'
-//   });
-
 const TraderDetailScreen = ({route}) => {
     const [isSubscribe, setIsSubscribe] = useState();
     const navigation = useNavigation();
@@ -60,7 +50,6 @@ const TraderDetailScreen = ({route}) => {
         React.useCallback(() => {
             setIsLoading(true);
             Subscribed(route.params);
-
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [isSubscribe]),
     );
