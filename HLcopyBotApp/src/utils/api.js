@@ -106,7 +106,6 @@ export async function getSubLeaders() {
         method: 'GET',
     });
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
@@ -133,5 +132,5 @@ export async function postUnsubscribe(params) {
         body: JSON.stringify(params),
     });
     const data = await response.json();
-    console.log(data);
+    return data;
 }

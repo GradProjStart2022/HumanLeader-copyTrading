@@ -1,7 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {Alert, ScrollView, StyleSheet, Text, View} from 'react-native';
-import traderdetail from '../../../testdata/traderdetail.json';
 import RoundImage from '../RoundImage';
 import {RFValue} from 'react-native-responsive-fontsize';
 import CustomButton from '../CustomButton';
@@ -10,8 +9,33 @@ import {getSubscribed, postHistory, postUnsubscribe} from '../../utils/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoaderAnimation from '../LoaderAnimation';
 
+const numberWithCommas = number => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+const formatDate = dateObj => {
+    const date = new Date(dateObj);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
+};
+
+// const formattedDate = originalDate.toLocaleString('en-US', {
+//     year: 'numeric',
+//     month: '2-digit',
+//     day: '2-digit',
+//     hour: '2-digit',
+//     minute: '2-digit',
+//     second: '2-digit',
+//     timeZone: 'UTC'
+//   });
+
 const TraderDetailScreen = ({route}) => {
-    const trader = traderdetail;
     const [isSubscribe, setIsSubscribe] = useState();
     const navigation = useNavigation();
     const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +46,6 @@ const TraderDetailScreen = ({route}) => {
             const publicSeq = await AsyncStorage.getItem('publicSeq');
             const subScribe = await getSubscribed(item.LEADER_SEQ, publicSeq);
             setHistory(await postHistory({seq: route.params.LEADER_SEQ}));
-            console.log(history);
             setIsSubscribe(subScribe.SUBSCRIBED);
         } catch (error) {
             console.error(error);
@@ -81,41 +104,42 @@ const TraderDetailScreen = ({route}) => {
                                         <Text style={styles.tableHeaderText}>체결수량</Text>
                                     </View>
                                     <View style={[styles.tableHeader, {width: RFValue(100)}]}>
-                                        <Text style={styles.tableHeaderText}>체결금액</Text>
+                                        <Text style={styles.tableHeaderText}>체결금액(원)</Text>
                                     </View>
                                 </View>
-                                {/* {history.map(trader => (
-                                    <View key={trader.REG_DT} style={{flexDirection: 'row'}}>
-                                        <View style={[styles.tableBody, {width: RFValue(150)}]}>
-                                            <Text style={styles.tableBodyText}>{trader.REG_DT}</Text>
+                                {history
+                                    .reverse()
+                                    .slice(0, 10)
+                                    .map(item => (
+                                        <View key={item.LEADER_HISTORY_SEQ} style={{flexDirection: 'row'}}>
+                                            <View style={[styles.tableBody, {width: RFValue(150)}]}>
+                                                <Text style={styles.tableBodyText}>{formatDate(item.REG_DT)}</Text>
+                                            </View>
+                                            <View style={[styles.tableBody, {width: RFValue(70)}]}>
+                                                <Text style={styles.tableBodyText}>{item.TRADE_TYPE === 'TT01' ? '매수' : '매도'}</Text>
+                                            </View>
+                                            <View style={[styles.tableBody, {width: RFValue(70)}]}>
+                                                <Text style={styles.tableBodyText}>Upbit</Text>
+                                            </View>
+                                            <View style={[styles.tableBody, {width: RFValue(100)}]}>
+                                                <Text style={styles.tableBodyText}>{item.TRADE_VOLUME}</Text>
+                                            </View>
+                                            <View style={[styles.tableBody, {width: RFValue(100)}]}>
+                                                <Text style={styles.tableBodyText}>{numberWithCommas(item.TRADE_PRICE)}</Text>
+                                            </View>
                                         </View>
-                                        <View style={[styles.tableBody, {width: RFValue(70)}]}>
-                                            <Text style={styles.tableBodyText}>{trader.TRADE_TYPE === 'TT01' ? '매수' : '매도'}</Text>
-                                        </View>
-                                        <View style={[styles.tableBody, {width: RFValue(70)}]}>
-                                            <Text style={styles.tableBodyText}>{trader.TRADE_TYPE}</Text>
-                                        </View>
-                                        <View style={[styles.tableBody, {width: RFValue(100)}]}>
-                                            <Text style={styles.tableBodyText}>{trader.TRADE_VOLUME}</Text>
-                                        </View>
-                                        <View style={[styles.tableBody, {width: RFValue(100)}]}>
-                                            <Text style={styles.tableBodyText}>{trader.TRADE_PRICE}</Text>
-                                        </View>
-                                    </View>
-                                ))} */}
+                                    ))}
                             </View>
                         </ScrollView>
                         <View style={{marginVertical: RFValue(20)}} />
                     </ScrollView>
                     <View
                         style={{
-                            position: 'absolute',
                             bottom: 0,
-                            left: 20,
-                            right: 20,
+                            marginRight: 20,
+                            marginLeft: 20,
                             alignItems: 'center',
                             justifyContent: 'flex-end',
-                            backgroundColor: 'rgba(0,0,0,0)',
                         }}>
                         {isSubscribe === 'N' ? (
                             <CustomButton text={'구독 하기'} onPress={() => navigation.navigate('Subscribe', {LeaderSEQ: route.params.LEADER_SEQ})} />
