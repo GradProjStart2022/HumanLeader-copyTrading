@@ -29,8 +29,18 @@ router.get("/:seq", async function (req, res, next) {
 
 router.get("/leaders/:publicseq", async function (req, res, next) {
   var seq = await req.params.publicseq;
-  // LR 모듈에게 모든 리더 목록 요청
+  // LR 모듈에게 리더 요청
   var LR_data = await LR_leaderget.get_leader_by_publicseq(seq);
+  //console.log(`LR data : ${JSON.stringify(LR_data)}`);
+
+  res.json(LR_data);
+});
+
+// 리더 수익률 계산
+router.get("/profit/:publicseq", async function (req, res, next) {
+  var seq = await req.params.publicseq;
+  // LR 모듈에게 리더 수익률 요청
+  var LR_data = await LR_leaderget.getLeaderProfit(seq);
   //console.log(`LR data : ${JSON.stringify(LR_data)}`);
 
   res.json(LR_data);

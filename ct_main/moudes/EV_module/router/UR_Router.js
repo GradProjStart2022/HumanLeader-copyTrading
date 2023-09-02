@@ -4,6 +4,10 @@ var UR_userget = require("../../UR_moudle/UR_getuser");
 var UR_userput = require('../../UR_moudle/UR_putuser');
 var UR_userdel = require('../../UR_moudle/UR_deluser')
 var router = express.Router();
+const request = require("request");
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const axios = require("axios");
 
 // id로 유저 조회
 router.post("/", async function (req, res, next) {
@@ -27,11 +31,20 @@ router.get("/all", async function (req, res, next) {
   res.json(UR_data);
 });
 
-// 모든 유저 목록 조회
+// 유저 정보 조회
 router.get("/info/:id", async function (req, res, next) {
   // UR 모듈을 통해 데이터 조회 요청
   const id = req.params.id;
   var UR_data = await UR_userget.get_userinfo_by_id(id);
+  console.log(`UR_data : ${JSON.stringify(UR_data)}`);
+  res.json(UR_data);
+});
+
+// 유저 미실현수익 조회
+router.get("/ror/:id", async function (req, res, next) {
+  // UR 모듈을 통해 데이터 조회 요청
+  const id = req.params.id;
+  var UR_data = await UR_userget.getUserPortfolioValue(id);
   console.log(`UR_data : ${JSON.stringify(UR_data)}`);
   res.json(UR_data);
 });
@@ -68,13 +81,43 @@ router.post("/key", async function (req, res, next) {
   data = req.body;
   console.log(req.body);
   res.statusCode = 200;
-  res.json(1);
 
-  // 받은 데이터 확인
-  console.log(`EV data: ${JSON.stringify(data)}`);
+  const accessKey = data.accessKey;
+  const secretKey = data.secretKey;
+  const baseUrl = "https://api.upbit.com";
+  const endpoint = "/v1/accounts";
 
-  // 받은 데이터를 UR모듈의 함수에 전달
-  ur_userpost.keyRegist(data);
+  const payload = {
+    access_key: accessKey,
+    nonce: Date.now(),
+  };
+
+  const token = jwt.sign(payload, secretKey);
+  const signature = crypto
+    .createHmac("sha512", secretKey)
+    .update(token)
+    .digest("hex");
+
+  const options = {
+    url: baseUrl + endpoint,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "CB-ACCESS-SIGN": signature,
+    },
+  };
+
+  request.get(options, (error, response, body) => {
+    if (error) {
+      res.json("Error");
+    } else {
+      res.json(1);
+      // 받은 데이터 확인
+      console.log(`EV data: ${JSON.stringify(data)}`);
+
+      // 받은 데이터를 UR모듈의 함수에 전달
+      ur_userpost.keyRegist(data);
+    }
+  });
 });
 
 
