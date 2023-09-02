@@ -53,12 +53,18 @@ function monitoring(leader) {
     headers: { Authorization: `Bearer ${token}` },
     json: body,
   };
-  const currentDate = new Date().toISOString();
+  // 테스트용 시간
+  // const currentDate = new Date().toISOString().slice(0, 19);
+
+  // 시간 보정
+  const currentUTCTime = new Date();
+  const currentDate = new Date(currentUTCTime.getTime() + 9 * 60 * 60 * 1000);
+
   request(options, (error, response, body) => {
     if (error) throw new Error(error);
     if (
       JSON.stringify(bodyT) !== JSON.stringify(body) &&
-      body[0].created_at.slice(0, 19) > currentDate.slice(0, 19)
+      body[0].created_at.slice(0, 19) > currentDate
     ) {
       // trading 서버에 거래 발생 POST
       bodyT = body;
@@ -83,11 +89,34 @@ function monitoring(leader) {
 
       // main 서버에 거래 발생 POST 부분
       let tradeType;
-
+      let avg_buy_price;
+      // 매수일 때
       if (body1[0].side === "bid") {
-        tradeType = "TT02";
-      } else if (body1[0].side === "ask") {
         tradeType = "TT01";
+        // 평단가 불러오기
+        const payload = {
+          access_key: access_key,
+          nonce: uuidv4(),
+        };
+
+        const token = sign(payload, secret_key);
+
+        const options = {
+          method: "GET",
+          url: server_url + "/v1/accounts",
+          headers: { Authorization: `Bearer ${token}` },
+        };
+
+        request(options, (error, response, body) => {
+          if (error) throw new Error(error);
+          let json1 = JSON.parse(response.body);
+          avg_buy_price = json1.filter(
+            (item) => item.currency === body1[0].market.match(/-(.*)/)[1]
+          )[0].avg_buy_price;
+        });
+        // 매도일 떄
+      } else if (body1[0].side === "ask") {
+        tradeType = "TT02";
       }
       const date = body1[0].created_at.slice(0, 19);
 
@@ -96,28 +125,19 @@ function monitoring(leader) {
         method: "POST",
         json: {
           LEADER_SEQ: leader["LEADER_SEQ"],
-          HISTORY_NUM: "00",
+          HISTORY_NUM: body1[0].uuid,
           TRADE_TYPE: tradeType,
           TRADE_SYMBOL: "test_sym",
           TRADE_MARKET: body1[0].market,
           TRADE_PRICE: body1[0].price,
           TRADE_VOLUME: body1[0].volume,
           REG_DT: date,
-        },
-        body: {
-          LEADER_SEQ: leader["LEADER_SEQ"],
-          HISTORY_NUM: "00",
-          TRADE_TYPE: tradeType,
-          TRADE_SYMBOL: "test_sym",
-          TRADE_MARKET: body1[0].market,
-          TRADE_PRICE: body1[0].price,
-          TRADE_VOLUME: body1[0].volume,
-          REG_DT: date,
+          AVG_BUY_PRICE: avg_buy_price,
         },
       };
       // main 서버 전송
       request.post(options2, function (error, response, body) {
-        console.log(response);
+        //console.log(response.body);
         console.log("메인 서버에 전송완료");
       });
     }
