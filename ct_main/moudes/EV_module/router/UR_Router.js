@@ -1,8 +1,8 @@
 var express = require("express");
 var ur_userpost = require("../../UR_moudle/UR_postuser");
 var UR_userget = require("../../UR_moudle/UR_getuser");
-var UR_userput = require('../../UR_moudle/UR_putuser');
-var UR_userdel = require('../../UR_moudle/UR_deluser')
+var UR_userput = require("../../UR_moudle/UR_putuser");
+var UR_userdel = require("../../UR_moudle/UR_deluser");
 var router = express.Router();
 const request = require("request");
 const crypto = require("crypto");
@@ -120,7 +120,6 @@ router.post("/key", async function (req, res, next) {
   });
 });
 
-
 // 유저 정보 수정
 router.put("/info", async function (req, res, next) {
   const data = req.body;
@@ -128,21 +127,27 @@ router.put("/info", async function (req, res, next) {
   // 받은 데이터 확인
   console.log(`EV data: ${JSON.stringify(data)}`);
   res.statusCode = 200;
-  UR_userput.put_user(data)
+  UR_userput.put_user(data);
 
-  res.end('ok');
+  res.end("ok");
 });
 
-
 // 유저 삭제
-router.delete('/info', async (req,res,next) => {
+router.delete("/info", async (req, res, next) => {
   res.statusCode = 200;
-  console.log("EV data: ",req.body);
+  console.log("EV data: ", req.body);
 
   UR_userdel.del_user(req.body);
 
-  res.end('ok')
-})
+  res.end("ok");
+});
 
+// 유저 토큰 삭제
+router.delete("/token/:id", async (req, res, next) => {
+  res.statusCode = 200;
+  UR_userdel.del_token(req.params.id);
+
+  res.end("ok");
+});
 
 module.exports = router;
