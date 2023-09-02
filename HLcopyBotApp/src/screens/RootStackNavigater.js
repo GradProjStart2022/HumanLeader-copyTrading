@@ -3,10 +3,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import BottomNavigationBar from './BottomNavigationBar';
 import AccountSetting from './Setting/AccountSetting';
-import AlarmSetting from './Setting/AlarmSetting';
 import SubscribeSetting from './Setting/SubscribeSetting';
-import TraderDetailScreen from '../components/trader/TraderDetailScreen';
+import LeaderDetailScreen from '../components/leader/LeaderDetailScreen';
 import Subscribe from '../components/subscribe/Subscribe';
+import AlarmDetail from '../components/Alarm/AlarmDetail';
 
 const RootStack = createStackNavigator();
 
@@ -19,8 +19,8 @@ const RootStackScreen = ({setIsLogin}) => {
                 </RootStack.Screen>
                 <RootStack.Screen name="AccountSetting" options={{headerShown: false}} component={AccountSetting} />
                 <RootStack.Screen name="SubscribeSetting" options={{headerShown: false}} component={SubscribeSetting} />
-                <RootStack.Screen name="AlarmSetting" options={{headerShown: false}} component={AlarmSetting} />
-                <RootStack.Screen name="TraderDetail" options={{headerShown: false}} component={TraderDetailScreen} />
+                <RootStack.Screen name="LeaderDetail" options={{headerShown: false}} component={LeaderDetailScreen} />
+                <RootStack.Screen name="AlarmDetail" options={{headerShown: false}} component={AlarmDetail} />
                 <RootStack.Screen name="Subscribe" options={{headerShown: false}} component={Subscribe} />
             </RootStack.Navigator>
         </NavigationContainer>

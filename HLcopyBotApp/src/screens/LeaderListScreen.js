@@ -1,12 +1,12 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
-import TraderList from '../components/trader/TraderList';
+import LeaderList from '../components/leader/LeaderList';
 
-const TraderListScreen = () => {
+const LeaderListScreen = () => {
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.title}>Leader</Text>
-            <TraderList />
+            <LeaderList />
         </ScrollView>
     );
 };
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TraderListScreen;
+export default LeaderListScreen;

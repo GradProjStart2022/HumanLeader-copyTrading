@@ -77,6 +77,19 @@ export const getLeaders = async () => {
     return data;
 };
 
+// Leader 거래 기록 조회
+export const postHistory = async params => {
+    const response = await fetch(`${API_URI}/leader/history`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+    });
+    const data = await response.json();
+    return data;
+};
+
 // 구독 여부 확인
 export const getSubscribed = async (LeaderSeq, PublicSeq) => {
     const response = await fetch(`${API_URI}/sub/${LeaderSeq}/${PublicSeq}`, {
@@ -93,7 +106,6 @@ export async function getSubLeaders() {
         method: 'GET',
     });
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
@@ -107,7 +119,7 @@ export async function postSubscribe(params) {
         body: JSON.stringify(params),
     });
     const data = await response.json();
-    console.log(data);
+    return data;
 }
 
 // 구독 취소
@@ -120,5 +132,16 @@ export async function postUnsubscribe(params) {
         body: JSON.stringify(params),
     });
     const data = await response.json();
-    console.log(data);
+    return data;
 }
+
+// 고정금액, 고정비율 설명 조회
+export const getContent = async () => {
+    const response = await fetch(`${API_URI}/app/contents`, {
+        method: 'GET',
+    });
+    const data = await response.json();
+    await AsyncStorage.setItem('fixedRatio', data.find(item => item.text_id === 'AT01')?.text_contents);
+    await AsyncStorage.setItem('fixedAmount', data.find(item => item.text_id === 'AT02')?.text_contents);
+    return data;
+};

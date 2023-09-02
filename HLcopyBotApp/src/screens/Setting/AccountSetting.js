@@ -38,6 +38,9 @@ const AccountSetting = () => {
             <View style={{width: '100%', marginBottom: RFValue(50)}}>
                 <TextInput style={styles.input} value={accessKey} onChangeText={setAccessKey} placeholder="Access Key" placeholderTextColor="#CCCCCC" />
                 <TextInput style={styles.input} value={secretKey} onChangeText={setSecretKey} placeholder="Secret Key" placeholderTextColor="#CCCCCC" />
+                <View style={{height: 10}} />
+                <Text style={styles.text}>자산조회, 주문조회, 주문하기 선택</Text>
+                <Text style={styles.text}>IP주소: 123.123.123.123</Text>
             </View>
             <CustomButton
                 text={'Key update'}
@@ -110,6 +113,10 @@ const styles = StyleSheet.create({
         fontSize: RFValue(13),
         marginVertical: RFValue(5),
         color: '#777777',
+    },
+    text: {
+        fontSize: 15,
+        color: '#000000',
     },
 });
 
