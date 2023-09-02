@@ -25,7 +25,7 @@ const formatDate = dateObj => {
     return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
 };
 
-const TraderDetailScreen = ({route}) => {
+const LeaderDetailScreen = ({route}) => {
     const [isSubscribe, setIsSubscribe] = useState();
     const navigation = useNavigation();
     const [isLoading, setIsLoading] = useState(true);
@@ -211,4 +211,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TraderDetailScreen;
+export default LeaderDetailScreen;

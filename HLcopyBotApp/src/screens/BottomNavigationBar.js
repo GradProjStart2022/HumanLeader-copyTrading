@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from './HomeScreen';
-import TraderListScreen from './TraderListScreen';
+import TraderListScreen from './LeaderListScreen';
 import AlarmScreen from './AlarmScreen';
 import SettingScreen from './SettingScreen';
 

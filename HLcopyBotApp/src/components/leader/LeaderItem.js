@@ -4,14 +4,14 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import RoundImage from '../RoundImage';
 
-const TraderItem = ({item}) => {
+const LeaderItem = ({item}) => {
     const navigation = useNavigation();
 
     return (
         <TouchableOpacity
             style={styles.container}
             onPress={() =>
-                navigation.navigate('TraderDetail', {
+                navigation.navigate('LeaderDetail', {
                     LEADER_SEQ: item.LEADER_SEQ,
                     LEADER_UID: item.LEADER_UID,
                     LEADER_NAME: item.LEADER_NAME,
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
-export default TraderItem;
+export default LeaderItem;

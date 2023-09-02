@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Linking, ScrollView, StyleSheet, Text, View} from 'react-native';
 import MenuButton from '../components/MenuButton';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
@@ -23,7 +23,7 @@ const SettingScreen = ({setIsLogin}) => {
             <Text style={styles.title}>Setting</Text>
             <MenuButton text={'계좌 설정'} onPress={() => navigation.navigate('AccountSetting')} />
             <MenuButton text={'구독 관리'} onPress={() => navigation.navigate('SubscribeSetting')} />
-            <MenuButton text={'알람 설정'} onPress={() => navigation.navigate('AlarmSetting')} />
+            <MenuButton text={'알람 설정'} onPress={() => Linking.openSettings()} />
             <MenuButton text={'로그 아웃'} onPress={() => logout()} />
         </ScrollView>
     );

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Button, Modal, StyleSheet, Text, View} from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import {Alert} from 'react-native';
 import RootStackScreen from './src/screens/RootStackNavigater';
 import LoginScreen from './src/screens/LoginScreen';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {useNavigation} from '@react-navigation/native';
 
 const App = () => {
     const [isLogin, setIsLogin] = useState(false);
@@ -24,13 +25,18 @@ const App = () => {
         const unsubscribe = messaging().onMessage(async remoteMessage => {
             // eslint-disable-next-line no-lone-blocks
             {
-                remoteMessage.data.tradeType === 'CT01'
+                remoteMessage.data.IS_AUTOTRADE_YN === 'Y'
                     ? Alert.alert(remoteMessage.notification.title, remoteMessage.notification.body, [
-                          {text: '자동 거래'},
                           {
                               text: '자세히 보기',
                               onPress: () => {
-                                  console.log('자세히보기');
+                                  console.log(remoteMessage.data);
+                              },
+                          },
+                          {
+                              text: '확인',
+                              onPress: () => {
+                                  console.log('확인');
                               },
                           },
                       ])
