@@ -10,6 +10,38 @@ const queryEncode = require("querystring").encode;
 const router = express.Router();
 
 const followers = getFollowers();
+// 업비트 호가 단위 기준
+const ranges = [
+  [2000000, 1000],
+  [1000000, 500],
+  [500000, 100],
+  [100000, 50],
+  [10000, 10],
+  [1000, 5],
+  [1, 1],
+  [0.1, 0.1],
+  [0.01, 0.01],
+  [0.001, 0.001],
+  [0.0001, 0.0001],
+];
+// 호가 수정용 올림 함수
+function ceilValue(value) {
+  for (const [rangeValue, step] of ranges) {
+    if (value >= rangeValue) {
+      return Math.ceil(value / step) * step;
+    }
+  }
+  return value;
+}
+
+// 호가 수정용 내림 함수
+function floorValue(value) {
+  for (const [rangeValue, step] of ranges) {
+    if (value >= rangeValue) {
+      return Math.floor(value / step - 1) * step;
+    }
+  }
+}
 
 // 거래 발생 수신
 router.post("/", async (req, res) => {
@@ -26,12 +58,21 @@ router.post("/", async (req, res) => {
 
     // 구독자들의 거래 유형 별 요청거래량 계산을 위한 변수
     let calculatedVol;
+    let calculatedPrice;
 
     // 구독자 별 거래량 계산
     if (follower.COPY_TRADE_TYPE === "CT01") {
       calculatedVol = follower.FIXED_AMOUNT / req.body[0].price;
+      console.log(`ct01주문수량 ${calculatedVol}`);
     } else if (follower.COPY_TRADE_TYPE === "CT02") {
       calculatedVol = (req.body[0].volume * follower.FIXED_RATIO) / 100;
+      console.log(`ct02주문수량 ${calculatedVol}`);
+    }
+    //매도 sleepage
+    if (req.body[0].side === "bid") {
+      calculatedPrice = floorValue(req.body[0].price * 1.005);
+    } else if (req.body[0].side === "ask") {
+      calculatedPrice = ceilValue(req.body[0].price * 0.995);
     }
 
     // 거래요청 parameter
@@ -39,7 +80,7 @@ router.post("/", async (req, res) => {
       market: req.body[0].market,
       side: req.body[0].side,
       volume: calculatedVol.toString(),
-      price: req.body[0].price,
+      price: calculatedPrice.toString(),
       ord_type: req.body[0].ord_type,
     };
 
@@ -68,36 +109,6 @@ router.post("/", async (req, res) => {
       if (error) throw new Error(error);
       console.log(body);
     });
-    // main 서버에 전송하는 부분
-    // request(options, (error, response, body) => {
-    //   if (error) throw new Error(error);
-    //   if (
-    //     JSON.stringify(bodyT) !== JSON.stringify(body) &&
-    //     body[0].created_at > currentDate
-    //   ) {
-    //     bodyT = body;
-    //     const request = require("request");
-
-    //     let body1 = _.cloneDeep(body);
-    //     console.log(body1);
-    //     body1[0].LEADER_SEQ = leader["LEADER_SEQ"];
-    //     console.log(body1);
-    //     const options = {
-    //       uri: "http://localhost:3000/v1/copytrading",
-    //       method: "POST",
-
-    //       body: body1,
-    //       json: body1,
-    //     };
-    //     console.log("카피트레이딩 서버에 전송완료");
-
-    //     request.post(options, function (error, response, body) {
-    //       console.log(response.body);
-    //     });
-    //   }
-    // });
-
-    console.log(req.body);
   });
   res.json("업비트 서버에 전송완료");
 });
