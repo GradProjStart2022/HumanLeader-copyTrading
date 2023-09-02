@@ -10,15 +10,12 @@ const Tab = createBottomTabNavigator();
 
 const MainTab = () => {
     return (
-        <Tab.Navigator
-            screenOptions={{showLable: false, activeTintColor: '#e7d6ff'}}>
+        <Tab.Navigator screenOptions={{showLable: false, activeTintColor: '#e7d6ff'}}>
             <Tab.Screen
                 name="Main"
                 component={MainScreen}
                 options={{
-                    tabBarIcon: ({color, size}) => (
-                        <Icon name="home" size={size} color={color} />
-                    ),
+                    tabBarIcon: ({color, size}) => <Icon name="home" size={size} color={color} />,
                     headerShown: false,
                 }}
             />
@@ -26,9 +23,7 @@ const MainTab = () => {
                 name="Trader"
                 component={TraderListScreen}
                 options={{
-                    tabBarIcon: ({color, size}) => (
-                        <Icon name="person-pin" size={size} color={color} />
-                    ),
+                    tabBarIcon: ({color, size}) => <Icon name="person-pin" size={size} color={color} />,
                     headerShown: false,
                 }}
             />
@@ -36,9 +31,7 @@ const MainTab = () => {
                 name="Alarm"
                 component={AlarmScreen}
                 options={{
-                    tabBarIcon: ({color, size}) => (
-                        <Icon name="notifications" size={size} color={color} />
-                    ),
+                    tabBarIcon: ({color, size}) => <Icon name="notifications" size={size} color={color} />,
                     headerShown: false,
                 }}
             />
@@ -46,9 +39,7 @@ const MainTab = () => {
                 name="Setting"
                 component={SettingScreen}
                 options={{
-                    tabBarIcon: ({color, size}) => (
-                        <Icon name="settings" size={size} color={color} />
-                    ),
+                    tabBarIcon: ({color, size}) => <Icon name="settings" size={size} color={color} />,
                     headerShown: false,
                 }}
             />

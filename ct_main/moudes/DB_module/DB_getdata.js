@@ -155,7 +155,7 @@ async function Get_leader_history_byID(seq) {
     conn = await pool.getConnection();
     conn.query("USE copytrade_proto;");
     rows = await conn.query(
-      `select TRADE_TYPE, TRADE_PRICE,TRADE_VOLUME,REG_DT,AVG_BUY_PRICE from ct_leader_history where LEADER_SEQ = ${seq};`
+      `select LEADER_HISTORY_SEQ TRADE_TYPE, TRADE_PRICE,TRADE_VOLUME,REG_DT,AVG_BUY_PRICE from ct_leader_history where LEADER_SEQ = ${seq};`
     );
     //console.log(rows)
   } catch (err) {

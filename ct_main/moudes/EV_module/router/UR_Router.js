@@ -38,11 +38,10 @@ router.get("/info/:id", async function (req, res, next) {
   res.json(UR_data);
 });
 
-// 유저 미실현손익 조회
-router.get("/profit/:id", async function (req, res, next) {
+// 유저 미실현수익 조회
+router.get("/ror/:id", async function (req, res, next) {
   // UR 모듈을 통해 데이터 조회 요청
   const id = req.params.id;
-
   var UR_data = await UR_userget.getUserPortfolioValue(id);
   console.log(`UR_data : ${JSON.stringify(UR_data)}`);
   res.json(UR_data);
