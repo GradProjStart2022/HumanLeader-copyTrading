@@ -11,17 +11,35 @@ class Useradd extends React.Component {
     super(props);
     this.state = {
       PUBLIC_ID : '',
-      PUBLIC_ST : '',
-      REG_DT : '',
-      MOD_DT : '',
+      PUBLIC_ST : 'OS01',
+      REG_DT : '1999-12-31T23:59:59',
+      MOD_DT : '2000-12-31T23:59:59',
       ACCESS_KEY : '',
-      SECRET_KEY : ''
+      SECRET_KEY : '',
+      TOKEN : ''
     }
   }
 
   exportdata(){
-    console.log(JSON.stringify(this.state))
-    alert(`${JSON.stringify(this.state)}`)
+    const userdata = this.state
+    console.log(JSON.stringify(userdata));
+    alert(`${JSON.stringify(userdata)}`);
+    
+    fetch('http://124.50.247.56:3000/user/new', {
+      method : 'POST',
+      headers : {
+        'Content-Type': 'application/json'
+      },
+      body : JSON.stringify(userdata)
+    })
+    .then((response) => response)
+    .then((data)=>{
+      console.log('success to add user', data);
+    })
+    .catch((err)=>{
+      console.log('유저등록 api 오류');
+      console.error(err);
+    })
   }
 
 
@@ -50,6 +68,7 @@ class Useradd extends React.Component {
                           className="inputtext" 
                           type='text'
                           value={'AutoGenerate'}
+                          readOnly
                         ></input>
                       </div>
   
@@ -88,7 +107,7 @@ class Useradd extends React.Component {
                         <input 
                           className="inputtext" 
                           type='text'
-                          placeholder='yyyy-mm-ddTHH:MM:SS.000Z'
+                          placeholder='yyyy-mm-ddTHH:MM:SS'
                           value={this.state.REG_DT}
                           onChange={
                             (e) => {this.setState({ REG_DT: e.target.value });
@@ -103,7 +122,7 @@ class Useradd extends React.Component {
                         <input 
                           className="inputtext" 
                           type='text'
-                          placeholder='yyyy-mm-ddTHH:MM:SS.000Z'
+                          placeholder='yyyy-mm-ddTHH:MM:SS'
                           value={this.state.MOD_DT}
                           onChange={
                             (e) => {this.setState({ MOD_DT: e.target.value });
@@ -142,6 +161,21 @@ class Useradd extends React.Component {
                                   }
                           ></input>
                       </div>
+
+                      <div className="inputdata">
+                        <label>TOKEN</label>
+                        <input 
+                          className="inputtext" 
+                          type='text'
+                          placeholder='TOKEN'
+                          value={this.state.TOKEN}
+                          onChange={
+                            (e) => {this.setState({ TOKEN: e.target.value });
+                                    console.log(`${this.state.TOKEN}`)
+                                    }
+                                  }
+                          ></input>
+                      </div>
   
                       <span>
   
@@ -153,6 +187,15 @@ class Useradd extends React.Component {
                         className="button"
                         onClick = {()=>{
                           this.exportdata();
+                          this.setState({
+                            PUBLIC_ID : '',
+                            PUBLIC_ST : '',
+                            REG_DT : '1999-12-31T23:59:59',
+                            MOD_DT : '2000-12-31T23:59:59',
+                            ACCESS_KEY : '',
+                            SECRET_KEY : '',
+                            TOKEN : ''
+                          })
                           close();}}
                       >
                         ok

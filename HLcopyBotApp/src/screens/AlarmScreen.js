@@ -1,22 +1,25 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import AlarmList from '../components/Alarm/AlarmList';
 
 const AlarmScreen = () => {
     return (
-        <View style={styles.block}>
-            <Text style={styles.text}>AlarmScreen</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>Alarm</Text>
+            <AlarmList />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    block: {
+    container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#FFFFFF',
+        padding: 20,
     },
-    text: {
+    title: {
         fontSize: 36,
+        paddingBottom: 30,
     },
 });
 

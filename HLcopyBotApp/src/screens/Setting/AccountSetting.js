@@ -1,16 +1,28 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Animated, Image, Modal, Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import CustomButton from '../../components/CustomButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {postPublicKey} from '../../utils/api';
+import {useNavigation} from '@react-navigation/native';
 
 const AccountSetting = () => {
+    const navigation = useNavigation();
+
+    const [isVisible, setIsVisible] = useState(false);
     const [accessKey, setAccessKey] = useState('');
     const [secretKey, setSecretKey] = useState('');
-    const updateKey = () => {
-        console.log(accessKey);
-        console.log(secretKey);
+    const updateKey = async () => {
+        const id = await AsyncStorage.getItem('uid');
+        await postPublicKey({
+            id: id,
+            accessKey: accessKey,
+            secretKey: secretKey,
+        });
+        setIsVisible(true);
     };
+
     return (
         <View style={styles.container}>
             <View
@@ -26,14 +38,47 @@ const AccountSetting = () => {
             <View style={{width: '100%', marginBottom: RFValue(50)}}>
                 <TextInput style={styles.input} value={accessKey} onChangeText={setAccessKey} placeholder="Access Key" placeholderTextColor="#CCCCCC" />
                 <TextInput style={styles.input} value={secretKey} onChangeText={setSecretKey} placeholder="Secret Key" placeholderTextColor="#CCCCCC" />
+                <View style={{height: 10}} />
+                <Text style={styles.text}>자산조회, 주문조회, 주문하기 선택</Text>
+                <Text style={styles.text}>IP주소: 123.123.123.123</Text>
             </View>
             <CustomButton
                 text={'Key update'}
                 onPress={updateKey}
-                disabled={!(accessKey.length == 40 && secretKey.length == 40)}
-                color={!(accessKey.length == 40 && secretKey.length == 40) ? '#D4D9F3' : '#1F3FDB'}
-                textColor={!(accessKey.length == 40 && secretKey.length == 40) ? '#1F3FDB' : '#FFFFFF'}
+                disabled={!(accessKey.length === 40 && secretKey.length === 40)}
+                color={!(accessKey.length === 40 && secretKey.length === 40) ? '#D4D9F3' : '#1F3FDB'}
+                textColor={!(accessKey.length === 40 && secretKey.length === 40) ? '#1F3FDB' : '#FFFFFF'}
             />
+
+            <Modal animationType="none" visible={isVisible} transparent={true}>
+                <View
+                    style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                        alignItems: 'center',
+                    }}>
+                    <Animated.View
+                        style={{
+                            backgroundColor: '#fff',
+                            borderRadius: 7,
+
+                            padding: 20,
+                            width: '80%',
+                        }}>
+                        <Text>Upbit Key 등록이 완료되었습니다.</Text>
+                        <View style={{height: 10}} />
+                        <CustomButton
+                            text={'확인'}
+                            width={'30%'}
+                            onPress={() => {
+                                setIsVisible(false);
+                                navigation.goBack();
+                            }}
+                        />
+                    </Animated.View>
+                </View>
+            </Modal>
         </View>
     );
 };
@@ -68,6 +113,10 @@ const styles = StyleSheet.create({
         fontSize: RFValue(13),
         marginVertical: RFValue(5),
         color: '#777777',
+    },
+    text: {
+        fontSize: 15,
+        color: '#000000',
     },
 });
 

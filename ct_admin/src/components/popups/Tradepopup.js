@@ -22,7 +22,7 @@ const TradePopup = (props) => {
                   <button className='close' onClick={()=>{close();}} >
                     &times;
                   </button>
-                  <div className="header"> USER INFO </div>
+                  <div className="header"> TRADE INFO </div>
                   <div className="contents"> 
 
                     <div className="inputdata">
