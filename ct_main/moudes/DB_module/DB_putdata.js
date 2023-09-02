@@ -50,7 +50,30 @@ async function PUT_public(data) {
     }
   }
 
+
+// 알람 seq를 받아 해당알람을 읽음으로 표시
+async function PUT_alarm_isread(alarm_seq) {
+  let conn, rows;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto;");
+    rows = await conn.query(`
+    UPDATE ct_alarm_history
+    SET IS_READ_YN = 'Y'
+    WHERE ALARM_SEQ = ${alarm_seq};
+    `);
+    //console.log(rows)
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    //console.log(rows)
+    return rows;
+  }
+}
+
 module.exports = {
   PUT_public: PUT_public,
+  PUT_alarm_isread : PUT_alarm_isread,
   };
   

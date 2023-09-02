@@ -1,10 +1,12 @@
 var express = require("express");
+var router = express.Router();
+
+
 var tr_post = require("../../TR_module/TR_posttrade");
 var sub_get = require("../../SU_module/SU_getsub");
 var al_post = require("../../AL_module/AL_postdata");
-var DB_post = require('../../DB_module/DB_postdata')
-
-var router = express.Router();
+var DB_post = require('../../DB_module/DB_postdata');
+var DB_getdata = require('../../DB_module/DB_getdata');
 
 var telegramBot = require("../Trigger/TR_testbot");
 var TR_app_autotrade = require("../Trigger/TR_app_autotrade");
@@ -29,6 +31,7 @@ router.post("/newtrade", async function (req, res, next) {
   // TR모듈을 이용하여 거래 갱신
   tr_post.trade_postLtrade(body);
   LEADER_SEQ = body.LEADER_SEQ;
+  const LEADER_NAME = await DB_getdata.Get_leader_name_byID(LEADER_SEQ);
   console.log("거래발생 리더SEQ : ", body.LEADER_SEQ);
 
   // SUB 모듈을 통해 구독정보조회
@@ -38,10 +41,42 @@ router.post("/newtrade", async function (req, res, next) {
   // 구독정보에서 FOLLOWING_SEQ만 리스트의 형태로 추출
   const following_data  = await sub_data.map(item => item.FOLLOWING_SEQ);
   console.log('following: ',following_data);
+  const public_data = await sub_data.map(item => item.PUBLIC_SEQ);
+  console.log('public: ',public_data);
+
+
+  const userdata = [];
+
+
+  for (const seq of following_data) {
+    const isAutoValue = await DB_getdata.Get_following_isauto(seq.toString());
+    userdata.push(isAutoValue);
+  }
+
+  const userToken = []
+
+  for (const seq of public_data) {
+    const value = await DB_getdata.Get_token_bypublic(seq.toString());
+    userToken.push(value);
+  }
+
+  // console.log("token: ",userToken)
+
+
+
+
+  
   // 구독번호에 해당하는 기기에 알람 전송
   for (const F of following_data){
+    const user_Data = userdata[following_data.indexOf(F)];
+    const user_token = userToken[following_data.indexOf(F)];
+
     let temp = {
+      LEADER_SEQ : LEADER_SEQ,
+      LEADER_NAME : LEADER_NAME,
       FOLLOWING_SEQ : F,
+      PUBLIC_SEQ : user_Data.PUBLIC_SEQ,
+      FCM_TOKEN : user_token,
       TRADE_TYPE : req.body.TRADE_TYPE,
       TRADE_SYMBOL : req.body.TRADE_SYMBOL,
       TRADE_MARKET : req.body.TRADE_MARKET,
@@ -49,12 +84,13 @@ router.post("/newtrade", async function (req, res, next) {
       TRADE_VOLUME : req.body.TRADE_VOLUME,
       IS_READ_YN : 'N',
       TRADE_YN : 'Y',
-      IS_AUTOTRADE_YN : 'Y',
+      IS_AUTOTRADE_YN : user_Data.IS_AUTO_TRADING_YN,
       CONTENTS : 'NULL',
-      REG_DT : req.body.REG_DT
+      REG_DT : req.body.REG_DT,
     }
-    await console.log('temp: ',temp)
-    await DB_post.POST_alarm(temp);
+    console.log('temp: ',temp)
+    DB_post.POST_alarm(temp); 
+    TR_app_autotrade(temp);
   }
 
   //console.log(`router_get data :${JSON.stringify(sub_data, null, 2)}`);
