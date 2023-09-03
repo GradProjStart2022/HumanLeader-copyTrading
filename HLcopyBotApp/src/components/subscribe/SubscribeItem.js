@@ -33,7 +33,7 @@ const SubscribeItem = ({item}) => {
                         <CustomButton
                             text={'자세히 보기'}
                             onPress={() =>
-                                navigation.navigate('TraderDetail', {
+                                navigation.navigate('LeaderDetail', {
                                     LEADER_SEQ: item.LEADER_SEQ,
                                     LEADER_UID: item.LEADER_UID,
                                     LEADER_NAME: item.LEADER_NAME,

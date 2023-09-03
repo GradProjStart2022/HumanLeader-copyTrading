@@ -35,7 +35,7 @@ const LoginScreen = ({setIsLogin, setUserinfo}) => {
             id: uid,
             token: fcmToken,
         });
-
+        console.log(fcmToken);
         // 로그인
         await getPublic(uid);
 

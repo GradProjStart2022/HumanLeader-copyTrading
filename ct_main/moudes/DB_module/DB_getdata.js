@@ -155,7 +155,7 @@ async function Get_leader_history_byID(seq) {
     conn = await pool.getConnection();
     conn.query("USE copytrade_proto;");
     rows = await conn.query(
-      `select  LEADER_HISTORY_SEQ,TRADE_TYPE, TRADE_PRICE,TRADE_VOLUME,REG_DT from ct_leader_history where LEADER_SEQ = ${seq};`
+      `select LEADER_HISTORY_SEQ,TRADE_TYPE, TRADE_PRICE,TRADE_VOLUME,REG_DT,AVG_BUY_PRICE from ct_leader_history where LEADER_SEQ = ${seq};`
     );
     //console.log(rows)
   } catch (err) {
@@ -166,7 +166,6 @@ async function Get_leader_history_byID(seq) {
     return rows;
   }
 }
-
 
 // 리더 SEQ를 통해 리더이름만 조회
 async function Get_leader_name_byID(seq) {
@@ -186,8 +185,6 @@ async function Get_leader_name_byID(seq) {
     return rows[0].LEADER_NAME;
   }
 }
-
-
 
 //특정 유저 id로 불러오기
 async function Get_user_by_id(id) {
@@ -281,14 +278,33 @@ async function Get_leader_by_publicseq(publicSeq) {
   }
 }
 
-async function Get_apptext() {
+//특정 유저 키 id로 불러오기
+async function GetUserKey(id) {
   let conn, rows;
   try {
     conn = await pool.getConnection();
     conn.query("USE copytrade_proto;");
     rows = await conn.query(
-      `select * from ct_app_text`
+      "SELECT ACCESS_KEY, SECRET_KEY FROM ct_public WHERE PUBLIC_SEQ = ?",
+      [id]
     );
+
+    //console.log(rows)
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    //console.log(rows)
+    return rows;
+  }
+}
+
+async function Get_apptext() {
+  let conn, rows;
+  try {
+    conn = await pool.getConnection();
+    conn.query("USE copytrade_proto;");
+    rows = await conn.query(`select * from ct_app_text`);
 
     //console.log(rows)
   } catch (err) {
@@ -339,8 +355,6 @@ async function Get_alarm_bypublic(public_seq) {
   }
 }
 
-
-
 // 팔로잉 seq를 받아 자동거래여부 출력
 async function Get_following_isauto(FOLLOWING_SEQ) {
   let conn, rows;
@@ -374,24 +388,21 @@ async function Get_token_bypublic(PUBLIC_SEQ) {
     WHERE PUBLIC_SEQ = ${PUBLIC_SEQ};
     `);
     //console.log(rows)
-  } catch (err) {s
+  } catch (err) {
+    s;
     throw err;
   } finally {
     if (conn) conn.end();
-    console.log("Token log: ",rows[0].TOKEN)
+    console.log("Token log: ", rows[0].TOKEN);
     return rows[0].TOKEN;
   }
 }
-
-
-
-
 
 module.exports = {
   Get_Sub_User: Get_Sub_User,
   Get_all_leader: Get_all_leader,
   Get_leader_history_byID: Get_leader_history_byID,
-  Get_leader_name_byID : Get_leader_name_byID,
+  Get_leader_name_byID: Get_leader_name_byID,
   Get_all_trade: Get_all_trade,
   Get_all_sub: Get_all_sub,
   Get_all_user: Get_all_user,
@@ -400,9 +411,10 @@ module.exports = {
   Get_userinfo_by_id: Get_userinfo_by_id,
   IsSubed: IsSubed,
   Get_leader_by_publicseq: Get_leader_by_publicseq,
+  GetUserKey: GetUserKey,
   Get_apptext: Get_apptext,
-  Get_all_alarm : Get_all_alarm,
-  Get_alarm_bypublic : Get_alarm_bypublic,
-  Get_following_isauto : Get_following_isauto,
-  Get_token_bypublic : Get_token_bypublic,
+  Get_all_alarm: Get_all_alarm,
+  Get_alarm_bypublic: Get_alarm_bypublic,
+  Get_following_isauto: Get_following_isauto,
+  Get_token_bypublic: Get_token_bypublic,
 };

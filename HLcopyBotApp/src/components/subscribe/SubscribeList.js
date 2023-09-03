@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView} from 'react-native';
 import SubscribeItem from './SubscribeItem';
 import {getSubLeaders} from '../../utils/api';
 import {useFocusEffect} from '@react-navigation/native';
 import LoaderAnimation from '../LoaderAnimation';
-import TraderItem from '../trader/TraderItem';
 
 const SubscribeList = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +28,7 @@ const SubscribeList = () => {
             getLeaderList();
         }, []),
     );
-    return <View>{isLoading ? <LoaderAnimation /> : leaderList.map(item => <SubscribeItem key={item.LEADER_SEQ} item={item} />)}</View>;
+    return <ScrollView>{isLoading ? <LoaderAnimation /> : leaderList.map(item => <SubscribeItem key={item.LEADER_SEQ} item={item} />)}</ScrollView>;
 };
 
 export default SubscribeList;

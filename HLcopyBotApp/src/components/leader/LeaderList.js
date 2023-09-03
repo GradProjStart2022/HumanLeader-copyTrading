@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
-import TraderItem from './TraderItem';
+import {ScrollView} from 'react-native';
+import LeaderItem from './LeaderItem';
 import {getLeader, getLeaders} from '../../utils/api';
 import {useFocusEffect} from '@react-navigation/native';
 import LoaderAnimation from '../LoaderAnimation';
 
-const TraderList = () => {
+const LeaderList = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [leaderList, setLeaderList] = useState();
 
@@ -29,6 +29,6 @@ const TraderList = () => {
         }, []),
     );
 
-    return <View>{isLoading ? <LoaderAnimation /> : leaderList.map(item => <TraderItem key={item.LEADER_SEQ} item={item} />)}</View>;
+    return <ScrollView>{isLoading ? <LoaderAnimation /> : leaderList.map(item => <LeaderItem key={item.LEADER_SEQ} item={item} />)}</ScrollView>;
 };
-export default TraderList;
+export default LeaderList;
