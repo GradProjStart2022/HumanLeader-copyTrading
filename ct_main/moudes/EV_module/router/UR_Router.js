@@ -101,5 +101,12 @@ router.delete('/info', async (req,res,next) => {
   res.end('ok')
 })
 
+// 유저 토큰 삭제
+router.delete('/token/:id', async (req,res,next) => {
+  res.statusCode = 200;
+  UR_userdel.del_token(req.params.id);
+
+  res.end('ok')
+})
 
 module.exports = router;
