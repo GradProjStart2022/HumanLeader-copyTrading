@@ -8,6 +8,7 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {getSubscribed, postHistory, postUnsubscribe} from '../../utils/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoaderAnimation from '../LoaderAnimation';
+import ChartComponent from '../ChartComponent';
 
 const numberWithCommas = number => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -67,14 +68,13 @@ const LeaderDetailScreen = ({route}) => {
                         </View>
 
                         <View style={styles.infobox}>
-                            <Text style={styles.infotext}>팔로워: {}</Text>
+                            {/* <Text style={styles.infotext}>팔로워: {}</Text> */}
                             <Text style={styles.infotext}>구독료: {route.params.LEADER_PRICE.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Text>
                             <Text style={styles.infotext}>투자 자금: {route.params.LEADER_AMOUNT.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Text>
                             {/* <Text style={styles.infotext}>활동 기간: </Text> */}
                         </View>
-                        {/* <View style={{height: 300, backgroundColor: '#c0c0c0', width: '100%'}}>
-                    <Text>그래프</Text>
-                </View> */}
+                        <Text style={{fontSize: 20, marginBottom: 10}}>수익율 그래프</Text>
+                        <ChartComponent />
                         <View style={{marginVertical: RFValue(20)}} />
                         <Text style={{fontSize: 20, marginBottom: 10}}>최근 거래 목록</Text>
                         <ScrollView horizontal={true}>
