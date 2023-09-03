@@ -27,6 +27,5 @@ function del_token(id){
 
 module.exports = {
   del_user: del_user,
-    del_token:del_token
-  del_token: del_token,
+  del_token:del_token
 };
