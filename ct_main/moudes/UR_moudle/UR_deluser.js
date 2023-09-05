@@ -13,7 +13,19 @@ function del_token(id) {
   DB_delete.DEL_token(id);
 }
 
+function del_token(id){
+    // 받은 데이터 확인
+    console.log(`UR data: ${JSON.stringify(data)}`);
+    DB_delete.DEL_token(id)
+}
+
+function del_token(id){
+    // 받은 데이터 확인
+    console.log(`UR data: ${JSON.stringify(data)}`);
+    DB_delete.DEL_token(id)
+}
+
 module.exports = {
   del_user: del_user,
-  del_token: del_token,
+  del_token:del_token
 };
