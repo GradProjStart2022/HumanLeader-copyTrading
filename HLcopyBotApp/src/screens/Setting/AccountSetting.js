@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Animated, Image, Modal, Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Alert, Animated, Image, Modal, Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import CustomButton from '../../components/CustomButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,16 +11,24 @@ const AccountSetting = () => {
     const navigation = useNavigation();
 
     const [isVisible, setIsVisible] = useState(false);
-    const [accessKey, setAccessKey] = useState('');
-    const [secretKey, setSecretKey] = useState('');
+    const [accessKey, setAccessKey] = useState('3Wvox9z9D7P7himIbDbyHCxkPPDHlT9pZa98fK1z');
+    const [secretKey, setSecretKey] = useState('MvIm9MDMavMhZO0rmDLz5xfQX8CDP1Pa2E4X2ZPN');
     const updateKey = async () => {
         const id = await AsyncStorage.getItem('uid');
-        await postPublicKey({
+        const result = await postPublicKey({
             id: id,
             accessKey: accessKey,
             secretKey: secretKey,
         });
-        setIsVisible(true);
+        if (result === 1) {
+            setIsVisible(true);
+        } else {
+            Alert.alert('key 등록 에러', 'key가 올바르게 입력됬는지 확인해주세요', [
+                {
+                    text: '확인',
+                },
+            ]);
+        }
     };
 
     return (

@@ -55,6 +55,15 @@ export async function postPublicToken(params) {
     return data;
 }
 
+// fcm 토근 삭제
+export async function deleteToken(params) {
+    const response = await fetch(`${API_URI}/user/token/${params}`, {
+        method: 'DELETE',
+    });
+    const data = await response.json();
+    return data;
+}
+
 // upbit key 등록
 export async function postPublicKey(params) {
     const response = await fetch(`${API_URI}/user/key`, {
@@ -144,4 +153,28 @@ export const getContent = async () => {
     await AsyncStorage.setItem('fixedRatio', data.find(item => item.text_id === 'AT01')?.text_contents);
     await AsyncStorage.setItem('fixedAmount', data.find(item => item.text_id === 'AT02')?.text_contents);
     return data;
+};
+
+// 알람 목록 조회
+export const postAlarm = async params => {
+    const response = await fetch(`${API_URI}/alarm/public`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+    });
+    const data = await response.json();
+    return data;
+};
+
+// 알람 확인
+export const alarmRead = async params => {
+    const response = await fetch(`${API_URI}/alarm/isread`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+    });
 };

@@ -1,12 +1,28 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
-import RoundImage from '../RoundImage';
-import {useNavigation} from '@react-navigation/native';
+import {View, Text, StyleSheet} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
+import {alarmRead} from '../../utils/api';
 
 const AlarmDetail = ({route}) => {
-    const navigation = useNavigation();
+    const [isLoading, setIsLoading] = useState(true);
+    const isRead = async item => {
+        try {
+            await alarmRead({ALARM_SEQ: item.params.ALARM_SEQ});
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 500);
+        }
+    };
 
+    useFocusEffect(
+        React.useCallback(() => {
+            isRead(route);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, []),
+    );
     return (
         <View style={styles.container}>
             <View style={styles.textbox}>
