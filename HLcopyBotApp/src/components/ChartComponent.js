@@ -1,18 +1,18 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import {LineChart} from 'react-native-gifted-charts';
+import {LineChart, LineChartBicolor} from 'react-native-gifted-charts';
 
 const lineData = [
     {value: 160, date: '1 Apr 2022'},
     {value: 180, date: '2 Apr 2022'},
     {value: 190, date: '3 Apr 2022'},
     {value: 180, date: '4 Apr 2022'},
-    {value: 140, date: '5 Apr 2022'},
+    {value: -10, date: '5 Apr 2022'},
     {value: 145, date: '6 Apr 2022'},
     {value: 160, date: '7 Apr 2022'},
     {value: 200, date: '8 Apr 2022'},
 
-    {value: 220, date: '9 Apr 2022'},
+    {value: -20, date: '9 Apr 2022'},
     {
         value: 240,
         date: '10 Apr 2022',
@@ -84,6 +84,8 @@ const ChartComponent = () => {
                 rulesColor="gray"
                 yAxisTextStyle={{color: 'gray'}}
                 yAxisSide="right"
+                colorNegative="red"
+                startFillColorNegative="red"
                 xAxisColor="lightgray"
                 pointerConfig={{
                     pointerStripHeight: 160,

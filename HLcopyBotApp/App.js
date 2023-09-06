@@ -45,7 +45,7 @@ const App = () => {
                           {
                               text: '자세히 보기',
                               onPress: () => {
-                                  console.log('자세히보기');
+                                  console.log(remoteMessage.data);
                               },
                           },
                       ]);

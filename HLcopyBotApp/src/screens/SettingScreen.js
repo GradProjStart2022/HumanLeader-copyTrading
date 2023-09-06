@@ -5,12 +5,14 @@ import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {deleteToken} from '../utils/api';
 
 const SettingScreen = ({setIsLogin}) => {
     const navigation = useNavigation();
-
     const logout = async () => {
         try {
+            const publicSeq = await AsyncStorage.getItem('publicSeq');
+            await deleteToken(publicSeq);
             await GoogleSignin.signOut();
             // this.setState({user: null});
             setIsLogin(false);
