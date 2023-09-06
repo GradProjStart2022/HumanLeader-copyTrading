@@ -4,7 +4,7 @@ const autoTrade_message =  async (data) => {
 
     // 하드코딩 데이터
     const ACCESS_TOKEN = "AAAARTTDyQ4:APA91bHNkM0S4tjYaXxw_V3qkjiyaap0-hPuGIyRTYwhJxamrKRoZztgzLjF_0F9x4AGiunTJ7g8WE_IOKdYYhdn7V4kpwmmyCWpRDszUwZeN3hG3ZXI6EiGYPclGPWHCQxjme_TG9Sg"
-    const URL = "fcm.googleapis.com/v1/projects/hlcopybot/messages:send"
+    const URL = "https://fcm.googleapis.com/fcm/send"
         
     // 메세지 데이터
     const FCM_TOKEN = data.FCM_TOKEN
