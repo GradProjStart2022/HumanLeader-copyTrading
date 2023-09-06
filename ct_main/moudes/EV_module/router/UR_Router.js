@@ -107,13 +107,14 @@ router.post("/key", async function (req, res, next) {
   };
 
   request.get(options, (error, response, body) => {
-    if (error) {
+    const responseBody = JSON.parse(response.body);
+    if ("error" in responseBody) {
       res.json("Error");
+      console.log(response.body);
     } else {
       res.json(1);
       // 받은 데이터 확인
       console.log(`EV data: ${JSON.stringify(data)}`);
-
       // 받은 데이터를 UR모듈의 함수에 전달
       ur_userpost.keyRegist(data);
     }
@@ -143,11 +144,11 @@ router.delete("/info", async (req, res, next) => {
 });
 
 // 유저 토큰 삭제
-router.delete("/token/:id", async (req, res, next) => {
+router.delete("/token/:public_seq", async (req, res, next) => {
   res.statusCode = 200;
-  UR_userdel.del_token(req.params.id);
+  UR_userdel.del_token(req.params.public_seq);
 
-  res.end("ok");
+  res.json("ok");
 });
 
 module.exports = router;

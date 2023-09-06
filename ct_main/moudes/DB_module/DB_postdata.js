@@ -166,6 +166,9 @@ async function PostKey(data) {
   const ACCESS_KEY = data.accessKey;
   const SECRET_KEY = data.secretKey;
 
+  console.log(data.id)
+  console.log(data.accessKey)
+
   const query =
     await "UPDATE ct_public SET ACCESS_KEY=?, SECRET_KEY=? WHERE PUBLIC_ID = ?";
 
@@ -218,7 +221,7 @@ async function PostFollowing(data) {
       data.stopRatio,
       data.takeRatio,
       data.isAutoTrading,
-      "FS01",
+      "FT01",
       data.tradeType,
       data.fixAmount,
       data.fixRatio,

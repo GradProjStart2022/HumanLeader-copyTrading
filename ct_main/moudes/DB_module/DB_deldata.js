@@ -43,15 +43,15 @@ async function DEL_public(data) {
   }
 
   // 유저 토큰 삭제
-async function DEL_token(id) {
+async function DEL_token(public_seq) {
   console.log('pulic data delete call')
-  console.log(`DB data : ${JSON.stringify(id)}`);
+  console.log(`DB data : ${JSON.stringify(public_seq)}`);
 
   // 실행될 SQL 쿼리
   const SQLquery =
     await `UPDATE ct_public
     SET TOKEN = NULL
-    WHERE PUBLIC_SEQ = ${PUBLIC_SEQ};`;
+    WHERE PUBLIC_SEQ = ${public_seq};`;
   console.log(SQLquery);
   let conn, output;
   try {
