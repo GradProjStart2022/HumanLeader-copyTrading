@@ -43,10 +43,7 @@ async function get_leader_by_publicseq(PUBLIC_SEQ) {
 // 리더 실현수익, 수익률
 async function getLeaderProfit(seq) {
   const rows = await db_getdata.Get_leader_history_byID(seq);
-  let conn;
   try {
-    conn = await pool.getConnection();
-
     // 코인 종류별로 수익을 저장할 객체
     const coinProfits = {};
 

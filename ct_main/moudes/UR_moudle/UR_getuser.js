@@ -1,4 +1,6 @@
 var db_getdata = require("../DB_module/DB_getdata");
+const jwt = require("jsonwebtoken");
+const axios = require("axios");
 
 // 모든 유저 목록 조회
 async function get_user_all() {
@@ -20,17 +22,13 @@ async function get_userinfo_by_id(id) {
 
   return DB_data;
 }
-async function getUserKey(id) {
-  var DB_data = await db_getdata.getUserKey(id);
-
-  return DB_data;
-}
 
 // 유저 수익률 조회
 async function getUserPortfolioValue(id) {
   // JWT 생성 함수
-  const keys = getUserKey(id);
+  const keys = await db_getdata.GetUserKey(id);
 
+  console.log(keys[0]);
   function generateJwtToken(ACCESS_KEY, SECRET_KEY) {
     const payload = {
       access_key: ACCESS_KEY,
@@ -99,13 +97,19 @@ async function getUserPortfolioValue(id) {
 
     const unrealizedProfitLoss = totalCurrentValue - totalInvestment;
     const unrealizedProfitRate = (unrealizedProfitLoss / totalInvestment) * 100;
+
     return {
       profit: unrealizedProfitLoss.toFixed(2),
       rate: unrealizedProfitRate.toFixed(2),
     };
   }
 
-  calculatePortfolioValue(keys.ACCESS_KEY, keys.SECRET_KEY);
+  const portfolioValue = await calculatePortfolioValue(
+    keys[0].ACCESS_KEY,
+    keys[0].SECRET_KEY
+  );
+
+  return portfolioValue;
 }
 
 module.exports = {
