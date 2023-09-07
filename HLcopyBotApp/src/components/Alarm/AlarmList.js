@@ -31,13 +31,6 @@ const AlarmList = () => {
     );
 
     return <ScrollView>{isLoading ? <LoaderAnimation /> : alarmList.reverse().map(item => <Alarmitem key={item.ALARM_SEQ} item={item} />)}</ScrollView>;
-    // return (
-    //     <ScrollView>
-    //         {alarmList.map(item => (
-    //             <Alarmitem key={item.ALARM_SEQ} item={item}></Alarmitem>
-    //         ))}
-    //     </ScrollView>
-    // );
 };
 
 export default AlarmList;

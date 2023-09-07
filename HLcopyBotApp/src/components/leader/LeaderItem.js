@@ -19,6 +19,8 @@ const LeaderItem = ({item}) => {
                     LEADER_CAPACITY: item.LEADER_CAPACITY,
                     LEADER_PRICE: item.LEADER_PRICE,
                     LEADER_AMOUNT: item.LEADER_AMOUNT,
+                    profit: item.profit,
+                    rate: item.rate,
                 })
             }>
             {/* <RoundImage source={item.LEADER_IMAGE ? {uri: item.LEADER_IMAGE} : require('../../img/symbol/ticker/BTC.png')} /> */}
@@ -28,7 +30,7 @@ const LeaderItem = ({item}) => {
                     <Text>{item.LEADER_NAME}</Text>
                 </View>
                 <View style={styles.textbox}>
-                    <Text>구독자 수 : {item.LEADER_PRICE}</Text>
+                    <Text>수익률: {item.rate}</Text>
                 </View>
             </View>
         </TouchableOpacity>

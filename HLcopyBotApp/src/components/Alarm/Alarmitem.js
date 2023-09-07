@@ -43,7 +43,8 @@ const Alarmitem = ({item}) => {
             <View style={styles.container2}>
                 <View style={{flex: 1}}>
                     <View style={styles.textbox}>
-                        <Text style={styles.text}>리더 : {item.LEADER_NAME}</Text>
+                        <Text style={styles.title}>{item.IS_AUTOTRADE_YN === 'Y' ? '자동거래 알림' : '수동거래 알림'}</Text>
+                        <Text style={styles.text}>리더: {item.LEADER_NAME}</Text>
                         <Text style={styles.text}>거래 타입 : {item.TRADE_TYPE === 'TT01' ? '매수' : '매도'}</Text>
                         <Text style={styles.text}>채결량 : {item.TRADE_VOLUME}</Text>
                         <Text style={styles.text}>채결 금액 : {item.TRADE_PRICE}</Text>
@@ -60,11 +61,11 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         backgroundColor: '#F2F2F2',
-        borderRadius: RFValue(12),
-        paddingHorizontal: RFValue(20),
+        paddingHorizontal: RFValue(15),
         paddingVertical: RFValue(15),
         marginBottom: RFValue(10),
-        zIndex: -1,
+        borderColor: '#909090',
+        borderWidth: 1,
     },
     container2: {
         flexDirection: 'row',
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     title: {
         color: '#000000',
         fontSize: 18,
-        marginBottom: 5,
+        marginBottom: 10,
     },
     text: {
         color: '#000000',

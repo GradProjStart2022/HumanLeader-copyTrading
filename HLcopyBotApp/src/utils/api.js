@@ -187,3 +187,29 @@ export const alarmRead = async params => {
         body: JSON.stringify(params),
     });
 };
+
+// 수동 거래 여부 변경
+export const istrade = async params => {
+    const response = await fetch(`${API_URI}/alarm/istrade`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+    });
+};
+
+// 수동 거래
+export const manualTrade = async params => {
+    const response = await fetch(`http://124.50.247.56:4020/v1/copytrading/manual`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+    });
+    const data = await response.json();
+
+    console.log(params);
+    console.log(data);
+};

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Modal, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import {Alert} from 'react-native';
 import RootStackScreen from './src/screens/RootStackNavigater';
 import LoginScreen from './src/screens/LoginScreen';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useNavigation} from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {istrade, manualTrade} from './src/utils/api';
 const App = () => {
     const [isLogin, setIsLogin] = useState(false);
     const [userinfo, setUserinfo] = useState();
@@ -28,22 +28,31 @@ const App = () => {
                 remoteMessage.data.IS_AUTOTRADE_YN === 'Y'
                     ? Alert.alert(remoteMessage.notification.title, remoteMessage.notification.body, [
                           {
-                              text: '자세히 보기',
+                              text: '확인',
                               onPress: () => {
                                   console.log(remoteMessage.data);
                               },
                           },
-                          {
-                              text: '확인',
-                              onPress: () => {
-                                  console.log('확인');
-                              },
-                          },
                       ])
                     : Alert.alert(remoteMessage.notification.title, remoteMessage.notification.body, [
-                          {text: '수동 거래'},
+                          //   {
+                          //       text: '수동 거래',
+                          //       onPress: async () => {
+                          //           const publicSeq = await AsyncStorage.getItem('publicSeq');
+                          //           const side = remoteMessage.data.TRADE_TYPE === 'TT01' ? 'bid' : 'ask';
+                          //           await manualTrade({
+                          //               PUBLIC_SEQ: Number(publicSeq),
+                          //               side: side,
+                          //               ord_type: 'limit',
+                          //               price: Number(remoteMessage.data.TRADE_PRICE),
+                          //               market: remoteMessage.data.TRADE_MARKET,
+                          //               volume: Number(remoteMessage.data.TRADE_VOLUME),
+                          //           });
+                          //           //   await istrade({ALARM_SEQ: remoteMessage.data.ALARM_SEQ});
+                          //       },
+                          //   },
                           {
-                              text: '자세히 보기',
+                              text: '확인',
                               onPress: () => {
                                   console.log(remoteMessage.data);
                               },
@@ -54,6 +63,7 @@ const App = () => {
             console.log('메세지 도착');
             console.log(remoteMessage.notification);
             console.log(remoteMessage.data);
+            console.log(remoteMessage.data.TRADE_TYPE);
         });
 
         return unsubscribe;
@@ -61,7 +71,5 @@ const App = () => {
 
     return <>{isLogin ? <RootStackScreen setIsLogin={setIsLogin} setUserinfo={setUserinfo} /> : <LoginScreen setIsLogin={setIsLogin} />}</>;
 };
-
-const styles = StyleSheet.create({});
 
 export default App;
