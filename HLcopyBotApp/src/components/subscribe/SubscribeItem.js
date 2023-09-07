@@ -22,7 +22,7 @@ const SubscribeItem = ({item}) => {
                             <Text>{item.LEADER_NAME}</Text>
                         </View>
                         <View style={styles.textbox}>
-                            <Text>수익률 : </Text>
+                            <Text>수익률 : {item.rate}%</Text>
                         </View>
                     </View>
                 </View>
@@ -41,6 +41,8 @@ const SubscribeItem = ({item}) => {
                                     LEADER_CAPACITY: item.LEADER_CAPACITY,
                                     LEADER_PRICE: item.LEADER_PRICE,
                                     LEADER_AMOUNT: item.LEADER_AMOUNT,
+                                    profit: item.profit,
+                                    rate: item.rate,
                                 })
                             }
                             color="#D4D9F3"
