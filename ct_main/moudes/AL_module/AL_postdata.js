@@ -16,7 +16,14 @@ function alarm_isread(alarm_seq){
   db_putdata.PUT_alarm_isread(alarm_seq);
 }
 
+// 특정 알람을 읽음으로 표시
+function alarm_istrade(alarm_seq){
+  console.log('al_istrade AL / alarmseq: ',alarm_seq)
+  db_putdata.PUT_alarm_istrade(alarm_seq);
+}
+
 module.exports = {
     newalalrm: newalalrm,
     alarm_isread : alarm_isread,
+    alarm_istrade : alarm_istrade,
 };

@@ -13,6 +13,7 @@ const autoTrade_message =  async (data) => {
     const TRADE_TYPE = data.TRADE_TYPE
     const TRADE_VOLUME = data.TRADE_VOLUME
     const TRADE_PRICE = data.TRADE_PRICE
+    const TRADE_MARKET = data.TRADE_MARKET
     const IS_AUTOTRADE_YN = data.IS_AUTOTRADE_YN
     const REG_DT = data.REG_DT
     
@@ -27,6 +28,7 @@ const autoTrade_message =  async (data) => {
               "TRADE_TYPE": TRADE_TYPE, // TT01: 매수, TT02: 매도 
               "TRADE_VOLUME" : TRADE_VOLUME,
               "TRADE_PRICE" : TRADE_PRICE,
+              "TRADE_MARKET" : TRADE_MARKET,
               "IS_AUTOTRADE_YN": IS_AUTOTRADE_YN, 
               "TRADE_YN" : "Y", // follower 계좌에서 거래가 발생할 경우 Y, 아닐 경우 N
               "REG_DT": REG_DT

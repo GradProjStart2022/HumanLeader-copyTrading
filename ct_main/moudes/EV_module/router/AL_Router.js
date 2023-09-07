@@ -82,8 +82,13 @@ router.post("/public", async (req,res,next) => {
 router.post("/isread", async (req,res,next) => {
   console.log("{post} /alarm/isread");
   AL_postdata.alarm_isread(req.body.ALARM_SEQ)
-  res.end('ok')
-  
+  res.end('ok')  
+})
+
+router.post("/istrade", async (req,res,next) => {
+  console.log("{post} /alarm/istrade");
+  AL_postdata.alarm_istrade(req.body.ALARM_SEQ)
+  res.end('ok');
 })
 
 

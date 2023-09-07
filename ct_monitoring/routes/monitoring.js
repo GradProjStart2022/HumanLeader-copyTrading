@@ -9,6 +9,13 @@ const queryEncode = require("querystring").encode;
 
 let bodyT = {};
 
+// 테스트용 시간
+// const currentDate = new Date().toISOString().slice(0, 19);
+
+// 시간 보정
+const currentUTCTime = new Date();
+const currentDate = new Date(currentUTCTime.getTime() + 9 * 60 * 60 * 1000);
+
 function monitoring(leader) {
   const access_key = leader["ACCESS_KEY"]; // 리더 ACCESS KEY
   const secret_key = leader["SECRET_KEY"]; // 리더 SECRET KEY
@@ -53,12 +60,6 @@ function monitoring(leader) {
     headers: { Authorization: `Bearer ${token}` },
     json: body,
   };
-  // 테스트용 시간
-  // const currentDate = new Date().toISOString().slice(0, 19);
-
-  // 시간 보정
-  const currentUTCTime = new Date();
-  const currentDate = new Date(currentUTCTime.getTime() + 9 * 60 * 60 * 1000);
 
   request(options, (error, response, body) => {
     if (error) throw new Error(error);
@@ -66,6 +67,7 @@ function monitoring(leader) {
       JSON.stringify(bodyT) !== JSON.stringify(body) &&
       body[0].created_at.slice(0, 19) > currentDate.toISOString().slice(0, 19)
     ) {
+      console.log(body[0])
       // trading 서버에 거래 발생 POST
       bodyT = body;
 
@@ -74,7 +76,7 @@ function monitoring(leader) {
       // monitoring한 거래기록 확인
       // console.log(body1);
       const options = {
-        uri: "http://localhost:3020/v1/copytrading",
+        uri: "http://localhost:4020/v1/copytrading/",
         method: "POST",
 
         body: body1,
@@ -84,7 +86,6 @@ function monitoring(leader) {
 
       // 카필트레이딩 서버에 전송
       request.post(options, function (error, response, body) {
-        console.log(response.body);
       });
 
       // main 서버에 거래 발생 POST 부분
@@ -121,7 +122,7 @@ function monitoring(leader) {
       const date = body1[0].created_at.slice(0, 19);
 
       const options2 = {
-        url: "http://124.50.247.56:3000/trade/newtrade",
+        url: "http://localhost:3000/trade/newtrade",
         method: "POST",
         json: {
           LEADER_SEQ: leader["LEADER_SEQ"],

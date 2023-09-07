@@ -104,7 +104,12 @@ async function getUserPortfolioValue(id) {
     };
   }
 
-  calculatePortfolioValue(keys[0].ACCESS_KEY, keys[0].SECRET_KEY);
+  const portfolioValue = await calculatePortfolioValue(
+    keys[0].ACCESS_KEY,
+    keys[0].SECRET_KEY
+  );
+
+  return portfolioValue;
 }
 
 module.exports = {
