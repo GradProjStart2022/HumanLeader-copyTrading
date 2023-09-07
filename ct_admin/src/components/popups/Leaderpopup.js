@@ -1,11 +1,16 @@
 // src/components/popups/Leaderpopup.js
 
-import React from 'react';
+import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 
 import '../../styles/modal.css'
 
 const LeaderPopup = (props) => {
+  let [leaderData, setleaderData] = useState({
+    ACCESS_KEY : props.item.ACCESS_KEY,
+    SECRET_KEY : props.item.SECRET_KEY,
+  })
+
   return (
     <Popup 
           trigger={ <button> Edit </button> } 
@@ -72,12 +77,16 @@ const LeaderPopup = (props) => {
 
                     <div className="inputdata">
                       <label>ACCESS_KEY</label>
-                      <input className="inputtext" value={`${props.item.ACCESS_KEY}`}></input>
+                      <input className="inputtext" value={`${leaderData.ACCESS_KEY}`}
+                        onChange = { (e) => {setleaderData({...leaderData, ACCESS_KEY: e.target.value})}}
+                      ></input>
                     </div>
 
                     <div className="inputdata">
                       <label>SECRET_KEY</label>
-                      <input className="inputtext" value={`${props.item.SECRET_KEY}`}></input>
+                      <input className="inputtext" value={`${leaderData.SECRET_KEY}`}
+                        onChange = { (e) => {setleaderData({...leaderData, SECRET_KEY: e.target.value})}}
+                      ></input>
                     </div>
 
                     <span>

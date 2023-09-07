@@ -37,7 +37,7 @@ async function Get_all_leader() {
     conn.query("USE copytrade_proto;");
     //rows = await conn.query(`select * from ct_leader;`);
     rows = await conn.query(
-      `select LEADER_SEQ,LEADER_UID,LEADER_NAME,LEADER_IMAGE,LEADER_CAPACITY,LEADER_PRICE,LEADER_AMOUNT,EXCHANGE_TYPE,TRADER_ST from ct_leader;`
+      `select LEADER_SEQ,LEADER_UID,LEADER_NAME,LEADER_IMAGE,LEADER_CAPACITY,LEADER_PRICE,LEADER_AMOUNT,EXCHANGE_TYPE,TRADER_ST,ACCESS_KEY,SECRET_KEY from ct_leader;`
     );
     //console.log(rows)
   } catch (err) {
