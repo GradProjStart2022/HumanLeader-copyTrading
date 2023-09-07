@@ -68,10 +68,14 @@ const LeaderDetailScreen = ({route}) => {
                         </View>
 
                         <View style={styles.infobox}>
-                            {/* <Text style={styles.infotext}>팔로워: {}</Text> */}
-                            <Text style={styles.infotext}>구독료: {route.params.LEADER_PRICE.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Text>
-                            <Text style={styles.infotext}>투자 자금: {route.params.LEADER_AMOUNT.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Text>
-                            {/* <Text style={styles.infotext}>활동 기간: </Text> */}
+                            <Text style={styles.infotext}>수익률: {route.params.rate}%</Text>
+                            <Text style={styles.infotext}>
+                                수익 금액: ￦{''}
+                                {route.params.profit
+                                    .toFixed(2)
+                                    .toString()
+                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            </Text>
                         </View>
                         <Text style={{fontSize: 20, marginBottom: 10}}>수익율 그래프</Text>
                         <ChartComponent />

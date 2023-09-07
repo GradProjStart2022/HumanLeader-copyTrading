@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import SubscribeList from '../components/subscribe/SubscribeList';
 import auth from '@react-native-firebase/auth';
 import RoundImage from '../components/RoundImage';
