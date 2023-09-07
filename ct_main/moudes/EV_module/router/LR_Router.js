@@ -15,7 +15,36 @@ router.get("/all", async function (req, res, next) {
   var LR_data = await LR_leaderget.get_leader_all();
   //console.log(`LR data : ${JSON.stringify(LR_data)}`);
 
-  res.json(LR_data);
+  
+  // 각 JSON 객체에 대해 LEADER_SEQ를 사용하여 LR_leaderget.getLeaderProfit(seq) 호출 후 결과 추가
+async function enrichDataWithProfit(data) {
+  var array = [];
+  for (let i = 0; i < data.length; i++) {
+    const seq = data[i].LEADER_SEQ;
+
+    try {
+      // getLeaderProfit(seq) 함수를 호출하여 수익 정보 가져오기
+      const profit = await LR_leaderget.getLeaderProfit(seq);
+
+      // 수익 정보를 JSON 객체에 추가
+      data[i].profit = profit.profit;
+      data[i].rate = profit.rate;
+      // 이제 data[i] 객체에 LEADER_PROFIT 필드가 추가되었습니다.
+      array.push(data[i]);
+    } catch (error) {
+      console.error(
+        `Error fetching profit for LEADER_SEQ ${seq}: ${error.message}`
+      );
+    }
+  }
+  return array;
+}
+
+// 최상위 레벨에서 실행
+(async () => {
+  const data = await enrichDataWithProfit(LR_data);
+  res.json(data);
+})();
 });
 
 router.get("/:seq", async function (req, res, next) {
@@ -32,8 +61,13 @@ router.get("/leaders/:publicseq", async function (req, res, next) {
   // LR 모듈에게 리더 요청
   var LR_data = await LR_leaderget.get_leader_by_publicseq(seq);
   //console.log(`LR data : ${JSON.stringify(LR_data)}`);
-
-  res.json(LR_data);
+  var profit = await LR_leaderget.getLeaderProfit(LR_data[0].LEADER_SEQ)
+  var data = {
+    ...LR_data[0],
+    ...profit
+  }
+  data=[data]
+  res.json(data);
 });
 
 // 리더 수익률 계산

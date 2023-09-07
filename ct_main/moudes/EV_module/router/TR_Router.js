@@ -83,7 +83,7 @@ router.post("/newtrade", async function (req, res, next) {
       TRADE_PRICE : req.body.TRADE_PRICE,
       TRADE_VOLUME : req.body.TRADE_VOLUME,
       IS_READ_YN : 'N',
-      TRADE_YN : 'Y',
+      TRADE_YN : (user_Data.IS_AUTO_TRADING_YN == 'Y') ? 'Y' : 'N',
       IS_AUTOTRADE_YN : user_Data.IS_AUTO_TRADING_YN,
       CONTENTS : 'NULL',
       REG_DT : req.body.REG_DT,
