@@ -42,6 +42,15 @@ export async function getPublic(uid) {
     // return data;
 }
 
+// 유저 수익율 조회
+export async function getRate(param) {
+    const response = await fetch(`${API_URI}/user/ror/${param}`, {
+        method: 'GET',
+    });
+    const data = await response.json();
+    return data.rate;
+}
+
 // fcm 토큰 등록
 export async function postPublicToken(params) {
     const response = await fetch(`${API_URI}/user/token`, {

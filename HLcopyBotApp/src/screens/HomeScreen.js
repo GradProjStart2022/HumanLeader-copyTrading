@@ -1,11 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import SubscribeList from '../components/subscribe/SubscribeList';
 import auth from '@react-native-firebase/auth';
 import RoundImage from '../components/RoundImage';
+import {getRate} from '../utils/api';
+import {useFocusEffect} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoaderAnimation from '../components/LoaderAnimation';
 
 const HomeScreen = () => {
     const user = auth().currentUser;
+    const [isLoadings, setIsLoadings] = useState(true);
+    const [userRate, setUserRate] = useState();
+
+    const getUserRate = async () => {
+        try {
+            const publicSeq = await AsyncStorage.getItem('publicSeq');
+            setUserRate(await getRate(publicSeq));
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setTimeout(() => {
+                setIsLoadings(false);
+            }, 500);
+        }
+    };
+
+    useFocusEffect(
+        React.useCallback(() => {
+            setIsLoadings(true);
+            getUserRate();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, []),
+    );
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#ffffff'}}>
@@ -17,7 +44,7 @@ const HomeScreen = () => {
                 <View style={{justifyContent: 'center'}}>
                     <Text style={styles.title}>{user.displayName}</Text>
                     <View style={{height: 20}} />
-                    <Text>수익률 : 00%</Text>
+                    <Text>수익률 : {userRate}%</Text>
                 </View>
             </View>
             <View></View>

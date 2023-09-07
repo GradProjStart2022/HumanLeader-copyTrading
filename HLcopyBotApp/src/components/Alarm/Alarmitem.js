@@ -28,6 +28,7 @@ const Alarmitem = ({item}) => {
                 navigation.navigate('AlarmDetail', {
                     ALARM_SEQ: item.ALARM_SEQ,
                     LEADER_SEQ: item.LEADER_SEQ,
+                    LEADER_NAME: item.LEADER_NAME,
                     TRADE_TYPE: item.TRADE_TYPE,
                     TRADE_SYMBOL: item.TRADE_SYMBOL,
                     TRADE_MARKET: item.TRADE_MARKET,
@@ -42,18 +43,10 @@ const Alarmitem = ({item}) => {
             <View style={styles.container2}>
                 <View style={{flex: 1}}>
                     <View style={styles.textbox}>
-                        <Text style={styles.text}>리더 : {item.LEADER_SEQ}</Text>
-                    </View>
-                    <View style={styles.textbox}>
+                        <Text style={styles.text}>리더 : {item.LEADER_NAME}</Text>
                         <Text style={styles.text}>거래 타입 : {item.TRADE_TYPE === 'TT01' ? '매수' : '매도'}</Text>
-                    </View>
-                    <View style={styles.textbox}>
                         <Text style={styles.text}>채결량 : {item.TRADE_VOLUME}</Text>
-                    </View>
-                    <View style={styles.textbox}>
                         <Text style={styles.text}>채결 금액 : {item.TRADE_PRICE}</Text>
-                    </View>
-                    <View style={styles.textbox}>
                         <Text style={styles.text}>거래 시간 : {formatDate(item.REG_DT)}</Text>
                     </View>
                 </View>
@@ -84,8 +77,14 @@ const styles = StyleSheet.create({
     textbox: {
         justifyContent: 'center',
     },
+    title: {
+        color: '#000000',
+        fontSize: 18,
+        marginBottom: 5,
+    },
     text: {
         color: '#000000',
+        fontSize: 15,
     },
 });
 
