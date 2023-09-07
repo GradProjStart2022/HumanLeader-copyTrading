@@ -9,6 +9,13 @@ const queryEncode = require("querystring").encode;
 
 let bodyT = {};
 
+// 테스트용 시간
+// const currentDate = new Date().toISOString().slice(0, 19);
+
+// 시간 보정
+const currentUTCTime = new Date();
+const currentDate = new Date(currentUTCTime.getTime() + 9 * 60 * 60 * 1000);
+
 function monitoring(leader) {
   const access_key = leader["ACCESS_KEY"]; // 리더 ACCESS KEY
   const secret_key = leader["SECRET_KEY"]; // 리더 SECRET KEY
@@ -53,12 +60,6 @@ function monitoring(leader) {
     headers: { Authorization: `Bearer ${token}` },
     json: body,
   };
-  // 테스트용 시간
-  // const currentDate = new Date().toISOString().slice(0, 19);
-
-  // 시간 보정
-  const currentUTCTime = new Date();
-  const currentDate = new Date(currentUTCTime.getTime() + 9 * 60 * 60 * 1000);
 
   request(options, (error, response, body) => {
     if (error) throw new Error(error);
