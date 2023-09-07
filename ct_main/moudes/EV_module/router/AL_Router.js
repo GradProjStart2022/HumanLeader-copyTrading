@@ -7,6 +7,11 @@ var AL_getdata = require('../../AL_module/AL_getdata');
 var AL_postdata = require('../../AL_module/AL_postdata');
 
 
+router.use('/',(req,res,next) => {
+  console.log('alarm router ok');
+  next();
+})
+
 router.get("/", async function (req, res, next) {
     console.log("this is alarm router");
     res.end("ok - (get)alarm router");
@@ -39,6 +44,8 @@ router.post("/new", async function (req, res, next) {
     DB_postdata.POST_alarm(data);
     res.end("ok - (post) new alarm ");
   });
+
+
 
 
 router.get("/all", async (req,res,next) => {

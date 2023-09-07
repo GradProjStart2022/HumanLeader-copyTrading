@@ -340,10 +340,24 @@ async function Get_alarm_bypublic(public_seq) {
     conn = await pool.getConnection();
     conn.query("USE copytrade_proto;");
     rows = await conn.query(`
-    SELECT ah.*
-    FROM ct_alarm_history AS ah
-    INNER JOIN ct_following AS f ON ah.FOLLOWING_SEQ = f.FOLLOWING_SEQ
-    WHERE f.PUBLIC_SEQ = ${public_seq}
+    SELECT
+        a.ALARM_SEQ,
+        f.LEADER_SEQ AS LEADER_SEQ, -- 해당 FOLLOWING_SEQ에 대응하는 LEADER_SEQ
+        l.LEADER_NAME AS LEADER_NAME,
+        a.IS_AUTOTRADE_YN,
+        a.IS_READ_YN,
+        a.REG_DT,
+        a.TRADE_MARKET,
+        a.TRADE_PRICE,
+        a.TRADE_SYMBOL,
+        a.TRADE_TYPE,
+        a.TRADE_VOLUME,
+        a.TRADE_YN
+      FROM ct_alarm_history a
+      INNER JOIN ct_public p
+      LEFT JOIN ct_following f ON a.FOLLOWING_SEQ = f.FOLLOWING_SEQ
+      LEFT JOIN ct_leader l ON f.LEADER_SEQ = l.LEADER_SEQ
+      WHERE p.PUBLIC_SEQ = '${public_seq}';
     `);
     //console.log(rows)
   } catch (err) {

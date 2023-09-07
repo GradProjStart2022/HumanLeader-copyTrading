@@ -166,6 +166,9 @@ async function PostKey(data) {
   const ACCESS_KEY = data.accessKey;
   const SECRET_KEY = data.secretKey;
 
+  console.log(data.id)
+  console.log(data.accessKey)
+
   const query =
     await "UPDATE ct_public SET ACCESS_KEY=?, SECRET_KEY=? WHERE PUBLIC_ID = ?";
 
@@ -218,7 +221,7 @@ async function PostFollowing(data) {
       data.stopRatio,
       data.takeRatio,
       data.isAutoTrading,
-      "FS01",
+      "FT01",
       data.tradeType,
       data.fixAmount,
       data.fixRatio,
@@ -263,37 +266,32 @@ async function DisableFollowing(data) {
 
 // 신규 알람 등록
 async function POST_alarm(data) {
-  console.log('new Alarm')
+  console.log("new Alarm");
   console.log(`DB data : ${JSON.stringify(data)}`);
 
-  
-  FOLLOWING_SEQ = data.FOLLOWING_SEQ
-  TRADE_TYPE = data.TRADE_TYPE
-  TRADE_SYMBOL = data.TRADE_SYMBOL
-  TRADE_MARKET = data.TRADE_MARKET
-  TRADE_VOLUME = data.TRADE_VOLUME
-  TRADE_PRICE = data.TRADE_PRICE
-  IS_READ_YN = data.IS_READ_YN
-  TRADE_YN = data.TRADE_YN
-  IS_AUTOTRADE_YN = data.IS_AUTOTRADE_YN
-  CONTENTS = data.CONTENTS
-  REG_DT = data.REG_DT
-  
+  FOLLOWING_SEQ = data.FOLLOWING_SEQ;
+  TRADE_TYPE = data.TRADE_TYPE;
+  TRADE_SYMBOL = data.TRADE_SYMBOL;
+  TRADE_MARKET = data.TRADE_MARKET;
+  TRADE_VOLUME = data.TRADE_VOLUME;
+  TRADE_PRICE = data.TRADE_PRICE;
+  IS_READ_YN = data.IS_READ_YN;
+  TRADE_YN = data.TRADE_YN;
+  IS_AUTOTRADE_YN = data.IS_AUTOTRADE_YN;
+  CONTENTS = data.CONTENTS;
+  REG_DT = data.REG_DT;
+
   const SQLquery =
     await `INSERT INTO copytrade_proto.ct_alarm_history (FOLLOWING_SEQ, TRADE_TYPE, TRADE_SYMBOL, TRADE_MARKET, TRADE_VOLUME, TRADE_PRICE, IS_READ_YN, TRADE_YN, IS_AUTOTRADE_YN, CONTENTS, REG_DT) VALUES (${FOLLOWING_SEQ}, '${TRADE_TYPE}', '${TRADE_SYMBOL}', '${TRADE_MARKET}', ${TRADE_VOLUME}, ${TRADE_PRICE}, '${IS_READ_YN}', '${TRADE_YN}', '${IS_AUTOTRADE_YN}', '${CONTENTS}', '${REG_DT}')`;
-  console.log("SQL query",SQLquery);
+  console.log("SQL query", SQLquery);
 
   let conn, output;
   try {
     conn = await pool.getConnection();
     conn.query("USE copytrade_proto");
     console.log("con success");
-    console.log(
-      `DB query :  ${SQLquery}`
-    );
-    output = await conn.query(
-      `${SQLquery}`
-    );
+    console.log(`DB query :  ${SQLquery}`);
+    output = await conn.query(`${SQLquery}`);
   } catch (err) {
     throw err;
   } finally {
@@ -302,13 +300,6 @@ async function POST_alarm(data) {
     return;
   }
 }
-
-
-
-
-
-
-
 
 const sql = (module.exports = {
   POST_LT_history: POST_LT_history,
@@ -319,5 +310,5 @@ const sql = (module.exports = {
   PostKey: PostKey,
   PostFollowing: PostFollowing,
   DisableFollowing: DisableFollowing,
-  POST_alarm : POST_alarm,
+  POST_alarm: POST_alarm,
 });
