@@ -55,7 +55,7 @@ router.post("/manual", async (req, res) => {
   );
 
   // 타겟 팔로워들에 대해 거래 요청 송신
-  if (targetFollowers.length > 0) {
+
     targetFollowers.forEach((follower) => {
       const access_key = follower.ACCESS_KEY;
       const secret_key = follower.SECRET_KEY;
@@ -74,10 +74,10 @@ router.post("/manual", async (req, res) => {
       //매도 sleepage
       if (req.body.side === "bid") {
         calculatedPrice = floorValue(req.body.price * 1.005);
-      } else if (req.body[0].side === "ask") {
+      } else if (req.body.side === "ask") {
         calculatedPrice = ceilValue(req.body.price * 0.995);
       }
-
+      console.log(calculatedVol);
       // 거래요청 parameter
       const body = {
         market: req.body.market,
@@ -115,19 +115,19 @@ router.post("/manual", async (req, res) => {
     });
     res.json("업비트 서버에 전송완료");
   }
-});
+);
 
 // 거래 발생 수신
 router.post("/", async (req, res) => {
   const followers1 = await followers;
   // 수신받은 leader의 팔로워들만 필터링
+  console.log(req.body)
   const targetFollowers = followers1.filter(
     (obj) =>
-      obj["PUBLIC_SEQ"] === req.body.PUBLIC_SEQ &&
-      obj["IS_AUTO_TRADING_YN"] === "N"
+      obj["LEADER_SEQ"] === req.body[0].LEADER_SEQ &&
+      obj["IS_AUTO_TRADING_YN"] === "Y"
   );
   // 타겟 팔로워들에 대해 거래 요청 송신
-  if (targetFollowers.length > 0) {
     targetFollowers.forEach((follower) => {
       const access_key = follower.ACCESS_KEY;
       const secret_key = follower.SECRET_KEY;
@@ -187,6 +187,6 @@ router.post("/", async (req, res) => {
     });
     res.json("업비트 서버에 전송완료");
   }
-});
+);
 
 module.exports = router;
