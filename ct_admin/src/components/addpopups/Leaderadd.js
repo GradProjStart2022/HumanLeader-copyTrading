@@ -10,7 +10,6 @@ class Useradd extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      LEADER_SEQ : '',
       LEADER_UID : '',
       LEADER_NAME : '',
       LEADER_IMAGE : '',
@@ -18,8 +17,25 @@ class Useradd extends React.Component {
       LEADER_PRICE : '',
       LEADER_AMOUNT : '',
       EXCHANGE_TYPE : '',
+      ACCESS_KEY : 'null',
+      SECRET_KEY : 'null',
       TRADER_ST : '',
+      REG_DT : this.formatCurrentDateTime(),
+      MOD_DT : this.formatCurrentDateTime(),
     }
+  }
+
+  formatCurrentDateTime() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+  
+    const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    return formattedDate;
   }
 
   // leader에 맞게 수정 필요
@@ -199,7 +215,7 @@ class Useradd extends React.Component {
                       <button 
                         className="button"
                         onClick = {()=>{
-                          //this.exportdata();
+                          this.exportdata();
                           console.log(JSON.stringify(this.state))
                           this.setState({
                             PUBLIC_ID : '',
