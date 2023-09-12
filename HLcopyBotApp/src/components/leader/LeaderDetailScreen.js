@@ -72,7 +72,7 @@ const LeaderDetailScreen = ({route}) => {
                             <Text style={styles.infotext}>
                                 수익 금액: ￦{''}
                                 {route.params.profit
-                                    .toFixed(2)
+                                    .toFixed(0)
                                     .toString()
                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                             </Text>
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     name: {
-        fontSize: 24,
+        fontSize: RFValue(24),
     },
     title: {
         flexDirection: 'row',
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     },
     infotext: {
         padding: 10,
-        fontSize: 18,
+        fontSize: RFValue(18),
     },
     tableHeader: {
         backgroundColor: '#f0f0f0',

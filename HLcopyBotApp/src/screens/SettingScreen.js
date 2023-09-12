@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {deleteToken} from '../utils/api';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const SettingScreen = ({setIsLogin}) => {
     const navigation = useNavigation();
@@ -38,8 +39,10 @@ const styles = StyleSheet.create({
         padding: 30,
     },
     title: {
-        fontSize: 36,
-        paddingBottom: 30,
+        fontSize: RFValue(36),
+        marginTop: -20,
+        fontFamily: 'NotoSansKR-Bold',
+        color: '#000000',
     },
 });
 

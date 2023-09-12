@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import LeaderList from '../components/leader/LeaderList';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const LeaderListScreen = () => {
     return (
@@ -18,8 +19,10 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        fontSize: 36,
-        paddingBottom: 30,
+        fontSize: RFValue(36),
+        marginTop: -20,
+        fontFamily: 'NotoSansKR-Bold',
+        color: '#000000',
     },
 });
 

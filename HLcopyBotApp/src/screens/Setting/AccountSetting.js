@@ -4,15 +4,31 @@ import {Alert, Animated, Image, Modal, Pressable, StyleSheet, Text, TextInput, V
 import {RFValue} from 'react-native-responsive-fontsize';
 import CustomButton from '../../components/CustomButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {postPublicKey} from '../../utils/api';
-import {useNavigation} from '@react-navigation/native';
+import {getContent, postPublicKey} from '../../utils/api';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import LoaderAnimation from '../../components/LoaderAnimation';
 
 const AccountSetting = () => {
     const navigation = useNavigation();
-
     const [isVisible, setIsVisible] = useState(false);
-    const [accessKey, setAccessKey] = useState('3Wvox9z9D7P7himIbDbyHCxkPPDHlT9pZa98fK1z');
-    const [secretKey, setSecretKey] = useState('MvIm9MDMavMhZO0rmDLz5xfQX8CDP1Pa2E4X2ZPN');
+    const [accessKey, setAccessKey] = useState('');
+    const [secretKey, setSecretKey] = useState('');
+    const [IP, setIP] = useState();
+    const [isLoading, setIsLoading] = useState(true);
+
+    const getContents = async () => {
+        try {
+            const content = await getContent();
+            setIP(content.find(item => item.text_id === 'AT03')?.text_contents);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 500);
+        }
+    };
+
     const updateKey = async () => {
         const id = await AsyncStorage.getItem('uid');
         const result = await postPublicKey({
@@ -31,6 +47,13 @@ const AccountSetting = () => {
         }
     };
 
+    useFocusEffect(
+        React.useCallback(() => {
+            setIsLoading(true);
+            getContents();
+        }, []),
+    );
+
     return (
         <View style={styles.container}>
             <View
@@ -47,8 +70,14 @@ const AccountSetting = () => {
                 <TextInput style={styles.input} value={accessKey} onChangeText={setAccessKey} placeholder="Access Key" placeholderTextColor="#CCCCCC" />
                 <TextInput style={styles.input} value={secretKey} onChangeText={setSecretKey} placeholder="Secret Key" placeholderTextColor="#CCCCCC" />
                 <View style={{height: 10}} />
-                <Text style={styles.text}>자산조회, 주문조회, 주문하기 선택</Text>
-                <Text style={styles.text}>IP주소: 123.123.123.123</Text>
+                {isLoading ? (
+                    <LoaderAnimation />
+                ) : (
+                    <View>
+                        <Text style={styles.text}>자산조회, 주문조회, 주문하기 선택</Text>
+                        <Text style={styles.text}>IP주소 : {IP}</Text>
+                    </View>
+                )}
             </View>
             <CustomButton
                 text={'Key update'}
@@ -108,6 +137,7 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontSize: RFValue(18),
         marginLeft: RFValue(30),
+        fontFamily: 'NotoSansKR-Bold',
     },
     input: {
         width: '100%',
@@ -123,7 +153,7 @@ const styles = StyleSheet.create({
         color: '#777777',
     },
     text: {
-        fontSize: 15,
+        fontSize: RFValue(15),
         color: '#000000',
     },
 });

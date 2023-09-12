@@ -43,15 +43,21 @@ const Alarmitem = ({item}) => {
             <View style={styles.container2}>
                 <View style={{flex: 1}}>
                     <View style={styles.textbox}>
-                        <Text style={styles.title}>{item.IS_AUTOTRADE_YN === 'Y' ? '자동거래 알림' : '수동거래 알림'}</Text>
-                        <Text style={styles.text}>리더: {item.LEADER_NAME}</Text>
-                        <Text style={styles.text}>거래 타입 : {item.TRADE_TYPE === 'TT01' ? '매수' : '매도'}</Text>
-                        <Text style={styles.text}>채결량 : {item.TRADE_VOLUME}</Text>
-                        <Text style={styles.text}>채결 금액 : {item.TRADE_PRICE}</Text>
-                        <Text style={styles.text}>거래 시간 : {formatDate(item.REG_DT)}</Text>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style={styles.title}>{item.IS_AUTOTRADE_YN === 'Y' ? '자동거래 알림 ' : '수동거래 알림 '}</Text>
+                            {item.IS_READ_YN === 'N' ? (
+                                <View style={{alignItems: 'center', justifyContent: 'center', backgroundColor: 'red', borderRadius: 10, width: 15, height: 15}}>
+                                    <Text style={{color: '#ffffff', fontSize: 10}}>N</Text>
+                                </View>
+                            ) : null}
+                        </View>
+                        <Text style={styles.text1}>{formatDate(item.REG_DT)}</Text>
+                        <Text style={styles.text2}>리더: {item.LEADER_NAME}</Text>
+                        <Text style={styles.text2}>거래 타입 : {item.TRADE_TYPE === 'TT01' ? '매수' : '매도'}</Text>
+                        <Text style={styles.text2}>채결량 : {item.TRADE_VOLUME}</Text>
+                        <Text style={styles.text2}>채결 금액 : {item.TRADE_PRICE}</Text>
                     </View>
                 </View>
-                <View style={styles.icon}>{item.IS_READ_YN === 'N' ? <Icon name="notifications-active" size={24} color={'red'} /> : null}</View>
             </View>
         </TouchableOpacity>
     );
@@ -60,12 +66,12 @@ const Alarmitem = ({item}) => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: '#F2F2F2',
+        backgroundColor: '#ffffff',
         paddingHorizontal: RFValue(15),
         paddingVertical: RFValue(15),
-        marginBottom: RFValue(10),
-        borderColor: '#909090',
-        borderWidth: 1,
+        borderColor: '#cecece',
+        borderBottomWidth: 1,
+        borderTopWidth: 1,
     },
     container2: {
         flexDirection: 'row',
@@ -80,12 +86,16 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#000000',
-        fontSize: 18,
-        marginBottom: 10,
+        fontSize: RFValue(18),
     },
-    text: {
+    text1: {
+        color: '#030303',
+        fontSize: RFValue(12),
+        marginBottom: 5,
+    },
+    text2: {
         color: '#000000',
-        fontSize: 15,
+        fontSize: RFValue(15),
     },
 });
 

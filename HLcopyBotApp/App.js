@@ -35,22 +35,6 @@ const App = () => {
                           },
                       ])
                     : Alert.alert(remoteMessage.notification.title, remoteMessage.notification.body, [
-                          //   {
-                          //       text: '수동 거래',
-                          //       onPress: async () => {
-                          //           const publicSeq = await AsyncStorage.getItem('publicSeq');
-                          //           const side = remoteMessage.data.TRADE_TYPE === 'TT01' ? 'bid' : 'ask';
-                          //           await manualTrade({
-                          //               PUBLIC_SEQ: Number(publicSeq),
-                          //               side: side,
-                          //               ord_type: 'limit',
-                          //               price: Number(remoteMessage.data.TRADE_PRICE),
-                          //               market: remoteMessage.data.TRADE_MARKET,
-                          //               volume: Number(remoteMessage.data.TRADE_VOLUME),
-                          //           });
-                          //           //   await istrade({ALARM_SEQ: remoteMessage.data.ALARM_SEQ});
-                          //       },
-                          //   },
                           {
                               text: '확인',
                               onPress: () => {

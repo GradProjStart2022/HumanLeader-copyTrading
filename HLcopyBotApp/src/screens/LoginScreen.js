@@ -48,7 +48,7 @@ const LoginScreen = ({setIsLogin, setUserinfo}) => {
 
     return (
         <Swiper ref={swiper} style={styles.banner} dotStyle={styles.dotStyle} activeDotStyle={styles.activeDotStyle} showsPagination={true} loop={false}>
-            <ImageBackground style={{height: '100%'}} imageStyle={{opacity: 0.4}} source={require('../img/graph.jpg')} resizeMode="cover">
+            <ImageBackground style={{height: '100%'}} imageStyle={{opacity: 0.5}} source={require('../img/graph.jpg')} resizeMode="cover">
                 <View style={styles.block}>
                     <Text style={styles.title}>H L C T</Text>
                     <Text style={styles.title2}>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         marginBottom: RFValue(60),
     },
     banner: {
-        backgroundColor: '#90caf9',
+        backgroundColor: '#004d8a',
     },
     dotStyle: {
         borderColor: '#777',
@@ -90,14 +90,14 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#ffffff',
-        fontSize: RFValue(38),
+        fontSize: RFValue(50),
         textAlign: 'center',
         margintop: RFValue(500),
         fontFamily: 'MBC_1961_M',
     },
     title2: {
         color: '#eeeeee',
-        fontSize: RFValue(15),
+        fontSize: RFValue(25),
         textAlign: 'center',
         marginBottom: RFValue(60),
         fontFamily: 'DancingScript-VariableFont_wght',
@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: RFValue(20),
         textAlign: 'center',
-        marginVertical: RFValue(20),
         marginTop: RFValue(100),
         fontFamily: 'NotoSansKR-Bold',
     },

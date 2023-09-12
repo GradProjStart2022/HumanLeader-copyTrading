@@ -41,13 +41,14 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         flexDirection: 'row',
-        backgroundColor: '#F2F2F2',
+        borderColor: '#000000',
         borderRadius: RFValue(12),
         alignItems: 'center',
         paddingHorizontal: RFValue(20),
         paddingVertical: RFValue(15),
         marginBottom: RFValue(10),
         zIndex: -1,
+        borderWidth: 1,
     },
     textbox: {
         flex: 1,

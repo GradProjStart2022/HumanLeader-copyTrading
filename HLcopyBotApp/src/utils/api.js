@@ -174,7 +174,7 @@ export const postAlarm = async params => {
         body: JSON.stringify(params),
     });
     const data = await response.json();
-    return data;
+    return data.reverse();
 };
 
 // 알람 확인

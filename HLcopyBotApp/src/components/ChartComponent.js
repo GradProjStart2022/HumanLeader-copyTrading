@@ -1,46 +1,99 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import {LineChart, LineChartBicolor} from 'react-native-gifted-charts';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const lineData = [
-    {value: 0, date: '1 Apr 2022'},
-    {value: 1, date: '2 Apr 2022'},
-    {value: 2, date: '3 Apr 2022'},
-    {value: 3, date: '4 Apr 2022'},
-    {value: -5, date: '5 Apr 2022'},
-    {value: 5, date: '6 Apr 2022'},
-    {value: 5, date: '7 Apr 2022'},
-    {value: 7, date: '8 Apr 2022'},
-    {value: -16, date: '9 Apr 2022'},
-    {value: 20, date: '10 Apr 2022'},
-
-    {value: 2, date: '11 Apr 2022'},
-    {value: 4, date: '12 Apr 2022'},
-    {value: 5, date: '13 Apr 2022'},
-    {value: 6, date: '14 Apr 2022'},
-    {value: 4, date: '15 Apr 2022'},
-    {value: 4, date: '16 Apr 2022'},
-    {value: 4, date: '17 Apr 2022'},
-    {value: 4, date: '18 Apr 2022'},
-    {value: 4, date: '19 Apr 2022'},
-    {value: 4, date: '20 Apr 2022'},
-
-    {value: 5, date: '21 Apr 2022'},
-    {value: 6, date: '22 Apr 2022'},
-    {value: 7, date: '23 Apr 2022'},
-    {value: -20, date: '24 Apr 2022'},
-    {value: 10, date: '25 Apr 2022'},
-    {value: 7, date: '26 Apr 2022'},
-    {value: 5, date: '27 Apr 2022'},
-    {value: 4, date: '28 Apr 2022'},
-    {value: 3, date: '29 Apr 2022'},
-    {value: 1, date: '30 Apr 2022'},
-
-    {value: -5, date: '1 May 2022'},
-    {value: 5, date: '2 May 2022'},
-    {value: 7, date: '3 May 2022'},
-    {value: 6, date: '4 May 2022'},
-    {value: 8, date: '5 May 2022'},
+    {value: 1, date: '		2023-01-01'},
+    {value: 0, date: '	2023-01-02	'},
+    {value: 0, date: '	2023-01-03	'},
+    {value: 3, date: '	2023-01-04	'},
+    {value: 5, date: '	2023-01-05	'},
+    {value: 6, date: '	2023-01-06	'},
+    {value: 3, date: '	2023-01-07	'},
+    {value: 1, date: '	2023-01-08	'},
+    {value: -1, date: '	2023-01-09	'},
+    {value: -5, date: '	2023-01-10	'},
+    {value: -3, date: '	2023-01-11	'},
+    {value: 0, date: '	2023-01-12	'},
+    {value: 3, date: '	2023-01-13	'},
+    {value: 7, date: '	2023-01-14	'},
+    {value: 9, date: '	2023-01-15	'},
+    {value: 20, date: '	2023-01-16	'},
+    {value: 17, date: '	2023-01-17	'},
+    {value: 18, date: '	2023-01-18	'},
+    {value: 1, date: '	2023-01-19	'},
+    {value: 2, date: '	2023-01-20	'},
+    {value: 2, date: '	2023-01-21	'},
+    {value: 2, date: '	2023-01-22	'},
+    {value: 2, date: '	2023-01-23	'},
+    {value: 2, date: '	2023-01-24	'},
+    {value: 2, date: '	2023-01-25	'},
+    {value: 2, date: '	2023-01-26	'},
+    {value: 2, date: '	2023-01-27	'},
+    {value: 2, date: '	2023-01-28	'},
+    {value: 2, date: '	2023-01-29	'},
+    {value: 3, date: '	2023-01-30	'},
+    {value: 3, date: '	2023-01-31	'},
+    {value: 3, date: '	2023-02-01	'},
+    {value: 3, date: '	2023-02-02	'},
+    {value: 3, date: '	2023-02-03	'},
+    {value: 3, date: '	2023-02-04	'},
+    {value: 5, date: '	2023-02-05	'},
+    {value: 5, date: '	2023-02-06	'},
+    {value: 7, date: '	2023-02-07	'},
+    {value: 7, date: '	2023-02-08	'},
+    {value: 7, date: '	2023-02-09	'},
+    {value: 7, date: '	2023-02-10	'},
+    {value: 9, date: '	2023-02-11	'},
+    {value: 10, date: '	2023-02-12'},
+    {value: 10, date: '	2023-02-13	'},
+    {value: 10, date: '	2023-02-14	'},
+    {value: 10, date: '	2023-02-15	'},
+    {value: 13, date: '	2023-02-16	'},
+    {value: 15, date: '	2023-02-17	'},
+    {value: 17, date: '	2023-02-18	'},
+    {value: 17, date: '	2023-02-19	'},
+    {value: 17, date: '	2023-02-20	'},
+    {value: 10, date: '	2023-02-21	'},
+    {value: 5, date: '	2023-02-22	'},
+    {value: 5, date: '	2023-02-23	'},
+    {value: 5, date: '	2023-02-24	'},
+    {value: 5, date: '	2023-02-25	'},
+    {value: 0, date: '	2023-02-26	'},
+    {value: 0, date: '	2023-02-27	'},
+    {value: 0, date: '	2023-02-28	'},
+    {value: 0, date: '	2023-03-01	'},
+    {value: 0, date: '	2023-03-02	'},
+    {value: -5, date: '	2023-03-03	'},
+    {value: -5, date: '	2023-03-04	'},
+    {value: -5, date: '	2023-03-05	'},
+    {value: -1, date: '	2023-03-06	'},
+    {value: 3, date: '	2023-03-07	'},
+    {value: 3, date: '	2023-03-08	'},
+    {value: 6, date: '	2023-03-09	'},
+    {value: 6, date: '	2023-03-10	'},
+    {value: 7, date: '	2023-03-11	'},
+    {value: 7, date: '	2023-03-12	'},
+    {value: 7, date: '	2023-03-13	'},
+    {value: 7, date: '	2023-03-14	'},
+    {value: 17, date: '	2023-03-15	'},
+    {value: 17, date: '	2023-03-16	'},
+    {value: 17, date: '	2023-03-17	'},
+    {value: 17, date: '	2023-03-18	'},
+    {value: 17, date: '	2023-03-19	'},
+    {value: 17, date: '	2023-03-20	'},
+    {value: 20, date: '	2023-03-21	'},
+    {value: 23, date: '	2023-03-22	'},
+    {value: 25, date: '	2023-03-23	'},
+    {value: 25, date: '	2023-03-24	'},
+    {value: 25, date: '	2023-03-25	'},
+    {value: 25, date: '	2023-03-26	'},
+    {value: 25, date: '	2023-03-27	'},
+    {value: 25, date: '	2023-03-28	'},
+    {value: 25, date: '	2023-03-29	'},
+    {value: 25, date: '	2023-03-30	'},
+    {value: 25, date: '	2023-03-31	'},
 ];
 
 const ChartComponent = () => {
@@ -51,20 +104,20 @@ const ChartComponent = () => {
                 data={lineData}
                 hideYAxisText
                 rotateLabel
-                width={300}
+                width={RFValue(300)}
                 hideDataPoints
-                spacing={10}
+                spacing={RFValue(10)}
                 color="#00ff83"
-                thickness={2}
+                thickness={RFValue(2)}
                 startFillColor="rgba(20,105,81,0.3)"
                 endFillColor="rgba(20,85,81,0.01)"
-                startOpacity={0.9}
-                endOpacity={0.2}
-                initialSpacing={0}
-                noOfSections={6}
-                maxValue={50}
+                startOpacity={RFValue(0.9)}
+                endOpacity={RFValue(0.2)}
+                initialSpacing={RFValue(0)}
+                noOfSections={RFValue(6)}
+                maxValue={RFValue(50)}
                 yAxisColor="white"
-                yAxisThickness={0}
+                yAxisThickness={RFValue(0)}
                 rulesType="solid"
                 rulesColor="gray"
                 yAxisTextStyle={{color: 'gray'}}
@@ -73,28 +126,28 @@ const ChartComponent = () => {
                 startFillColorNegative="red"
                 xAxisColor="lightgray"
                 pointerConfig={{
-                    pointerStripHeight: 160,
+                    pointerStripHeight: RFValue(160),
                     pointerStripColor: 'lightgray',
-                    pointerStripWidth: 2,
+                    pointerStripWidth: RFValue(2),
                     pointerColor: 'lightgray',
-                    radius: 6,
-                    pointerLabelWidth: 100,
-                    pointerLabelHeight: 90,
+                    radius: RFValue(6),
+                    pointerLabelWidth: RFValue(100),
+                    pointerLabelHeight: RFValue(90),
                     activatePointersOnLongPress: true,
                     autoAdjustPointerLabelPosition: false,
                     pointerLabelComponent: items => {
                         return (
                             <View
                                 style={{
-                                    height: 90,
-                                    width: 100,
+                                    height: RFValue(150),
+                                    width: RFValue(100),
                                     justifyContent: 'center',
-                                    marginTop: -30,
-                                    marginLeft: -40,
+                                    marginTop: RFValue(-30),
+                                    marginLeft: RFValue(-40),
                                 }}>
-                                <Text style={{color: 'white', fontSize: 14, marginBottom: 6, textAlign: 'center'}}>{items[0].date}</Text>
-
-                                <View style={{paddingHorizontal: 14, paddingVertical: 6, borderRadius: 16, backgroundColor: 'white'}}>
+                                <Text style={{color: 'white', fontSize: RFValue(14), marginBottom: RFValue(6), textAlign: 'center'}}>{items[0].date}</Text>
+                                <View
+                                    style={{paddingHorizontal: RFValue(14), paddingVertical: RFValue(6), borderRadius: RFValue(16), backgroundColor: 'white'}}>
                                     <Text style={{fontWeight: 'bold', textAlign: 'center'}}>{items[0].value + '%'}</Text>
                                 </View>
                             </View>
@@ -108,9 +161,9 @@ const ChartComponent = () => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingBottom: 20,
-        paddingTop: 20,
-        paddingLeft: 10,
+        paddingBottom: RFValue(20),
+        paddingTop: RFValue(20),
+        paddingLeft: RFValue(10),
         backgroundColor: '#1C1C1C',
     },
 });

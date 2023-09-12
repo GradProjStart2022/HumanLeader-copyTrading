@@ -1,11 +1,12 @@
 import {Picker} from '@react-native-picker/picker';
 import React, {useEffect, useState} from 'react';
-import {Alert, Animated, Modal, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Alert, Animated, KeyboardAvoidingView, Modal, Platform, ScrollView, StyleSheet, Text, TextInput, View, ViewBase} from 'react-native';
 import CustomButton from '../CustomButton';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {getContent, postSubscribe} from '../../utils/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoaderAnimation from '../LoaderAnimation';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const SubScribe = ({route}) => {
     const navigation = useNavigation();
@@ -56,26 +57,30 @@ const SubScribe = ({route}) => {
                 <LoaderAnimation />
             ) : (
                 <View style={styles.container}>
-                    <Picker style={styles.pickerbox} selectedValue={isAutoTrade} onValueChange={item => setIsAutoTrade(item)}>
-                        <Picker.Item label="수동 거래" value={'N'} />
-                        <Picker.Item label="자동 거래" value={'Y'} />
-                    </Picker>
-                    <View>
-                        <Picker style={styles.pickerbox} selectedValue={tradeType} onValueChange={item => setTradeType(item)}>
-                            <Picker.Item label="고정 금액" value={'CT01'} />
-                            <Picker.Item label="고정 비율" value={'CT02'} />
+                    <View style={styles.picker}>
+                        <Picker style={styles.pickerbox} selectedValue={isAutoTrade} onValueChange={item => setIsAutoTrade(item)}>
+                            <Picker.Item label="수동 거래" value={'N'} />
+                            <Picker.Item label="자동 거래" value={'Y'} />
                         </Picker>
+                    </View>
+                    <View style={{marginTop: 10}}>
+                        <View style={styles.picker}>
+                            <Picker style={styles.pickerbox} selectedValue={tradeType} onValueChange={item => setTradeType(item)}>
+                                <Picker.Item label="고정 금액" value={'CT01'} />
+                                <Picker.Item label="고정 비율" value={'CT02'} />
+                            </Picker>
+                        </View>
                         <View style={{height: 20}} />
                         {tradeType === 'CT01' ? (
                             <View>
                                 <Text style={styles.text1}>고정 금액</Text>
-                                <Text>{fixedRatio}</Text>
+                                <Text>{fixedAmount}</Text>
                                 <TextInput style={styles.textbox} value={fixAmount} onChangeText={setFixAmount} keyboardType="number-pad" />
                             </View>
                         ) : (
                             <View>
                                 <Text style={styles.text1}>고정 비율</Text>
-                                <Text>{fixedAmount}</Text>
+                                <Text>{fixedRatio}</Text>
                                 <TextInput style={styles.textbox} value={fixRatio} onChangeText={setFixRatio} keyboardType="number-pad" />
                             </View>
                         )}
@@ -97,11 +102,7 @@ const SubScribe = ({route}) => {
                             clearTextOnFocus="true"
                         />
                     </View>
-                    <View
-                        style={{
-                            flex: 1,
-                            justifyContent: 'flex-end',
-                        }}>
+                    <View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 30}}>
                         <CustomButton
                             text={'구독 하기'}
                             onPress={async () => {
@@ -136,7 +137,7 @@ const SubScribe = ({route}) => {
                                     padding: 20,
                                     width: '80%',
                                 }}>
-                                <Text>testLeader1님 구독이 완료되었습니다.</Text>
+                                <Text style={styles.modaltext}>testLeader1님 구독이 완료되었습니다.</Text>
                                 <View style={{height: 10}} />
                                 <CustomButton
                                     text={'확인'}
@@ -169,8 +170,19 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     text1: {
-        fontSize: 20,
+        fontSize: RFValue(20),
         color: '#000000',
+    },
+    picker: {
+        borderRadius: 10,
+        backgroundColor: '#f2f2f2',
+        height: 60,
+        justifyContent: 'center',
+    },
+    modaltext: {
+        color: '#000000',
+        fontSize: RFValue(15),
+        marginBottom: 10,
     },
 });
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import SubscribeList from '../../components/subscribe/SubscribeList';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const SubscribeSetting = () => {
     return (
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        fontSize: 36,
+        fontSize: RFValue(36),
         paddingBottom: 30,
     },
 });

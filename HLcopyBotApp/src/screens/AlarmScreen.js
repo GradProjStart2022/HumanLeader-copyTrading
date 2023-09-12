@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import AlarmList from '../components/Alarm/AlarmList';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const AlarmScreen = () => {
     return (
@@ -18,8 +19,10 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        fontSize: 36,
-        paddingBottom: 30,
+        fontSize: RFValue(36),
+        marginTop: -20,
+        fontFamily: 'NotoSansKR-Bold',
+        color: '#000000',
     },
 });
 

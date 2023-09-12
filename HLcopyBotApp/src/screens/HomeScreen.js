@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 import SubscribeList from '../components/subscribe/SubscribeList';
 import auth from '@react-native-firebase/auth';
 import RoundImage from '../components/RoundImage';
@@ -7,11 +7,13 @@ import {getRate} from '../utils/api';
 import {useFocusEffect} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoaderAnimation from '../components/LoaderAnimation';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const HomeScreen = () => {
     const user = auth().currentUser;
     const [isLoadings, setIsLoadings] = useState(true);
     const [userRate, setUserRate] = useState();
+    const [refreshing, setRefreshing] = React.useState(false);
 
     const getUserRate = async () => {
         try {
@@ -26,6 +28,14 @@ const HomeScreen = () => {
         }
     };
 
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        getUserRate();
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 500);
+    }, []);
+
     useFocusEffect(
         React.useCallback(() => {
             setIsLoadings(true);
@@ -35,7 +45,7 @@ const HomeScreen = () => {
     );
 
     return (
-        <ScrollView style={{flex: 1, backgroundColor: '#ffffff'}}>
+        <ScrollView style={{flex: 1, backgroundColor: '#ffffff'}} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
             <View style={[styles.box, {flexDirection: 'row'}]}>
                 <RoundImage
                     imageStyle={{width: 70, height: 70}}
@@ -49,7 +59,7 @@ const HomeScreen = () => {
             </View>
             <View></View>
             <ScrollView style={styles.container}>
-                <Text>구독 중인 리더</Text>
+                <Text style={styles.text}>구독 중인 리더</Text>
                 <SubscribeList />
             </ScrollView>
         </ScrollView>
@@ -63,13 +73,17 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        fontSize: 20,
+        fontSize: RFValue(20),
     },
     box: {
         width: '100%',
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#eeeeee',
         marginBottom: 20,
         padding: 20,
+    },
+    text: {
+        marginBottom: 10,
+        fontSize: RFValue(15),
     },
 });
 
